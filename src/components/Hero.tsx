@@ -9,8 +9,9 @@ const Hero: React.FC = () => {
   
   useEffect(() => {
     const parallaxEffect = () => {
+      const scrollValue = window.scrollY;
+      
       if (heroRef.current) {
-        const scrollValue = window.scrollY;
         // Apply parallax effect to hero content
         heroRef.current.style.transform = `translateY(${scrollValue * 0.3}px)`;
         heroRef.current.style.opacity = `${1 - scrollValue * 0.002}`;
