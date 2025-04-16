@@ -50,6 +50,7 @@ const projects = [
 const UpcomingProjects: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [itemsPerSlide, setItemsPerSlide] = useState(4);
+  const [isHovered, setIsHovered] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -82,21 +83,28 @@ const UpcomingProjects: React.FC = () => {
   };
 
   useEffect(() => {
-    const autoSlideInterval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    
-    return () => clearInterval(autoSlideInterval);
-  }, [currentSlide, totalSlides]);
+    if (!isHovered) {
+      const autoSlideInterval = setInterval(() => {
+        nextSlide();
+      }, 5000);
+      
+      return () => clearInterval(autoSlideInterval);
+    }
+  }, [currentSlide, totalSlides, isHovered]);
 
   return (
     <section id="projects" className="py-24 relative overflow-hidden">
       {/* Background accents */}
       <div className="absolute top-1/3 right-0 w-64 h-64 rounded-full bg-stalight-primary/10 blur-3xl"></div>
       <div className="absolute bottom-0 left-1/4 w-64 h-64 rounded-full bg-stalight-blue/10 blur-3xl"></div>
+      <div className="absolute top-1/2 right-1/4 w-48 h-48 rounded-full bg-stalight-accent/10 blur-3xl animate-pulse-glow"></div>
+      
+      {/* 3D floating elements */}
+      <div className="absolute top-1/3 right-1/3 w-20 h-20 glass-card rounded-xl animate-float transform rotate-12" style={{ animationDelay: '-2s' }}></div>
+      <div className="absolute bottom-1/3 left-1/4 w-16 h-16 glass-card rounded-xl animate-float transform -rotate-12" style={{ animationDelay: '-4s' }}></div>
       
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="max-w-3xl mx-auto text-center mb-16 animate-reveal">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-gradient-primary">
             Upcoming Projects
           </h2>
@@ -105,12 +113,16 @@ const UpcomingProjects: React.FC = () => {
           </p>
         </div>
         
-        <div className="relative">
+        <div 
+          className="relative"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           {/* Navigation buttons */}
           <Button 
             variant="ghost" 
             size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-stalight-dark/50 hover:bg-stalight-primary/30 rounded-full text-white"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-stalight-dark/50 hover:bg-stalight-primary/30 rounded-full text-white transition-all duration-300 hover:scale-110 hover:shadow-[0_0_15px_rgba(155,135,245,0.5)]"
             onClick={prevSlide}
           >
             <ChevronLeft className="h-8 w-8" />
@@ -119,7 +131,7 @@ const UpcomingProjects: React.FC = () => {
           <Button 
             variant="ghost" 
             size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-stalight-dark/50 hover:bg-stalight-primary/30 rounded-full text-white"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-stalight-dark/50 hover:bg-stalight-primary/30 rounded-full text-white transition-all duration-300 hover:scale-110 hover:shadow-[0_0_15px_rgba(155,135,245,0.5)]"
             onClick={nextSlide}
           >
             <ChevronRight className="h-8 w-8" />
@@ -131,7 +143,7 @@ const UpcomingProjects: React.FC = () => {
             className="overflow-hidden mx-12"
           >
             <div 
-              className="flex transition-transform duration-500 ease-in-out"
+              className="flex transition-transform duration-700 ease-in-out"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {/* Group projects into slides */}
@@ -143,17 +155,18 @@ const UpcomingProjects: React.FC = () => {
                   ).map((project, projectIndex) => (
                     <GlassmorphicCard 
                       key={projectIndex}
-                      className="flex-1 min-w-[250px] max-w-[300px] text-center"
+                      className="flex-1 min-w-[250px] max-w-[300px] text-center transition-all duration-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(155,135,245,0.3)] group"
                     >
-                      <div className="flex justify-center mb-4">
+                      <div className="flex justify-center mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:text-stalight-light">
                         {project.icon}
                       </div>
                       <h3 className="text-xl font-semibold mb-3 font-poppins text-white">
                         {project.title}
                       </h3>
-                      <p className="text-white/70">
+                      <p className="text-white/70 transform transition-opacity duration-300 group-hover:text-white/90">
                         {project.description}
                       </p>
+                      <div className="h-1 w-0 bg-gradient-to-r from-stalight-primary to-stalight-blue mt-4 mx-auto group-hover:w-20 transition-all duration-500"></div>
                     </GlassmorphicCard>
                   ))}
                 </div>
@@ -168,7 +181,7 @@ const UpcomingProjects: React.FC = () => {
                 key={index}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${
                   currentSlide === index 
-                    ? 'bg-stalight-primary w-6' 
+                    ? 'bg-stalight-primary w-6 shadow-[0_0_10px_rgba(155,135,245,0.7)]' 
                     : 'bg-white/30 hover:bg-white/50'
                 }`}
                 onClick={() => setCurrentSlide(index)}

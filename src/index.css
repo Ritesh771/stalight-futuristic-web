@@ -88,4 +88,107 @@
   .font-inter {
     font-family: 'Inter', sans-serif;
   }
+  
+  /* Enhanced animations */
+  .animate-float {
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+  
+  .animate-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: reveal 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-in {
+    transform: translateX(-10px);
+    opacity: 0;
+    animation: slide-in 0.3s ease-out forwards;
+  }
+  
+  .animate-rotate-slow {
+    animation: rotate-slow 20s linear infinite;
+  }
+  
+  /* Interactive elements */
+  .story-link {
+    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-stalight-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+  
+  .pulse {
+    @apply animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite];
+  }
+  
+  .text-shadow {
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  
+  .text-shadow-glow {
+    text-shadow: 0 0 10px rgba(155,135,245,0.7), 0 0 20px rgba(155,135,245,0.4);
+  }
+  
+  .backdrop-glow {
+    @apply before:absolute before:inset-0 before:bg-gradient-to-br before:from-stalight-primary/20 before:to-stalight-blue/10 before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100;
+  }
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  25% { 
+    transform: translateY(-15px) rotate(2deg); 
+  }
+  50% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  75% { 
+    transform: translateY(15px) rotate(-2deg); 
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 0.7;
+    filter: blur(20px);
+  }
+  50% { 
+    opacity: 0.3;
+    filter: blur(30px);
+  }
+}
+
+@keyframes reveal {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  from { 
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
