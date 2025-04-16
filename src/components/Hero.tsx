@@ -5,6 +5,7 @@ import { ArrowDown, ChevronRight } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const floatingElementsRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const parallaxEffect = () => {
@@ -13,6 +14,19 @@ const Hero: React.FC = () => {
         // Apply parallax effect to hero content
         heroRef.current.style.transform = `translateY(${scrollValue * 0.3}px)`;
         heroRef.current.style.opacity = `${1 - scrollValue * 0.002}`;
+      }
+
+      // Animate floating elements
+      if (floatingElementsRef.current) {
+        const elements = floatingElementsRef.current.children;
+        for (let i = 0; i < elements.length; i++) {
+          const element = elements[i] as HTMLElement;
+          const speed = 0.05 + (i * 0.02);
+          const yPos = -scrollValue * speed;
+          const xPos = (i % 2 === 0) ? scrollValue * 0.1 : -scrollValue * 0.1;
+          const rotation = scrollValue * (i % 2 === 0 ? 0.05 : -0.05);
+          element.style.transform = `translate3d(${xPos}px, ${yPos}px, 0) rotate(${rotation}deg)`;
+        }
       }
     };
 
@@ -33,14 +47,28 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 bg-hero-pattern bg-cover bg-center"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-stalight-dark/60 to-stalight-dark/90"></div>
       
-      {/* Animated elements */}
-      <div className="absolute top-1/4 left-1/5 w-32 h-32 rounded-full bg-stalight-primary/20 blur-3xl animate-float"></div>
-      <div className="absolute bottom-1/4 right-1/5 w-40 h-40 rounded-full bg-stalight-blue/20 blur-3xl animate-float" style={{ animationDelay: '-3s' }}></div>
-      <div className="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-stalight-accent/10 blur-3xl animate-float" style={{ animationDelay: '-1.5s' }}></div>
-      
-      {/* 3D floating elements */}
-      <div className="absolute top-1/3 left-1/3 w-16 h-16 glass-card rounded-xl animate-float transform rotate-12" style={{ animationDelay: '-2s' }}></div>
-      <div className="absolute bottom-1/3 right-1/3 w-20 h-20 glass-card rounded-xl animate-float transform -rotate-12" style={{ animationDelay: '-4s' }}></div>
+      {/* 3D Floating elements with perspective */}
+      <div className="absolute inset-0 perspective-[1000px]">
+        <div ref={floatingElementsRef} className="relative h-full w-full">
+          {/* Animated elements */}
+          <div className="absolute top-1/4 left-1/5 w-32 h-32 rounded-full bg-stalight-primary/20 blur-3xl animate-float"></div>
+          <div className="absolute bottom-1/4 right-1/5 w-40 h-40 rounded-full bg-stalight-blue/20 blur-3xl animate-float" style={{ animationDelay: '-3s' }}></div>
+          <div className="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-stalight-accent/10 blur-3xl animate-float" style={{ animationDelay: '-1.5s' }}></div>
+          
+          {/* 3D floating elements */}
+          <div className="absolute top-1/3 left-1/3 w-16 h-16 glass-card rounded-xl animate-float transform rotate-12 transform-style-3d" style={{ animationDelay: '-2s' }}></div>
+          <div className="absolute bottom-1/3 right-1/3 w-20 h-20 glass-card rounded-xl animate-float transform -rotate-12 transform-style-3d" style={{ animationDelay: '-4s' }}></div>
+          
+          {/* Additional 3D elements */}
+          <div className="absolute top-2/3 left-1/4 w-24 h-24 glass-card rounded-full animate-float-slow backdrop-blur-lg bg-white/5 border border-white/20 shadow-xl" style={{ animationDelay: '-1s' }}></div>
+          <div className="absolute top-1/4 right-1/4 w-28 h-28 animate-rotate-slow transform-style-3d">
+            <div className="absolute inset-0 glass-pyramid transform-style-3d"></div>
+          </div>
+          <div className="absolute bottom-1/5 left-1/3 w-32 h-32 animate-float-reverse transform-style-3d" style={{ animationDelay: '-2.5s' }}>
+            <div className="absolute inset-0 glass-cube transform-style-3d"></div>
+          </div>
+        </div>
+      </div>
       
       {/* Hero content */}
       <div className="container mx-auto px-4 relative z-10">
@@ -70,14 +98,15 @@ const Hero: React.FC = () => {
         </div>
       </div>
       
-      {/* Scroll indicator */}
+      {/* Scroll indicator with enhanced animation */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <Button 
           variant="ghost" 
           className="text-white/60 hover:text-white glass-card rounded-full p-2 hover:bg-white/5 transition-all duration-300" 
           onClick={() => scrollToSection('about')}
         >
-          <ArrowDown className="h-8 w-8" />
+          <ArrowDown className="h-8 w-8 animate-pulse-soft" />
+          <span className="sr-only">Scroll Down</span>
         </Button>
       </div>
     </section>

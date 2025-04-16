@@ -39,6 +39,17 @@ const Blog: React.FC = () => {
     });
   };
 
+  const handleBlogClick = (url: string) => {
+    if (url.startsWith('#')) {
+      // Internal navigation - just scroll to the section
+      const sectionId = url.replace('#', '');
+      scrollToSection(sectionId);
+    } else {
+      // External navigation - open in new tab
+      window.open(url, '_blank');
+    }
+  };
+
   return (
     <section id="blog" className="py-24 relative overflow-hidden">
       {/* Background accents */}
@@ -46,9 +57,12 @@ const Blog: React.FC = () => {
       <div className="absolute bottom-0 left-1/3 w-64 h-64 rounded-full bg-stalight-blue/10 blur-3xl"></div>
       <div className="absolute top-1/2 left-1/5 w-48 h-48 rounded-full bg-stalight-accent/10 blur-3xl animate-pulse-glow"></div>
       
-      {/* 3D floating elements */}
-      <div className="absolute top-1/4 right-1/4 w-16 h-16 glass-card rounded-xl animate-float transform rotate-12" style={{ animationDelay: '-1s' }}></div>
-      <div className="absolute bottom-1/4 left-1/4 w-20 h-20 glass-card rounded-xl animate-float transform -rotate-12" style={{ animationDelay: '-3s' }}></div>
+      {/* 3D animated background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 right-1/3 w-16 h-16 glass-card rounded-xl animate-float transform rotate-12 backdrop-blur-lg" style={{ animationDelay: '-1.7s' }}></div>
+        <div className="absolute bottom-1/3 left-1/3 w-12 h-12 glass-card rounded-xl animate-float-reverse transform -rotate-12" style={{ animationDelay: '-3.2s' }}></div>
+        <div className="absolute top-2/3 right-1/5 w-20 h-20 glass-card rounded-lg animate-float-slow transform-style-3d" style={{ animationDelay: '-2.5s' }}></div>
+      </div>
       
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16 animate-reveal">
@@ -64,7 +78,7 @@ const Blog: React.FC = () => {
           {blogPosts.map((post, index) => (
             <GlassmorphicCard 
               key={index} 
-              className="flex flex-col h-full hover:scale-105 transition-all duration-300 hover:shadow-[0_0_20px_rgba(155,135,245,0.3)]"
+              className="flex flex-col h-full hover:scale-105 transition-all duration-500 hover:shadow-[0_0_30px_rgba(155,135,245,0.3)] backdrop-blur-md"
             >
               <div className="rounded-lg overflow-hidden mb-4 h-48 bg-gradient-to-br from-stalight-primary/20 to-stalight-blue/20 group relative">
                 <img 
@@ -76,7 +90,7 @@ const Blog: React.FC = () => {
               </div>
               <div className="flex-1">
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-stalight-primary text-sm">{post.category}</span>
+                  <span className="text-stalight-primary text-sm font-medium px-3 py-1 rounded-full bg-stalight-primary/10 backdrop-blur-sm">{post.category}</span>
                   <span className="text-white/60 text-sm">{post.date}</span>
                 </div>
                 <h3 className="text-xl font-semibold mb-3 font-poppins text-white">
@@ -88,10 +102,10 @@ const Blog: React.FC = () => {
               </div>
               <Button 
                 variant="ghost" 
-                className="text-stalight-primary hover:text-stalight-primary/80 hover:bg-white/5 p-0 flex items-center gap-2 mt-2 transition-all duration-300"
-                onClick={() => window.location.href = post.link}
+                className="text-stalight-primary hover:text-stalight-primary/80 hover:bg-white/5 p-0 flex items-center gap-2 mt-2 transition-all duration-300 group"
+                onClick={() => handleBlogClick(post.link)}
               >
-                Read more <ArrowRight className="h-4 w-4 animate-slide-in" />
+                Read more <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
             </GlassmorphicCard>
           ))}
@@ -100,7 +114,7 @@ const Blog: React.FC = () => {
         <div className="text-center mt-12">
           <Button 
             className="bg-stalight-primary hover:bg-stalight-primary/80 text-white glass-card-hover transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(155,135,245,0.5)]"
-            onClick={() => window.location.href = "#all-articles"}
+            onClick={() => handleBlogClick('#all-articles')}
           >
             View All Articles
           </Button>

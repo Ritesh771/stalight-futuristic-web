@@ -52,14 +52,15 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="pt-16 pb-8 relative overflow-hidden bg-black">
-      {/* Background accents */}
-      <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-stalight-primary/5 blur-3xl"></div>
-      <div className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full bg-stalight-blue/5 blur-3xl"></div>
-      <div className="absolute top-1/3 right-1/3 w-48 h-48 rounded-full bg-stalight-accent/5 blur-3xl animate-pulse-glow"></div>
+      {/* Background accents with enhanced animation */}
+      <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-stalight-primary/5 blur-3xl animate-pulse-glow"></div>
+      <div className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full bg-stalight-blue/5 blur-3xl animate-pulse-glow" style={{ animationDelay: '-2s' }}></div>
+      <div className="absolute top-1/3 right-1/3 w-48 h-48 rounded-full bg-stalight-accent/5 blur-3xl animate-pulse-glow" style={{ animationDelay: '-3s' }}></div>
       
-      {/* 3D floating elements */}
-      <div className="absolute top-1/4 right-1/4 w-12 h-12 glass-card rounded-xl animate-float transform rotate-12" style={{ animationDelay: '-1s' }}></div>
-      <div className="absolute bottom-1/4 left-1/4 w-16 h-16 glass-card rounded-xl animate-float transform -rotate-12" style={{ animationDelay: '-3s' }}></div>
+      {/* 3D floating elements with enhanced animation */}
+      <div className="absolute top-1/4 right-1/4 w-12 h-12 glass-card rounded-xl animate-float-slow transform rotate-12" style={{ animationDelay: '-1s' }}></div>
+      <div className="absolute bottom-1/4 left-1/4 w-16 h-16 glass-card rounded-xl animate-float-reverse transform -rotate-12" style={{ animationDelay: '-3s' }}></div>
+      <div className="absolute top-2/3 right-1/3 w-10 h-10 glass-card rounded-lg animate-float transform-style-3d" style={{ animationDelay: '-2.5s' }}></div>
       
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
@@ -80,10 +81,12 @@ const Footer: React.FC = () => {
                   key={index}
                   href={social.href}
                   onClick={(e) => handleLinkClick(e, social.href)}
-                  className="w-10 h-10 rounded-full glass-card flex items-center justify-center text-white/70 hover:text-stalight-primary transition-all duration-300 hover:scale-110 hover:shadow-[0_0_10px_rgba(155,135,245,0.4)]"
+                  className="w-10 h-10 rounded-full glass-card flex items-center justify-center text-white/70 hover:text-stalight-primary transition-all duration-300 hover:scale-110 hover:shadow-[0_0_10px_rgba(155,135,245,0.4)] group"
                   aria-label={social.label}
                 >
-                  {social.icon}
+                  <span className="transform transition-transform duration-300 group-hover:scale-110">
+                    {social.icon}
+                  </span>
                 </a>
               ))}
             </div>
@@ -91,7 +94,10 @@ const Footer: React.FC = () => {
           
           {/* Quick Links */}
           <div className="animate-reveal" style={{ animationDelay: '0.2s' }}>
-            <h3 className="text-xl font-semibold mb-6 font-poppins text-white">Quick Links</h3>
+            <h3 className="text-xl font-semibold mb-6 font-poppins text-white relative">
+              Quick Links
+              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-stalight-primary"></span>
+            </h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
@@ -110,7 +116,10 @@ const Footer: React.FC = () => {
           
           {/* Products */}
           <div className="animate-reveal" style={{ animationDelay: '0.3s' }}>
-            <h3 className="text-xl font-semibold mb-6 font-poppins text-white">Our Products</h3>
+            <h3 className="text-xl font-semibold mb-6 font-poppins text-white relative">
+              Our Products
+              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-stalight-primary"></span>
+            </h3>
             <ul className="space-y-3">
               {productLinks.map((link, index) => (
                 <li key={index}>
@@ -127,13 +136,16 @@ const Footer: React.FC = () => {
             </ul>
           </div>
           
-          {/* Newsletter */}
+          {/* Newsletter with enhanced design */}
           <div className="animate-reveal" style={{ animationDelay: '0.4s' }}>
-            <h3 className="text-xl font-semibold mb-6 font-poppins text-white">Newsletter</h3>
+            <h3 className="text-xl font-semibold mb-6 font-poppins text-white relative">
+              Newsletter
+              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-stalight-primary"></span>
+            </h3>
             <p className="text-white/70 mb-4">
               Subscribe to our newsletter to receive updates on our latest products and news.
             </p>
-            <form className="flex group" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex group relative" onSubmit={(e) => e.preventDefault()}>
               <input 
                 type="email" 
                 placeholder="Your email"
@@ -145,6 +157,7 @@ const Footer: React.FC = () => {
               >
                 Subscribe
               </button>
+              <div className="absolute -bottom-2 right-2 w-0 h-0.5 bg-stalight-primary group-hover:w-full group-hover:right-auto group-hover:left-0 transition-all duration-700"></div>
             </form>
           </div>
         </div>
