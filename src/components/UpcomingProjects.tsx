@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import GlassmorphicCard from './GlassmorphicCard';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight, Brain, VrHeadset, Gamepad2, Bot, Monitor, Smartphone, Route, PenTool } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Brain, Headset, Gamepad2, Bot, Monitor, Smartphone, Route, PenTool } from 'lucide-react';
 
 const projects = [
   {
@@ -11,7 +11,7 @@ const projects = [
     description: "AI-driven tools for creating and optimizing educational curriculums.",
   },
   {
-    icon: <VrHeadset className="h-10 w-10 text-stalight-primary" />,
+    icon: <Headset className="h-10 w-10 text-stalight-primary" />,
     title: "Virtual Reality Classrooms",
     description: "Immersive virtual reality classrooms for enhanced learning experiences.",
   },
