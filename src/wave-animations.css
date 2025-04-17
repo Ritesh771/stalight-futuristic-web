@@ -1,4 +1,3 @@
-
 /* Wave lines animation inspired by reference image */
 .wave-lines {
   position: absolute;
@@ -7,27 +6,27 @@
   background: repeating-linear-gradient(
     90deg,
     transparent,
-    transparent 40px,
-    rgba(155, 135, 245, 0.05) 40px,
-    rgba(155, 135, 245, 0.05) 41px
+    transparent 20px,
+    rgba(155, 135, 245, 0.07) 20px,
+    rgba(155, 135, 245, 0.07) 21px
   );
   background-size: 100px 100%;
-  transform: rotate(-30deg) scale(1.5);
-  animation: wave-move 20s linear infinite;
-  opacity: 0.3;
+  transform: rotate(-30deg) scale(2);
+  animation: wave-move 25s linear infinite;
+  opacity: 0.5;
   z-index: 0;
 }
 
 @keyframes wave-move {
   0% {
-    transform: rotate(-30deg) translateX(0) scale(1.5);
+    transform: rotate(-30deg) translateX(0) scale(2);
   }
   100% {
-    transform: rotate(-30deg) translateX(-50%) scale(1.5);
+    transform: rotate(-30deg) translateX(-50%) scale(2);
   }
 }
 
-/* Enhanced wavy background */
+/* Enhanced wavy background to match reference image */
 .wavy-background {
   position: relative;
   overflow: hidden;
@@ -38,24 +37,38 @@
   top: 0;
   left: 0;
   width: 200%;
-  height: 50%;
+  height: 100%;
   background: repeating-linear-gradient(
     90deg,
     transparent,
-    transparent 40px,
-    rgba(155, 135, 245, 0.05) 40px,
-    rgba(155, 135, 245, 0.05) 41px
+    transparent 20px,
+    rgba(155, 135, 245, 0.06) 20px,
+    rgba(155, 135, 245, 0.06) 21px
   );
-  transform: rotate(-30deg) scale(1.5);
-  animation: wave-float 15s ease-in-out infinite;
+  transform: rotate(-30deg) scale(2);
+  animation: wave-float 20s ease-in-out infinite;
+}
+
+.wave-curved {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/lovable-uploads/93320eb1-ed86-4aaf-ab32-e2038078e54b.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  mix-blend-mode: screen;
+  z-index: 0;
 }
 
 @keyframes wave-float {
   0%, 100% {
-    transform: rotate(-30deg) translateY(0) scale(1.5);
+    transform: rotate(-30deg) translateY(0) scale(2);
   }
   50% {
-    transform: rotate(-30deg) translateY(20px) scale(1.5);
+    transform: rotate(-30deg) translateY(20px) scale(2);
   }
 }
 
