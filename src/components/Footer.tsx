@@ -52,6 +52,11 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="pt-16 pb-8 relative overflow-hidden bg-black">
+      {/* Wave background lines inspired by the reference image */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
+        <div className="wave-lines"></div>
+      </div>
+      
       {/* Background accents with enhanced animation */}
       <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-stalight-primary/5 blur-3xl animate-pulse-glow"></div>
       <div className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full bg-stalight-blue/5 blur-3xl animate-pulse-glow" style={{ animationDelay: '-2s' }}></div>
@@ -65,7 +70,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Company info */}
-          <div className="animate-reveal" style={{ animationDelay: '0.1s' }}>
+          <div className="scroll-reveal-item opacity-0 translate-y-10" style={{ transitionDelay: '0.1s' }}>
             <div className="mb-6">
               <a href="#home" className="flex items-center" onClick={(e) => handleLinkClick(e, '#home')}>
                 <span className="text-2xl font-bold font-poppins text-gradient-primary">Stalight</span>
@@ -73,7 +78,7 @@ const Footer: React.FC = () => {
               </a>
             </div>
             <p className="text-white/70 mb-6">
-              Empowering educators and students with cutting-edge technology solutions for a brighter future.
+              Empowering educators and students with cutting-edge technology solutions for a brighter, more interconnected future of learning.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
@@ -93,7 +98,7 @@ const Footer: React.FC = () => {
           </div>
           
           {/* Quick Links */}
-          <div className="animate-reveal" style={{ animationDelay: '0.2s' }}>
+          <div className="scroll-reveal-item opacity-0 translate-y-10" style={{ transitionDelay: '0.2s' }}>
             <h3 className="text-xl font-semibold mb-6 font-poppins text-white relative">
               Quick Links
               <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-stalight-primary"></span>
@@ -115,7 +120,7 @@ const Footer: React.FC = () => {
           </div>
           
           {/* Products */}
-          <div className="animate-reveal" style={{ animationDelay: '0.3s' }}>
+          <div className="scroll-reveal-item opacity-0 translate-y-10" style={{ transitionDelay: '0.3s' }}>
             <h3 className="text-xl font-semibold mb-6 font-poppins text-white relative">
               Our Products
               <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-stalight-primary"></span>
@@ -137,13 +142,13 @@ const Footer: React.FC = () => {
           </div>
           
           {/* Newsletter with enhanced design */}
-          <div className="animate-reveal" style={{ animationDelay: '0.4s' }}>
+          <div className="scroll-reveal-item opacity-0 translate-y-10" style={{ transitionDelay: '0.4s' }}>
             <h3 className="text-xl font-semibold mb-6 font-poppins text-white relative">
               Newsletter
               <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-stalight-primary"></span>
             </h3>
             <p className="text-white/70 mb-4">
-              Subscribe to our newsletter to receive updates on our latest products and news.
+              Subscribe to our newsletter to receive updates on our latest products and innovations in educational technology.
             </p>
             <form className="flex group relative" onSubmit={(e) => e.preventDefault()}>
               <input 

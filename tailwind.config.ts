@@ -67,15 +67,15 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))'
         },
-        // Custom colors for Stalight
+        // Custom colors for Stalight - updated to match reference image
         stalight: {
-          primary: '#9b87f5',
-          secondary: '#7E69AB',
-          tertiary: '#6E59A5',
-          dark: '#1A1F2C',
-          light: '#D6BCFA',
-          accent: '#F97316',
-          blue: '#1EAEDB',
+          primary: '#9b87f5',    // Main purple
+          secondary: '#7E69AB',  // Darker purple
+          tertiary: '#6E59A5',   // Even darker purple
+          dark: '#0f0a1e',       // Dark background (updated to be more like the reference)
+          light: '#D6BCFA',      // Light purple
+          accent: '#F97316',     // Orange accent
+          blue: '#1EAEDB',       // Bright blue
         }
       },
       borderRadius: {
@@ -160,7 +160,8 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-pattern': 'linear-gradient(to bottom right, rgba(26, 31, 44, 0.8), rgba(18, 18, 18, 0.9)), url("/bg-hero.jpg")',
+        // Updated hero pattern to more closely match the reference image
+        'hero-pattern': 'linear-gradient(to bottom right, rgba(15, 10, 30, 0.9), rgba(10, 6, 20, 0.95)), url("/bg-hero.jpg")',
         'shimmer': 'linear-gradient(90deg, transparent 0%, rgba(155, 135, 245, 0.2) 50%, transparent 100%)',
       },
       transitionProperty: {

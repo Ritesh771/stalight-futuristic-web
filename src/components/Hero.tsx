@@ -1,11 +1,13 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, ChevronRight } from 'lucide-react';
+import { ArrowDown, ChevronRight, ExternalLink } from 'lucide-react';
+import GlassmorphicButton from './GlassmorphicButton';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const floatingElementsRef = useRef<HTMLDivElement>(null);
+  const waveRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const parallaxEffect = () => {
@@ -29,10 +31,41 @@ const Hero: React.FC = () => {
           element.style.transform = `translate3d(${xPos}px, ${yPos}px, 0) rotate(${rotation}deg)`;
         }
       }
+      
+      // Animate wave patterns
+      if (waveRef.current) {
+        waveRef.current.style.transform = `translateY(${scrollValue * 0.2}px)`;
+      }
+    };
+
+    // Initialize scroll reveal animation
+    const initScrollReveal = () => {
+      const revealItems = document.querySelectorAll('.scroll-reveal-item');
+      
+      const revealCallback: IntersectionObserverCallback = (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+          }
+        });
+      };
+      
+      const revealObserver = new IntersectionObserver(revealCallback, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+      });
+      
+      revealItems.forEach(item => {
+        revealObserver.observe(item);
+      });
     };
 
     window.addEventListener('scroll', parallaxEffect);
-    return () => window.removeEventListener('scroll', parallaxEffect);
+    initScrollReveal();
+    
+    return () => {
+      window.removeEventListener('scroll', parallaxEffect);
+    };
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -47,6 +80,11 @@ const Hero: React.FC = () => {
       {/* Background elements */}
       <div className="absolute inset-0 bg-hero-pattern bg-cover bg-center"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-stalight-dark/60 to-stalight-dark/90"></div>
+      
+      {/* Wave background lines inspired by the reference image */}
+      <div ref={waveRef} className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="wave-lines"></div>
+      </div>
       
       {/* 3D Floating elements with perspective */}
       <div className="absolute inset-0 perspective-[1000px]">
@@ -68,33 +106,54 @@ const Hero: React.FC = () => {
           <div className="absolute bottom-1/5 left-1/3 w-32 h-32 animate-float-reverse transform-style-3d" style={{ animationDelay: '-2.5s' }}>
             <div className="absolute inset-0 glass-cube transform-style-3d"></div>
           </div>
+          
+          {/* New futuristic 3D elements */}
+          <div className="absolute top-1/2 right-1/5 w-36 h-36 animate-float-slow transform-style-3d" style={{ animationDelay: '-3.5s' }}>
+            <div className="absolute inset-0 glass-helix transform-style-3d"></div>
+          </div>
+          <div className="absolute bottom-1/4 left-1/6 w-48 h-48 animate-pulse-glow transform-style-3d opacity-30">
+            <div className="absolute inset-0 glass-sphere transform-style-3d"></div>
+          </div>
         </div>
       </div>
       
       {/* Hero content */}
       <div className="container mx-auto px-4 relative z-10">
-        <div ref={heroRef} className="text-center max-w-5xl mx-auto animate-reveal">
+        <div ref={heroRef} className="text-center max-w-5xl mx-auto scroll-reveal-item opacity-0 translate-y-10">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 font-poppins text-gradient">
             Revolutionize Education with Stalight Technology
           </h1>
           <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto">
-            Empowering educators and students with cutting-edge technology solutions for a brighter future.
+            Empowering educators and students with cutting-edge AI and blockchain solutions for a smarter, more connected learning experience in the digital age.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
+            <GlassmorphicButton 
               onClick={() => scrollToSection('about')}
               className="bg-stalight-primary hover:bg-stalight-primary/80 text-white font-medium py-6 px-8 rounded-full glass-card-hover transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(155,135,245,0.5)]"
+              glowEffect={true}
             >
               Get Started
               <ChevronRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button 
+            </GlassmorphicButton>
+            <GlassmorphicButton 
               variant="outline" 
               onClick={() => scrollToSection('products')}
               className="border-white/20 hover:bg-white/10 text-white font-medium py-6 px-8 rounded-full glass-card transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)]"
             >
               Learn More
-            </Button>
+            </GlassmorphicButton>
+          </div>
+          
+          <div className="mt-16 flex justify-center items-center gap-8 opacity-80 hover:opacity-100 transition-opacity duration-300">
+            <p className="text-white/70">Trusted by leading institutions worldwide</p>
+            <div className="flex flex-wrap justify-center gap-8">
+              <div className="h-6 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+                <span className="text-white/80 text-sm">University Partners</span>
+              </div>
+              <div className="h-6 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
+                <span className="text-white/80 text-sm">Corporate Partners</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -109,6 +168,17 @@ const Hero: React.FC = () => {
           <ArrowDown className="h-8 w-8 animate-pulse-soft" />
           <span className="sr-only">Scroll Down</span>
         </Button>
+      </div>
+      
+      {/* Scroll progress indicator */}
+      <div className="fixed bottom-4 right-4 z-50 w-12 h-12 rounded-full glass-card flex items-center justify-center opacity-0 scroll-progress-indicator transition-opacity duration-300">
+        <div className="scroll-progress-circle">
+          <svg className="w-10 h-10">
+            <circle className="text-gray-300" strokeWidth="2" stroke="currentColor" fill="transparent" r="18" cx="20" cy="20" />
+            <circle className="text-stalight-primary scroll-progress-circle-bar" strokeWidth="2" stroke="currentColor" fill="transparent" r="18" cx="20" cy="20" />
+          </svg>
+          <span className="absolute text-xs text-white scroll-progress-percentage">0%</span>
+        </div>
       </div>
     </section>
   );
