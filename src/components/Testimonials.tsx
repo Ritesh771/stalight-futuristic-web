@@ -8,25 +8,25 @@ const testimonials = [
     name: "Ruthu Parinika",
     role: "Intern, Stalight Technology",
     quote: "Working at Stalight Technology has been an incredible journey! The hands-on projects and mentorship have sharpened my skills, and the dynamic work environment keeps me inspired every day.",
-    image: "/placeholder.svg" // Replace with actual image when available
+    image: "/ruthu.jpeg" // Replace with actual image when available
   },
   {
     name: "Shashank",
     role: "Intern, Stalight Technology",
     quote: "At Stalight, I've gained real-world experience in a fast-paced tech environment. The collaborative culture and cutting-edge projects have truly accelerated my professional growth.",
-    image: "/placeholder.svg" // Replace with actual image when available
+    image: "/shashank.jpeg" // Replace with actual image when available
   },
   {
     name: "Praveen V",
     role: "Intern, Stalight Technology",
     quote: "Stalight Technology has given me the opportunity to work on meaningful projects with a talented team. The experience has been invaluable in shaping my career path!",
-    image: "/placeholder.svg" // Replace with actual image when available
+    image: "/praveen.jpeg" // Replace with actual image when available
   },
   {
     name: "Raghuveer",
     role: "Intern, Stalight Technology",
     quote: "Interning at Stalight has been a fantastic learning experience. The supportive team and innovative projects have significantly contributed to my skill development.",
-    image: "/placeholder.svg" // Replace with actual image when available
+    image: "/raghuveer.jpg" // Replace with actual image when available
   }
 ];
 

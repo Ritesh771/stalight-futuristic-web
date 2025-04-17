@@ -11,7 +11,7 @@ const blogPosts = [
     excerpt: "Explore how artificial intelligence is reshaping the educational landscape and creating new opportunities for personalized learning experiences. AI-powered tools are revolutionizing how students learn, providing adaptive content and real-time feedback.",
     fullContent: "Artificial intelligence is transforming education at an unprecedented pace. Machine learning algorithms can now analyze student performance data to create truly personalized learning paths that adapt in real-time to individual strengths and weaknesses. These AI-driven educational platforms can identify knowledge gaps, suggest targeted resources, and even predict areas where a student may struggle in the future. Beyond personalization, AI virtual teaching assistants are available 24/7 to answer questions, provide explanations, and guide students through complex concepts at their own pace. This technology is particularly valuable in regions with teacher shortages or in providing specialized instruction that might not otherwise be available. As natural language processing continues to advance, these AI systems will become increasingly conversational and intuitive, creating learning experiences that closely mirror human instruction while scaling to meet the needs of millions of students simultaneously.",
     date: "April 10, 2025",
-    image: "/placeholder.svg", // Replace with actual image when available
+    image: "/1.jpg", // Replace with actual image when available
     category: "Technology",
     link: "#blog/ai-in-education",
     id: "blog-content-1"
@@ -21,7 +21,7 @@ const blogPosts = [
     excerpt: "Learn how blockchain is revolutionizing the way academic credentials are verified and maintained in educational institutions. This tamper-proof technology ensures the integrity and authenticity of certificates while simplifying verification processes.",
     fullContent: "Blockchain technology is solving one of the most persistent challenges in education: the secure, tamper-proof verification of academic credentials. By recording educational achievements on a distributed ledger, blockchain creates permanent, verifiable records that cannot be altered or falsified. This eliminates the need for time-consuming background checks and verification processes that plague both educational institutions and employers. Students gain complete ownership of their credentials, allowing them to share verified accomplishments instantly with potential employers worldwide. For educational institutions, blockchain reduces administrative costs associated with transcript requests and verification processes. The technology also enables micro-credentialing, where specific skills and achievements can be recorded and verified independently of traditional degrees. As global education becomes increasingly modular and lifelong learning becomes the norm, blockchain provides the infrastructure needed to track, verify and share educational accomplishments throughout a person's entire career journey.",
     date: "April 5, 2025",
-    image: "/placeholder.svg", // Replace with actual image when available
+    image: "/2.jpg", // Replace with actual image when available
     category: "Innovation",
     link: "#blog/blockchain-credentials",
     id: "blog-content-2"
@@ -31,7 +31,7 @@ const blogPosts = [
     excerpt: "Discover innovative methods of student assessment that leverage artificial intelligence to provide better insights into student performance and personalized learning paths that adapt to individual strengths and weaknesses.",
     fullContent: "Traditional student assessment methods are being revolutionized by artificial intelligence, shifting from standardized testing to continuous, personalized evaluation. AI-powered assessment tools can analyze not just the final answers, but the entire problem-solving process, identifying exactly where students struggle and succeed. This granular insight allows educators to target instruction precisely where it's needed most. Natural language processing enables automated essay grading that evaluates not just grammar and spelling, but also concept understanding, logical flow, and even creativity. Perhaps most importantly, AI assessment can happen continuously throughout the learning process rather than just at the end, providing immediate feedback that helps students correct misconceptions before they become entrenched. This shifts assessment from being primarily evaluative to being a powerful learning tool itself. These systems also reduce teacher workload, freeing educators to focus on high-value interactions with students rather than grading. As these technologies mature, they promise to create more equitable assessment that recognizes diverse learning styles and provides multiple pathways to demonstrate mastery.",
     date: "March 28, 2025",
-    image: "/placeholder.svg", // Replace with actual image when available
+    image: "/3.jpg", // Replace with actual image when available
     category: "Education",
     link: "#blog/ai-assessment",
     id: "blog-content-3"
@@ -41,7 +41,7 @@ const blogPosts = [
     excerpt: "See how virtual reality is transforming traditional classroom experiences into immersive learning environments that capture students' attention and improve knowledge retention through interactive simulations.",
     fullContent: "Virtual reality is redefining what's possible in education by creating immersive learning environments that were previously unimaginable. Students can now walk through ancient Rome, explore the human bloodstream from inside a cell, or manipulate virtual models of complex molecular structures. These experiences transform abstract concepts into tangible, interactive explorations that engage multiple senses and learning modalities simultaneously. Research shows that VR learning experiences can significantly increase knowledge retention, with some studies reporting retention rates up to 80% higher than traditional learning methods. Beyond content delivery, VR enables powerful collaborative learning experiences where students from around the world can gather in the same virtual space to solve problems together. The technology is particularly transformative for subjects that benefit from spatial understanding or hands-on practice, from architecture and engineering to surgical training. As VR hardware becomes more affordable and content libraries expand, these immersive learning experiences are increasingly accessible to schools at all resource levels, democratizing access to experiential learning that was once available only through expensive field trips or specialized labs.",
     date: "March 15, 2025",
-    image: "/placeholder.svg",
+    image: "/4.jpg", // Replace with actual image when available
     category: "Innovation",
     link: "#blog/vr-classroom",
     id: "blog-content-4"
@@ -114,7 +114,7 @@ const Blog: React.FC = () => {
             Latest Insights & Trends
           </h2>
           <p className="text-xl text-white/80 max-w-2xl mx-auto">
-            Stay updated with our latest articles on educational technology innovations and transformative approaches to learning in the digital age.
+            Stay updated with our latest articles on educational innovations and transformative approaches to learning in the digital age.
           </p>
         </div>
         

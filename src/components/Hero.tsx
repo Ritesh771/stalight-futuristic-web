@@ -133,22 +133,10 @@ const Hero: React.FC = () => {
             <GlassmorphicButton 
               variant="outline" 
               onClick={() => scrollToSection('products')}
-              className="border-white/20 hover:bg-white/10 text-white font-medium py-6 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] relative z-10"
+              className=" hover:bg-white/10 text-white font-medium py-6 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] relative z-10"
             >
               Learn More
             </GlassmorphicButton>
-          </div>
-          
-          <div className="mt-16 flex justify-center items-center gap-8 opacity-80 hover:opacity-100 transition-opacity duration-300">
-            <p className="text-white/70">Trusted by leading institutions worldwide</p>
-            <div className="flex flex-wrap justify-center gap-8">
-              <div className="h-6 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
-                <span className="text-white/80 text-sm">University Partners</span>
-              </div>
-              <div className="h-6 w-auto grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
-                <span className="text-white/80 text-sm">Corporate Partners</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
