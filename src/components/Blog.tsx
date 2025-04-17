@@ -61,7 +61,7 @@ const Blog: React.FC = () => {
 
   const handleViewAllArticles = () => {
     // In a real app, this would navigate to a blog listing page
-    console.log('Navigating to all articles page');
+    console.log('View All Articles clicked');
     // For demonstration, just scroll to the top for now
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -108,8 +108,8 @@ const Blog: React.FC = () => {
         </div>
       </div>
       
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16 animate-reveal">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-3xl mx-auto text-center mb-16 scroll-reveal-item">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 font-poppins text-gradient-primary">
             Latest Insights & Trends
           </h2>
@@ -157,26 +157,25 @@ const Blog: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                <GlassmorphicButton 
+                <Button 
                   variant="link" 
                   className="text-stalight-primary hover:text-stalight-primary/80 p-0 flex items-center gap-2 mt-2 transition-all duration-300 group read-more-button"
                   onClick={() => handleBlogClick(post.link, post.id)}
                 >
                   {expandedContent === post.id ? 'Read less' : 'Read more'} <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-                </GlassmorphicButton>
+                </Button>
               </GlassmorphicCard>
             </div>
           ))}
         </div>
         
-        <div className="text-center mt-12">
-          <GlassmorphicButton 
-            className="bg-stalight-primary hover:bg-stalight-primary/80 text-white glass-card-hover transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(155,135,245,0.5)] view-all-button"
+        <div className="text-center mt-12 scroll-reveal-item">
+          <Button 
+            className="bg-stalight-primary hover:bg-stalight-primary/80 text-white transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(155,135,245,0.5)] py-6 px-8 rounded-full view-all-button"
             onClick={handleViewAllArticles}
-            glowEffect={true}
           >
             View All Articles
-          </GlassmorphicButton>
+          </Button>
         </div>
       </div>
     </section>

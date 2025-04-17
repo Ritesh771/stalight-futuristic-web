@@ -126,7 +126,7 @@ const Hero: React.FC = () => {
       
       {/* Hero content */}
       <div className="container mx-auto px-4 relative z-10">
-        <div ref={heroRef} className="text-center max-w-5xl mx-auto scroll-reveal-item opacity-0 translate-y-10">
+        <div ref={heroRef} className="text-center max-w-5xl mx-auto scroll-reveal-item">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 font-poppins text-gradient">
             Revolutionize Education with Stalight Technology
           </h1>
@@ -136,7 +136,7 @@ const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center z-50 relative">
             <GlassmorphicButton 
               onClick={() => scrollToSection('about')}
-              className="bg-stalight-primary hover:bg-stalight-primary/80 text-white font-medium py-6 px-8 rounded-full glass-card-hover transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(155,135,245,0.5)]"
+              className="bg-stalight-primary text-white font-medium py-6 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(155,135,245,0.5)]"
               glowEffect={true}
             >
               Get Started
