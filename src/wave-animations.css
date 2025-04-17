@@ -1,3 +1,4 @@
+
 /* Wave lines animation inspired by reference image */
 .wave-lines {
   position: absolute;
@@ -7,13 +8,13 @@
     90deg,
     transparent,
     transparent 20px,
-    rgba(155, 135, 245, 0.07) 20px,
-    rgba(155, 135, 245, 0.07) 21px
+    rgba(155, 135, 245, 0.15) 20px, /* Increased opacity from 0.07 to 0.15 */
+    rgba(155, 135, 245, 0.15) 21px  /* Increased opacity from 0.07 to 0.15 */
   );
   background-size: 100px 100%;
   transform: rotate(-30deg) scale(2);
   animation: wave-move 25s linear infinite;
-  opacity: 0.5;
+  opacity: 0.8; /* Increased from 0.5 to 0.8 */
   z-index: 0;
 }
 
@@ -30,6 +31,7 @@
 .wavy-background {
   position: relative;
   overflow: hidden;
+  z-index: 1; /* Added z-index */
 }
 
 .wave-line {
@@ -42,8 +44,8 @@
     90deg,
     transparent,
     transparent 20px,
-    rgba(155, 135, 245, 0.06) 20px,
-    rgba(155, 135, 245, 0.06) 21px
+    rgba(155, 135, 245, 0.15) 20px, /* Increased opacity from 0.06 to 0.15 */
+    rgba(155, 135, 245, 0.15) 21px  /* Increased opacity from 0.06 to 0.15 */
   );
   transform: rotate(-30deg) scale(2);
   animation: wave-float 20s ease-in-out infinite;
@@ -58,7 +60,7 @@
   background-image: url('/lovable-uploads/93320eb1-ed86-4aaf-ab32-e2038078e54b.png');
   background-size: cover;
   background-position: center;
-  opacity: 0.15;
+  opacity: 0.3; /* Increased from 0.15 to 0.3 */
   mix-blend-mode: screen;
   z-index: 0;
 }

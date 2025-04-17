@@ -21,13 +21,13 @@ const GlassmorphicButton: React.FC<GlassmorphicButtonProps> = ({
   const baseStyle = "transition-all duration-300 transform hover:scale-105 backdrop-blur-md";
   
   const variantStyles = {
-    default: "bg-stalight-primary/90 hover:bg-stalight-primary text-white hover:shadow-[0_0_15px_rgba(155,135,245,0.5)]",
+    default: "bg-stalight-primary hover:bg-stalight-primary text-white hover:shadow-[0_0_15px_rgba(155,135,245,0.5)]",
     outline: "border border-white/20 hover:bg-white/10 text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.3)]",
     ghost: "text-white/80 hover:bg-white/5 hover:text-white",
     link: "text-stalight-primary hover:text-stalight-primary/80 p-0 underline-offset-4 hover:underline"
   };
   
-  const glowStyles = glowEffect ? "animate-pulse-glow" : "";
+  const glowStyles = glowEffect ? "relative after:absolute after:inset-0 after:bg-stalight-primary/30 after:blur-xl after:-z-10 after:rounded-full" : "";
   const widthStyles = fullWidth ? "w-full" : "";
   
   return (
