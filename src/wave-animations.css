@@ -26,6 +26,38 @@
   }
 }
 
+/* Enhanced wavy background */
+.wavy-background {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 50%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 40px,
+    rgba(155, 135, 245, 0.05) 40px,
+    rgba(155, 135, 245, 0.05) 41px
+  );
+  transform: rotate(-30deg) scale(1.5);
+  animation: wave-float 15s ease-in-out infinite;
+}
+
+@keyframes wave-float {
+  0%, 100% {
+    transform: rotate(-30deg) translateY(0) scale(1.5);
+  }
+  50% {
+    transform: rotate(-30deg) translateY(20px) scale(1.5);
+  }
+}
+
 /* 3D Shapes */
 .glass-helix {
   position: relative;
@@ -87,6 +119,63 @@
 .scroll-reveal-item.revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Enhanced scroll effects */
+.parallax-element {
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+.scroll-zoom {
+  will-change: transform;
+  transition: transform 0.2s ease-out;
+  transform-origin: center;
+}
+
+.sticky-container {
+  position: relative;
+  height: 300vh; /* Adjust based on content needs */
+}
+
+.sticky-element {
+  position: sticky;
+  top: 50px;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sticky-content {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.sticky-content.active {
+  opacity: 1;
+}
+
+.scroll-layer {
+  will-change: transform;
+}
+
+.scroll-transform {
+  will-change: transform;
+  transition: transform 0.2s ease-out;
+}
+
+/* Expanded content for Read More buttons */
+.expandable-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.expandable-content.expanded {
+  max-height: 1000px; /* Adjust based on content needs */
 }
 
 /* Scroll progress indicator */

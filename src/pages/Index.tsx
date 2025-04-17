@@ -6,6 +6,7 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Products from '@/components/Products';
 import UpcomingProjects from '@/components/UpcomingProjects';
+import ScrollDemo from '@/components/ScrollDemo';
 import Testimonials from '@/components/Testimonials';
 import Blog from '@/components/Blog';
 import Contact from '@/components/Contact';
@@ -20,6 +21,7 @@ const Index: React.FC = () => {
       <About />
       <Products />
       <UpcomingProjects />
+      <ScrollDemo />
       <Testimonials />
       <Blog />
       <Contact />
