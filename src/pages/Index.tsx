@@ -24,15 +24,31 @@ const Index: React.FC = () => {
       
       <ThreeBackground />
       <Navbar />
-      <Hero />
-      <About />
-      <Products />
+      <section id="home">
+        <Hero />
+      </section>
+      <section id="about">
+        <About />
+      </section>
+      <section id="products">
+        <Products />
+      </section>
       <DashboardShowcase />
-      <NeuroCampusReveal />
-      <UpcomingProjects />
-      <Testimonials />
-      <Blog />
-      <Contact />
+      <section id="neuro-campus">
+        <NeuroCampusReveal />
+      </section>
+      <section id="projects">
+        <UpcomingProjects />
+      </section>
+      <section id="testimonials">
+        <Testimonials />
+      </section>
+      <section id="blog">
+        <Blog />
+      </section>
+      <section id="contact">
+        <Contact />
+      </section>
       <Footer />
       <FloatingDock />
     </div>

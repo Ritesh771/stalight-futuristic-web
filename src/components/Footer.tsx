@@ -1,24 +1,6 @@
 
 import React from 'react';
-import { Facebook, Instagram, Linkedin, Twitter, Youtube, ChevronRight } from 'lucide-react';
-
-const quickLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Products', href: '#products' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Testimonials', href: '#testimonials' },
-  { name: 'Blog', href: '#blog' },
-  { name: 'Contact', href: '#contact' },
-];
-
-const productLinks = [
-  { name: 'Student Management System', href: '#products' },
-  { name: 'Learning Management System', href: '#products' },
-  { name: 'Smart Dashboards', href: '#products' },
-  { name: 'AI Face Attendance', href: '#products' },
-  { name: 'Blockchain Certificate', href: '#products' },
-];
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
 
 const socialLinks = [
   { icon: <Facebook className="h-5 w-5" />, href: 'https://facebook.com', label: 'Facebook' },
@@ -29,22 +11,16 @@ const socialLinks = [
 ];
 
 const Footer: React.FC = () => {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId.replace('#', ''));
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-      return true;
-    }
-    return false;
-  };
-
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     if (href.startsWith('#')) {
-      scrollToSection(href);
+      const element = document.getElementById(href.replace('#', ''));
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     } else {
       window.open(href, '_blank');
     }
@@ -68,19 +44,19 @@ const Footer: React.FC = () => {
       <div className="absolute top-2/3 right-1/3 w-10 h-10 glass-card rounded-lg animate-float transform-style-3d" style={{ animationDelay: '-2.5s' }}></div>
       
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="flex justify-center items-center mb-12">
           {/* Company info */}
           <div className="scroll-reveal-item opacity-0 translate-y-10" style={{ transitionDelay: '0.1s' }}>
-            <div className="mb-6">
+            <div className="mb-8 flex justify-center">
               <a href="#home" className="flex items-center" onClick={(e) => handleLinkClick(e, '#home')}>
-                <span className="text-2xl font-bold font-poppins text-gradient-primary">Stalight</span>
-                <span className="ml-1 text-xl font-light font-poppins text-white">Technology</span>
+                <span className="text-3xl lg:text-4xl font-bold font-poppins text-gradient-primary">Stalight</span>
+                <span className="ml-2 text-2xl lg:text-3xl font-light font-poppins text-white">Technology</span>
               </a>
             </div>
-            <p className="text-white/70 mb-6">
+            <p className="text-white/70 mb-8 text-center max-w-2xl">
               Empowering educators and students with cutting-edge technology solutions for a brighter, more interconnected future of learning.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-6 justify-center">
               {socialLinks.map((social, index) => (
                 <a 
                   key={index}
@@ -95,75 +71,6 @@ const Footer: React.FC = () => {
                 </a>
               ))}
             </div>
-          </div>
-          
-          {/* Quick Links */}
-          <div className="scroll-reveal-item opacity-0 translate-y-10" style={{ transitionDelay: '0.2s' }}>
-            <h3 className="text-xl font-semibold mb-6 font-poppins text-white relative">
-              Quick Links
-              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-stalight-primary"></span>
-            </h3>
-            <ul className="space-y-3">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.href)}
-                    className="text-white/70 hover:text-stalight-primary transition-all duration-300 flex items-center group"
-                  >
-                    <ChevronRight className="h-4 w-4 mr-2 text-stalight-primary/70 transition-transform duration-300 group-hover:translate-x-1" />
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Products */}
-          <div className="scroll-reveal-item opacity-0 translate-y-10" style={{ transitionDelay: '0.3s' }}>
-            <h3 className="text-xl font-semibold mb-6 font-poppins text-white relative">
-              Our Products
-              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-stalight-primary"></span>
-            </h3>
-            <ul className="space-y-3">
-              {productLinks.map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.href)}
-                    className="text-white/70 hover:text-stalight-primary transition-all duration-300 flex items-center group"
-                  >
-                    <ChevronRight className="h-4 w-4 mr-2 text-stalight-primary/70 transition-transform duration-300 group-hover:translate-x-1" />
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Newsletter with enhanced design */}
-          <div className="scroll-reveal-item opacity-0 translate-y-10" style={{ transitionDelay: '0.4s' }}>
-            <h3 className="text-xl font-semibold mb-6 font-poppins text-white relative">
-              Newsletter
-              <span className="absolute -bottom-2 left-0 w-12 h-0.5 bg-stalight-primary"></span>
-            </h3>
-            <p className="text-white/70 mb-4">
-              Subscribe to our newsletter to receive updates on our latest products and innovations in educational technology.
-            </p>
-            <form className="flex group relative" onSubmit={(e) => e.preventDefault()}>
-              <input 
-                type="email" 
-                placeholder="Your email"
-                className="bg-white/5 border border-white/10 text-white placeholder:text-white/50 rounded-l-md px-4 py-2 flex-1 focus:outline-none focus:ring-1 focus:ring-stalight-primary transition-all duration-300 group-hover:bg-white/10"
-              />
-              <button 
-                type="submit"
-                className="bg-stalight-primary hover:bg-stalight-primary/80 text-white px-4 py-2 rounded-r-md transition-all duration-300 hover:shadow-[0_0_10px_rgba(155,135,245,0.4)]"
-              >
-                Subscribe
-              </button>
-              <div className="absolute -bottom-2 right-2 w-0 h-0.5 bg-stalight-primary group-hover:w-full group-hover:right-auto group-hover:left-0 transition-all duration-700"></div>
-            </form>
           </div>
         </div>
         

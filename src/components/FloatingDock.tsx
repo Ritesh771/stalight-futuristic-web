@@ -1,11 +1,13 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, 
   BookOpen, 
   Users, 
   MessageCircle,
-  Bell
+  Bell,
+  Home,
+  Info
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -37,39 +39,86 @@ const DockItem: React.FC<DockItemProps> = ({
 };
 
 const FloatingDock: React.FC = () => {
+  const [activeSection, setActiveSection] = useState('');
+
   const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
-    });
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+      setActiveSection(sectionId);
+    }
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = [
+        'home',
+        'about',
+        'products',
+        'neuro-campus',
+        'testimonials',
+        'blog',
+        'contact'
+      ];
+
+      const current = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 200 && rect.bottom >= 200;
+        }
+        return false;
+      });
+
+      if (current) {
+        setActiveSection(current);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="floating-dock animate-fade-in">
       <DockItem 
+        icon={<Home className="h-6 w-6 text-white" />} 
+        label="Home"
+        onClick={() => scrollToSection('home')}
+        active={activeSection === 'home'}
+      />
+      <DockItem 
+        icon={<Info className="h-6 w-6 text-white" />} 
+        label="About"
+        onClick={() => scrollToSection('about')}
+        active={activeSection === 'about'}
+      />
+      <DockItem 
         icon={<LayoutDashboard className="h-6 w-6 text-white" />} 
         label="Products"
         onClick={() => scrollToSection('products')}
+        active={activeSection === 'products'}
       />
       <DockItem 
         icon={<Users className="h-6 w-6 text-white" />} 
         label="Testimonials"
         onClick={() => scrollToSection('testimonials')}
+        active={activeSection === 'testimonials'}
       />
       <DockItem 
         icon={<BookOpen className="h-6 w-6 text-white" />} 
         label="Blog"
         onClick={() => scrollToSection('blog')}
+        active={activeSection === 'blog'}
       />
       <DockItem 
         icon={<MessageCircle className="h-6 w-6 text-white" />} 
         label="Contact"
         onClick={() => scrollToSection('contact')}
-      />
-      <DockItem 
-        icon={<Bell className="h-6 w-6 text-white" />} 
-        label="Newsletter"
-        onClick={() => scrollToSection('newsletter')}
+        active={activeSection === 'contact'}
       />
     </div>
   );

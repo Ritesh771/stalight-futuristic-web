@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import GlassmorphicCard from './GlassmorphicCard';
 import { ArrowRight } from 'lucide-react';
@@ -25,7 +24,66 @@ const features = [
 const NeuroCampusReveal: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const observer = useRef<IntersectionObserver | null>(null);
+  const dotsRef = useRef<SVGCircleElement[]>([]);
+
+  useEffect(() => {
+    // Create dots for the Gemini effect
+    if (svgRef.current) {
+      const svg = svgRef.current;
+      const width = svg.clientWidth;
+      const height = svg.clientHeight;
+      
+      // Clear existing dots
+      while (svg.firstChild) {
+        svg.removeChild(svg.firstChild);
+      }
+      
+      // Create new dots
+      dotsRef.current = [];
+      const dotCount = 200;
+      for (let i = 0; i < dotCount; i++) {
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", `${Math.random() * width}`);
+        circle.setAttribute("cy", `${Math.random() * height}`);
+        circle.setAttribute("r", `${Math.random() * 2 + 1}`);
+        circle.setAttribute("fill", "#9b87f5");
+        circle.setAttribute("opacity", `${Math.random() * 0.5 + 0.2}`);
+        svg.appendChild(circle);
+        dotsRef.current.push(circle);
+      }
+    }
+    
+    // Animate dots
+    const animateDots = () => {
+      if (!svgRef.current) return;
+      
+      const width = svgRef.current.clientWidth;
+      const height = svgRef.current.clientHeight;
+      
+      dotsRef.current.forEach(dot => {
+        const x = parseFloat(dot.getAttribute("cx") || "0");
+        const y = parseFloat(dot.getAttribute("cy") || "0");
+        
+        // Random movement
+        const newX = x + (Math.random() - 0.5) * 2;
+        const newY = y + (Math.random() - 0.5) * 2;
+        
+        // Keep within bounds
+        dot.setAttribute("cx", `${newX < 0 ? width : (newX > width ? 0 : newX)}`);
+        dot.setAttribute("cy", `${newY < 0 ? height : (newY > height ? 0 : newY)}`);
+      });
+      
+      requestAnimationFrame(animateDots);
+    };
+    
+    const animation = requestAnimationFrame(animateDots);
+    
+    return () => {
+      cancelAnimationFrame(animation);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,6 +136,11 @@ const NeuroCampusReveal: React.FC = () => {
         <div className="aurora-bg w-full h-full"></div>
       </div>
       
+      {/* Gemini-style SVG effect */}
+      <div className="absolute inset-0 z-0 opacity-70 pointer-events-none">
+        <svg ref={svgRef} className="w-full h-full" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-gradient-primary">
@@ -114,7 +177,7 @@ const NeuroCampusReveal: React.FC = () => {
                   <div className="w-full md:w-1/2 flex justify-center">
                     <div className="canvas-reveal rounded-2xl overflow-hidden w-full max-w-md aspect-[4/3] card-spotlight">
                       <img 
-                        src={`/lovable-uploads/${index + 1}.png`} 
+                        src={`/lovable-uploads/photo-1461749280684-dccba630e2f6.avif`} 
                         alt={feature.title}
                         className="w-full h-full object-cover" 
                         onError={(e) => {
