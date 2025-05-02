@@ -89,6 +89,7 @@ const DashboardShowcase: React.FC = () => {
                 key={idx}
                 imageSrc={image.src}
                 title={image.title}
+                spotlight={true}
                 className={`transition-all duration-700 ${
                   idx === activeIndex ? "scale-105 ring-2 ring-stalight-primary" : "opacity-80"
                 }`}

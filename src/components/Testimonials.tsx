@@ -45,6 +45,7 @@ const Testimonials: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeDemoIndex, setActiveDemoIndex] = useState(0);
   const marqueeRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const testimonialInterval = setInterval(() => {
@@ -60,6 +61,16 @@ const Testimonials: React.FC = () => {
       clearInterval(demoInterval);
     };
   }, []);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!marqueeRef.current) return;
+    
+    const rect = marqueeRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+    
+    setMousePosition({ x, y });
+  };
 
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden bg-gradient-to-b from-black to-stalight-dark">
@@ -83,8 +94,17 @@ const Testimonials: React.FC = () => {
         </div>
         
         {/* 3D Marquee with Dashboard Images */}
-        <div className="marquee-3d mb-20 perspective-[1000px] scroll-reveal-item" ref={marqueeRef}>
-          <div className="marquee-grid grid grid-cols-1 md:grid-cols-3 gap-6 transform-style-3d rotate-x-10">
+        <div 
+          className="marquee-3d mb-20 perspective-[1000px] scroll-reveal-item" 
+          ref={marqueeRef}
+          onMouseMove={handleMouseMove}
+        >
+          <div 
+            className="marquee-grid grid grid-cols-1 md:grid-cols-3 gap-6 transform-style-3d"
+            style={{ 
+              transform: `rotateX(${-mousePosition.y * 0.3}deg) rotateY(${mousePosition.x * 0.3}deg)`
+            }}
+          >
             {demoImages.map((image, idx) => (
               <div 
                 key={idx}
@@ -92,7 +112,7 @@ const Testimonials: React.FC = () => {
                   idx === activeDemoIndex ? "scale-110 z-20" : "scale-90 opacity-70"
                 }`}
               >
-                <div className="canvas-reveal overflow-hidden rounded-xl border border-white/20">
+                <div className="canvas-reveal overflow-hidden rounded-xl border border-white/20 card-spotlight">
                   <img 
                     src={image} 
                     alt={`Application Demo ${idx + 1}`} 
@@ -114,7 +134,7 @@ const Testimonials: React.FC = () => {
             >
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="min-w-full px-4 scroll-reveal-item">
-                  <GlassmorphicCard className="relative px-8 py-10 testimonial-card transform hover:scale-[1.02] transition-all duration-500">
+                  <GlassmorphicCard className="relative px-8 py-10 testimonial-card card-spotlight transform hover:scale-[1.02] transition-all duration-500">
                     <Quote className="absolute top-6 left-6 h-8 w-8 text-stalight-primary opacity-40" />
                     
                     <div className="flex flex-col md:flex-row gap-8 items-center">
