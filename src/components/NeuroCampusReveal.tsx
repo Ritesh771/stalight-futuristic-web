@@ -1,6 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+
+import React, { useState } from 'react';
 import GlassmorphicCard from './GlassmorphicCard';
-import { ArrowRight } from 'lucide-react';
+import GlassmorphicButton from './GlassmorphicButton';
+import { Download, ArrowRight } from 'lucide-react';
+import TypeWriter from './TypeWriter';
 
 const features = [
   {
@@ -23,192 +26,131 @@ const features = [
 
 const NeuroCampusReveal: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
-  const observer = useRef<IntersectionObserver | null>(null);
-  const dotsRef = useRef<SVGCircleElement[]>([]);
+  const [typingComplete, setTypingComplete] = useState(false);
+  const [downloadStarted, setDownloadStarted] = useState(false);
 
-  useEffect(() => {
-    // Create dots for the Gemini effect
-    if (svgRef.current) {
-      const svg = svgRef.current;
-      const width = svg.clientWidth;
-      const height = svg.clientHeight;
-      
-      // Clear existing dots
-      while (svg.firstChild) {
-        svg.removeChild(svg.firstChild);
-      }
-      
-      // Create new dots
-      dotsRef.current = [];
-      const dotCount = 200;
-      for (let i = 0; i < dotCount; i++) {
-        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        circle.setAttribute("cx", `${Math.random() * width}`);
-        circle.setAttribute("cy", `${Math.random() * height}`);
-        circle.setAttribute("r", `${Math.random() * 2 + 1}`);
-        circle.setAttribute("fill", "#9b87f5");
-        circle.setAttribute("opacity", `${Math.random() * 0.5 + 0.2}`);
-        svg.appendChild(circle);
-        dotsRef.current.push(circle);
-      }
-    }
-    
-    // Animate dots
-    const animateDots = () => {
-      if (!svgRef.current) return;
-      
-      const width = svgRef.current.clientWidth;
-      const height = svgRef.current.clientHeight;
-      
-      dotsRef.current.forEach(dot => {
-        const x = parseFloat(dot.getAttribute("cx") || "0");
-        const y = parseFloat(dot.getAttribute("cy") || "0");
-        
-        // Random movement
-        const newX = x + (Math.random() - 0.5) * 2;
-        const newY = y + (Math.random() - 0.5) * 2;
-        
-        // Keep within bounds
-        dot.setAttribute("cx", `${newX < 0 ? width : (newX > width ? 0 : newX)}`);
-        dot.setAttribute("cy", `${newY < 0 ? height : (newY > height ? 0 : newY)}`);
-      });
-      
-      requestAnimationFrame(animateDots);
+  const handleDownload = (platform: 'android' | 'ios') => {
+    // In a real app, these would be actual download URLs
+    const downloadUrls = {
+      android: '/neuro-campus-android.apk',
+      ios: '/neuro-campus-ios.ipa'
     };
     
-    const animation = requestAnimationFrame(animateDots);
+    // Create an anchor element and simulate a click
+    const link = document.createElement('a');
+    link.href = downloadUrls[platform];
+    link.download = `neuro-campus-${platform}`;
+    link.click();
     
-    return () => {
-      cancelAnimationFrame(animation);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      
-      const rect = containerRef.current.getBoundingClientRect();
-      const scrollPercentage = 1 - Math.max(0, Math.min(1, rect.bottom / (rect.height + window.innerHeight)));
-      const newIndex = Math.min(features.length - 1, Math.floor(scrollPercentage * features.length));
-      
-      if (newIndex !== activeIndex) {
-        setActiveIndex(newIndex);
-      }
-      
-      if (containerRef.current) {
-        const rotateX = scrollPercentage * 20 - 10;
-        const rotateY = scrollPercentage * 20 - 10;
-        containerRef.current.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      }
-    };
-
-    observer.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            window.addEventListener('scroll', handleScroll);
-          } else {
-            window.removeEventListener('scroll', handleScroll);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (containerRef.current) {
-      observer.current.observe(containerRef.current);
-    }
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (observer.current && containerRef.current) {
-        observer.current.unobserve(containerRef.current);
-      }
-    };
-  }, [activeIndex]);
+    setDownloadStarted(true);
+    
+    // Reset the download state after a delay
+    setTimeout(() => {
+      setDownloadStarted(false);
+    }, 3000);
+  };
 
   return (
     <section id="neuro-campus" className="py-24 relative overflow-hidden bg-gradient-to-b from-black to-stalight-dark">
-      {/* Aurora Background */}
+      {/* Gradient Backdrop */}
       <div className="absolute inset-0 z-0 opacity-40">
-        <div className="aurora-bg w-full h-full"></div>
-      </div>
-      
-      {/* Gemini-style SVG effect */}
-      <div className="absolute inset-0 z-0 opacity-70 pointer-events-none">
-        <svg ref={svgRef} className="w-full h-full" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div className="bg-gradient-radial from-stalight-primary/20 via-transparent to-transparent w-full h-full"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-gradient-primary">
-            Introducing NEURO CAMPUS
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 font-poppins text-gradient-primary">
+            <TypeWriter 
+              text="Introducing NEURO CAMPUS" 
+              speed={70}
+              onComplete={() => setTypingComplete(true)}
+            />
           </h2>
-          <p className="text-xl text-white/80">
-            The future of education technology, powered by AI and blockchain
+          <p className="text-xl text-white/80 mt-8">
+            {typingComplete && (
+              <TypeWriter 
+                text="The future of education technology, powered by AI and blockchain" 
+                speed={30}
+              />
+            )}
           </p>
         </div>
         
-        <div className="container-3d-scroll min-h-[80vh]">
-          <div ref={containerRef} className="scroll-rotator w-full h-full py-10">
-            {features.map((feature, index) => (
-              <div 
-                key={index}
-                className={`scroll-content ${activeIndex === index ? 'active' : ''}`}
-              >
-                <div className="flex flex-col md:flex-row gap-10 items-center justify-center h-full">
-                  <div className="w-full md:w-1/2">
-                    <GlassmorphicCard className="card-spotlight p-8 h-full">
-                      <h3 className="text-2xl font-bold mb-4 text-gradient-primary">
-                        {feature.title}
-                      </h3>
-                      <p className="text-lg text-white/80">
-                        {feature.description}
-                      </p>
-                      <div className="mt-6">
-                        <button className="text-stalight-primary flex items-center text-lg transition-all hover:translate-x-2">
-                          Learn more <ArrowRight className="ml-2 h-5 w-5" />
-                        </button>
-                      </div>
-                    </GlassmorphicCard>
-                  </div>
-                  <div className="w-full md:w-1/2 flex justify-center">
-                    <div className="canvas-reveal rounded-2xl overflow-hidden w-full max-w-md aspect-[4/3] card-spotlight">
-                      <img 
-                        src={`/lovable-uploads/photo-1461749280684-dccba630e2f6.avif`} 
-                        alt={feature.title}
-                        className="w-full h-full object-cover" 
-                        onError={(e) => {
-                          e.currentTarget.src = `/lovable-uploads/e67c8bb8-4937-4d34-88a3-4057ffe0cf00.png`;
-                        }}
-                      />
-                      <div className="canvas-dots absolute inset-0 opacity-0"></div>
-                    </div>
-                  </div>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+          {features.map((feature, index) => (
+            <GlassmorphicCard 
+              key={index}
+              className="card-spotlight h-full p-8"
+              hoverEffect={true}
+            >
+              <h3 className="text-2xl font-bold mb-4 text-gradient-primary">
+                {feature.title}
+              </h3>
+              <p className="text-lg text-white/80">
+                {feature.description}
+              </p>
+              <div className="mt-6">
+                <button className="text-stalight-primary flex items-center text-lg transition-all hover:translate-x-2">
+                  Learn more <ArrowRight className="ml-2 h-5 w-5" />
+                </button>
               </div>
-            ))}
-            
-            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-3">
-              {features.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    activeIndex === index ? 'bg-stalight-primary w-12' : 'bg-white/30'
-                  }`}
-                  onClick={() => {
-                    setActiveIndex(index);
-                    const scrollAmount = index * (containerRef.current?.clientHeight || 0) / features.length;
-                    window.scrollTo({
-                      top: (containerRef.current?.offsetTop || 0) + scrollAmount,
-                      behavior: 'smooth'
-                    });
-                  }}
-                />
-              ))}
+            </GlassmorphicCard>
+          ))}
+        </div>
+
+        <div className="flex flex-col md:flex-row items-center justify-center gap-10 mt-20">
+          <div className="w-full md:w-1/2 flex justify-center">
+            <div className="canvas-reveal rounded-2xl overflow-hidden w-full max-w-md aspect-[4/3] card-spotlight">
+              <img 
+                src={`/lovable-uploads/904a99d9-9437-400c-9d5c-be969f43a002.png`} 
+                alt="NEURO CAMPUS AI Education Platform"
+                className="w-full h-full object-cover" 
+                onError={(e) => {
+                  e.currentTarget.src = `/lovable-uploads/e67c8bb8-4937-4d34-88a3-4057ffe0cf00.png`;
+                }}
+              />
             </div>
+          </div>
+          
+          <div className="w-full md:w-1/2">
+            <GlassmorphicCard className="card-spotlight p-8 h-full">
+              <h3 className="text-3xl font-bold mb-6 text-gradient-primary">
+                Experience the Future of Learning
+              </h3>
+              <p className="text-lg text-white/80 mb-8">
+                Download our mobile application now and experience the power of AI-driven education on your device. Available for both Android and iOS platforms.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 mt-6">
+                <GlassmorphicButton 
+                  onClick={() => handleDownload('android')} 
+                  className="group relative"
+                  glowEffect={true}
+                >
+                  <Download className="mr-2" /> 
+                  <span>Download for Android</span>
+                  {downloadStarted && (
+                    <span className="absolute top-0 right-0 -mt-2 -mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-green-500 text-xs text-white">
+                      ✓
+                    </span>
+                  )}
+                </GlassmorphicButton>
+                
+                <GlassmorphicButton 
+                  onClick={() => handleDownload('ios')}
+                  variant="outline"
+                  className="group relative"
+                >
+                  <Download className="mr-2" /> 
+                  <span>Download for iOS</span>
+                  {downloadStarted && (
+                    <span className="absolute top-0 right-0 -mt-2 -mr-2 flex h-6 w-6 items-center justify-center rounded-full bg-green-500 text-xs text-white">
+                      ✓
+                    </span>
+                  )}
+                </GlassmorphicButton>
+              </div>
+            </GlassmorphicCard>
           </div>
         </div>
       </div>

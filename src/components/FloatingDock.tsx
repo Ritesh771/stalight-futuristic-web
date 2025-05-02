@@ -5,9 +5,9 @@ import {
   BookOpen, 
   Users, 
   MessageCircle,
-  Bell,
   Home,
-  Info
+  Info,
+  Download
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -59,6 +59,7 @@ const FloatingDock: React.FC = () => {
         'about',
         'products',
         'neuro-campus',
+        'projects',
         'testimonials',
         'blog',
         'contact'
@@ -101,6 +102,18 @@ const FloatingDock: React.FC = () => {
         label="Products"
         onClick={() => scrollToSection('products')}
         active={activeSection === 'products'}
+      />
+      <DockItem 
+        icon={<Download className="h-6 w-6 text-white" />} 
+        label="Neuro Campus"
+        onClick={() => scrollToSection('neuro-campus')}
+        active={activeSection === 'neuro-campus'}
+      />
+      <DockItem 
+        icon={<BookOpen className="h-6 w-6 text-white" />} 
+        label="Projects"
+        onClick={() => scrollToSection('projects')}
+        active={activeSection === 'projects'}
       />
       <DockItem 
         icon={<Users className="h-6 w-6 text-white" />} 
