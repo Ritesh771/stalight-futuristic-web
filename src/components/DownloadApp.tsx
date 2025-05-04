@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import GlassmorphicCard from './GlassmorphicCard';
 import { Button } from '@/components/ui/button';
 import { Download, Smartphone, Loader2 } from 'lucide-react';
@@ -8,6 +8,29 @@ import { toast } from '@/hooks/use-toast';
 const DownloadApp: React.FC = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   const [isShowingIosMessage, setIsShowingIosMessage] = useState(false);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (!headingRef.current) return;
+    
+    const text = headingRef.current.innerText;
+    headingRef.current.innerText = '';
+    
+    let i = 0;
+    const typeWriter = () => {
+      if (i < text.length) {
+        if (headingRef.current) {
+          headingRef.current.innerText += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 80);
+        }
+      }
+    };
+    
+    setTimeout(() => {
+      typeWriter();
+    }, 500);
+  }, []);
 
   const handleAndroidDownload = () => {
     setIsDownloading(true);
@@ -49,28 +72,30 @@ const DownloadApp: React.FC = () => {
 
   return (
     <section id="neuro-campus" className="py-24 relative overflow-hidden bg-gradient-to-b from-black to-stalight-dark">
-      {/* Aurora Background */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <div className="aurora-bg w-full h-full"></div>
+      {/* Enhanced Aurora Background with extra glow */}
+      <div className="absolute inset-0 z-0">
+        <div className="aurora-bg w-full h-full opacity-60"></div>
       </div>
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-stalight-primary/10 blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-stalight-blue/10 blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-gradient-primary">
+          <h2 ref={headingRef} className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-gradient-primary">
             NEURO CAMPUS
           </h2>
-          <p className="text-xl text-white/80 mb-8">
+          <p className="text-xl text-white/80 mb-8 animate-fade-in">
             Experience the future of education technology on your mobile device
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-          <GlassmorphicCard className="p-8 flex flex-col items-center justify-center">
-            <div className="mb-6">
+          <GlassmorphicCard className="p-8 flex flex-col items-center justify-center hover:transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-stalight-primary/20">
+            <div className="mb-6 overflow-hidden rounded-lg">
               <img 
                 src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                 alt="Android App" 
-                className="w-full max-w-[240px] mx-auto rounded-lg shadow-lg" 
+                className="w-full max-w-[240px] mx-auto rounded-lg shadow-lg transition-transform hover:scale-105 duration-700" 
               />
             </div>
             <h3 className="text-2xl font-bold mb-4 text-gradient-primary">Android Version</h3>
@@ -79,7 +104,7 @@ const DownloadApp: React.FC = () => {
             </p>
             <Button 
               onClick={handleAndroidDownload} 
-              className="bg-stalight-primary hover:bg-stalight-primary/80 text-white font-semibold py-2 px-6 rounded-full transition-all duration-300"
+              className="bg-gradient-to-r from-stalight-primary to-stalight-blue hover:from-stalight-blue hover:to-stalight-primary text-white font-semibold py-2 px-6 rounded-full transition-all duration-500"
               disabled={isDownloading}
             >
               {isDownloading ? (
@@ -96,15 +121,15 @@ const DownloadApp: React.FC = () => {
             </Button>
           </GlassmorphicCard>
           
-          <GlassmorphicCard className="p-8 flex flex-col items-center justify-center">
-            <div className="mb-6 relative">
+          <GlassmorphicCard className="p-8 flex flex-col items-center justify-center hover:transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-stalight-blue/20">
+            <div className="mb-6 relative overflow-hidden rounded-lg">
               <img 
                 src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                 alt="iOS App" 
-                className="w-full max-w-[240px] mx-auto rounded-lg shadow-lg opacity-70" 
+                className="w-full max-w-[240px] mx-auto rounded-lg shadow-lg opacity-70 transition-transform hover:scale-105 duration-700" 
               />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-stalight-primary/80 px-4 py-2 rounded-lg rotate-12 text-white font-bold">
+                <div className="bg-gradient-to-r from-stalight-primary/80 to-stalight-blue/80 px-4 py-2 rounded-lg rotate-12 text-white font-bold animate-pulse-soft shadow-lg">
                   Coming Soon
                 </div>
               </div>
@@ -115,7 +140,7 @@ const DownloadApp: React.FC = () => {
             </p>
             <Button 
               onClick={handleIOSClick} 
-              className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-6 rounded-full transition-all duration-300"
+              className="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold py-2 px-6 rounded-full transition-all duration-500"
             >
               {isShowingIosMessage ? (
                 <>

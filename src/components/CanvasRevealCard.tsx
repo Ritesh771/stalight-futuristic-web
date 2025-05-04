@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
 interface CanvasRevealCardProps {
@@ -20,6 +20,28 @@ const CanvasRevealCard: React.FC<CanvasRevealCardProps> = ({
   spotlight = true,
 }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+    
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, []);
   
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!spotlight) return;
@@ -33,31 +55,41 @@ const CanvasRevealCard: React.FC<CanvasRevealCardProps> = ({
 
   return (
     <div 
+      ref={cardRef}
       className={cn(
-        "canvas-reveal relative rounded-xl overflow-hidden transition-all duration-500 scroll-reveal-item",
+        "canvas-reveal relative rounded-xl overflow-hidden transition-all duration-700 scroll-reveal-item",
         spotlight && "card-spotlight",
+        isVisible && "animate-fade-in",
         className
       )}
       onClick={onClick}
       onMouseMove={handleMouseMove}
       style={spotlight ? {
         '--x': `${position.x}px`,
-        '--y': `${position.y}px`
-      } as React.CSSProperties : undefined}
+        '--y': `${position.y}px`,
+        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+        opacity: isVisible ? 1 : 0,
+      } as React.CSSProperties : {
+        transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+        opacity: isVisible ? 1 : 0,
+      } as React.CSSProperties}
     >
       {imageSrc && (
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden group">
           <img 
             src={imageSrc} 
             alt={title || "Dashboard preview"} 
-            className="w-full h-auto object-cover transition-transform duration-500 hover:scale-105"
+            className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div className="canvas-dots absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="canvas-dots absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700"></div>
+          
+          {/* Add a gradient overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         </div>
       )}
-      <div className="p-4 glass-card">
+      <div className="p-4 glass-card backdrop-blur-md bg-black/30 border-t border-white/10">
         {title && (
-          <h3 className="text-lg font-semibold mb-2 text-white">{title}</h3>
+          <h3 className="text-lg font-semibold mb-2 text-gradient-primary transition-all duration-300 group-hover:text-white">{title}</h3>
         )}
         {children}
       </div>
