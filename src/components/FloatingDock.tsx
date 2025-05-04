@@ -7,7 +7,8 @@ import {
   MessageCircle,
   Bell,
   Home,
-  Info
+  Info,
+  Download
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -101,6 +102,12 @@ const FloatingDock: React.FC = () => {
         label="Products"
         onClick={() => scrollToSection('products')}
         active={activeSection === 'products'}
+      />
+      <DockItem 
+        icon={<Download className="h-6 w-6 text-white" />} 
+        label="NEURO CAMPUS"
+        onClick={() => scrollToSection('neuro-campus')}
+        active={activeSection === 'neuro-campus'}
       />
       <DockItem 
         icon={<Users className="h-6 w-6 text-white" />} 

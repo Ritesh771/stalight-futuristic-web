@@ -11,7 +11,7 @@ import DashboardShowcase from '@/components/DashboardShowcase';
 import Blog from '@/components/Blog';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import NeuroCampusReveal from '@/components/NeuroCampusReveal';
+import DownloadApp from '@/components/DownloadApp';
 import FloatingDock from '@/components/FloatingDock';
 
 const Index: React.FC = () => {
@@ -35,7 +35,7 @@ const Index: React.FC = () => {
       </section>
       <DashboardShowcase />
       <section id="neuro-campus">
-        <NeuroCampusReveal />
+        <DownloadApp />
       </section>
       <section id="projects">
         <UpcomingProjects />
