@@ -16,10 +16,13 @@ const Hero: React.FC = () => {
     "Empowering the Future of Smarter Campuses."
   ];
   
-  const { elementRef: headingRef } = useTypewriter(typewriterTexts, {
+  const { text: headingText } = useTypewriter(typewriterTexts, {
     speed: 1.2,
     pauseBetweenTexts: 2500,
-    startDelay: 700
+    startDelay: 700,
+    showCursor: true,
+    cursorChar: '|',
+    deleteSpeed: 30
   });
   
   useEffect(() => {
@@ -129,8 +132,8 @@ const Hero: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-30">
         <div ref={heroRef} className="text-center max-w-5xl mx-auto scroll-reveal-item">
-          <h1 ref={headingRef} className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 font-poppins text-transparent bg-clip-text bg-gradient-to-r from-stalight-primary via-stalight-blue to-stalight-accent animate-gradient-x min-h-[4.5rem] lg:min-h-[6rem]">
-            {/* Typewriter text will be injected here */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 font-poppins text-transparent bg-clip-text bg-gradient-to-r from-stalight-primary via-stalight-blue to-stalight-accent animate-gradient-x min-h-[4.5rem] lg:min-h-[6rem]">
+            {headingText}
           </h1>
           <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto">
             Empowering educators and students with cutting-edge AI and blockchain solutions for a smarter, more connected learning experience in the digital age.

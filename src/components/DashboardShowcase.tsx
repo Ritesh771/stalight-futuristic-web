@@ -35,9 +35,10 @@ const demoImages = [
 ];
 
 const DashboardShowcase: React.FC = () => {
-  const { elementRef } = useTypewriter(["Our Application Showcase"], { 
+  const { text: headingText } = useTypewriter(["Our Application Showcase"], { 
     speed: 1.2,
-    startDelay: 500
+    startDelay: 500,
+    showCursor: true
   });
 
   return (
@@ -50,10 +51,9 @@ const DashboardShowcase: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 
-            ref={elementRef} 
             className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-transparent bg-clip-text bg-gradient-to-r from-stalight-primary to-stalight-blue animate-gradient-x"
           >
-            Our Application Showcase
+            {headingText}
           </h2>
           <p className="text-xl text-white/80 animate-fade-in">
             Explore our powerful dashboard solutions and interfaces

@@ -7,64 +7,106 @@ interface TypewriterOptions {
   speed?: number;
   pauseBetweenTexts?: number;
   loop?: boolean;
+  deleteSpeed?: number;
+  showCursor?: boolean;
+  cursorChar?: string;
 }
 
 /**
- * A hook that adds a typewriter effect to a DOM element
+ * A hook that creates a typewriter effect
  * @param texts The array of texts to type (pass a single text as an array with one item)
  * @param options Configuration options for the typewriter effect
- * @returns Object with ref to attach to the element and current text index
+ * @returns Object with current text and cursor state
  */
 export const useTypewriter = (texts: string[], options: TypewriterOptions = {}) => {
-  const elementRef = useRef<HTMLElement>(null);
-  const { delay = 70, startDelay = 500, speed = 1, pauseBetweenTexts = 2000, loop = true } = options;
+  const {
+    delay = 70,
+    startDelay = 500,
+    speed = 1,
+    pauseBetweenTexts = 2000,
+    loop = true,
+    deleteSpeed = 40,
+    showCursor = true,
+    cursorChar = '|'
+  } = options;
+  
+  const [currentText, setCurrentText] = useState('');
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [cursorVisible, setCursorVisible] = useState(true);
+  
+  // Control cursor blinking
+  useEffect(() => {
+    if (!showCursor) return;
+    
+    const cursorInterval = setInterval(() => {
+      setCursorVisible(prev => !prev);
+    }, 500);
+    
+    return () => clearInterval(cursorInterval);
+  }, [showCursor]);
   
   useEffect(() => {
-    if (!elementRef.current || texts.length === 0) return;
+    if (texts.length === 0) return;
     
-    const element = elementRef.current;
-    
-    const typeText = (textIndex: number) => {
-      const currentText = texts[textIndex];
-      element.innerText = '';
-      let i = 0;
+    const typeText = () => {
+      const currentFullText = texts[currentTextIndex];
       
-      const typeWriter = () => {
-        if (i < currentText.length) {
-          if (elementRef.current) {
-            elementRef.current.innerText += currentText.charAt(i);
-            i++;
-            setTimeout(typeWriter, delay / speed);
+      // Calculate current text based on typing direction (typing or deleting)
+      setCurrentText(prevText => {
+        if (isDeleting) {
+          // Deleting text
+          const newText = prevText.substring(0, prevText.length - 1);
+          if (newText === '') {
+            setIsDeleting(false);
+            const nextIndex = (currentTextIndex + 1) % texts.length;
+            setCurrentTextIndex(nextIndex);
           }
+          return newText;
         } else {
-          // When finished typing, pause and then proceed to next text
-          setTimeout(() => {
-            if (loop || textIndex < texts.length - 1) {
-              const nextIndex = (textIndex + 1) % texts.length;
-              setCurrentTextIndex(nextIndex);
-              typeText(nextIndex);
-            }
-          }, pauseBetweenTexts);
+          // Typing text
+          const nextChar = currentFullText.substring(prevText.length, prevText.length + 1);
+          const newText = prevText + nextChar;
+          
+          if (newText === currentFullText) {
+            setIsTypingComplete(true);
+            setTimeout(() => {
+              setIsTypingComplete(false);
+              setIsDeleting(true);
+            }, pauseBetweenTexts);
+            return newText;
+          }
+          
+          return newText;
         }
-      };
-      
-      typeWriter();
+      });
     };
     
-    const timer = setTimeout(() => {
-      typeText(currentTextIndex);
+    // Initial delay before starting
+    const initialTimer = setTimeout(() => {
+      // Set typing interval
+      const typingInterval = setInterval(() => {
+        typeText();
+      }, isDeleting ? deleteSpeed / speed : delay / speed);
+      
+      return () => clearInterval(typingInterval);
     }, startDelay);
     
-    return () => {
-      clearTimeout(timer);
-      if (elementRef.current) {
-        elementRef.current.innerText = texts[currentTextIndex];
-      }
-    };
-  }, [texts, delay, startDelay, speed, pauseBetweenTexts, loop]);
+    return () => clearTimeout(initialTimer);
+  }, [texts, currentTextIndex, isDeleting, isTypingComplete, delay, deleteSpeed, pauseBetweenTexts, speed, startDelay]);
   
-  return { elementRef, currentTextIndex };
+  // Combine text and cursor for display
+  const displayText = showCursor 
+    ? `${currentText}${cursorVisible ? cursorChar : ''}`
+    : currentText;
+  
+  return { 
+    text: displayText, 
+    currentTextIndex,
+    isTypingComplete,
+    isDeleting
+  };
 };
 
 export default useTypewriter;
