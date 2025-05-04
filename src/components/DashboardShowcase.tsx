@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import CanvasRevealCard from './CanvasRevealCard';
 
 const demoImages = [
@@ -34,28 +34,6 @@ const demoImages = [
 ];
 
 const DashboardShowcase: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const showcaseRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % demoImages.length);
-    }, 4000);
-    
-    return () => clearInterval(interval);
-  }, []);
-  
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!showcaseRef.current) return;
-    
-    const rect = showcaseRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
-    
-    setMousePosition({ x, y });
-  };
-  
   return (
     <section id="dashboard-showcase" className="py-24 relative overflow-hidden bg-gradient-to-b from-stalight-dark to-black">
       {/* Aurora Background */}
@@ -73,26 +51,15 @@ const DashboardShowcase: React.FC = () => {
           </p>
         </div>
         
-        <div 
-          className="marquee-3d perspective-[1000px] scroll-reveal-item"
-          ref={showcaseRef}
-          onMouseMove={handleMouseMove}
-        >
-          <div 
-            className="marquee-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transform-style-3d"
-            style={{ 
-              transform: `rotateX(${-mousePosition.y * 0.2}deg) rotateY(${mousePosition.x * 0.2}deg)`
-            }}
-          >
+        <div className="showcase-grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {demoImages.map((image, idx) => (
               <CanvasRevealCard
                 key={idx}
                 imageSrc={image.src}
                 title={image.title}
-                spotlight={true}
-                className={`transition-all duration-700 ${
-                  idx === activeIndex ? "scale-105 ring-2 ring-stalight-primary" : "opacity-80"
-                }`}
+                spotlight={false}
+                className="transition-all duration-300"
               >
                 <p className="text-white/70 text-sm">
                   Interactive dashboard interface with real-time data visualization.

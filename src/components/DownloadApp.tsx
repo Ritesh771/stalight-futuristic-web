@@ -65,10 +65,10 @@ const DownloadApp: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-          <GlassmorphicCard className="card-spotlight p-8 flex flex-col items-center justify-center">
+          <GlassmorphicCard className="p-8 flex flex-col items-center justify-center">
             <div className="mb-6">
               <img 
-                src="/lovable-uploads/e67c8bb8-4937-4d34-88a3-4057ffe0cf00.png" 
+                src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                 alt="Android App" 
                 className="w-full max-w-[240px] mx-auto rounded-lg shadow-lg" 
               />
@@ -96,10 +96,10 @@ const DownloadApp: React.FC = () => {
             </Button>
           </GlassmorphicCard>
           
-          <GlassmorphicCard className="card-spotlight p-8 flex flex-col items-center justify-center">
+          <GlassmorphicCard className="p-8 flex flex-col items-center justify-center">
             <div className="mb-6 relative">
               <img 
-                src="/lovable-uploads/e67c8bb8-4937-4d34-88a3-4057ffe0cf00.png" 
+                src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                 alt="iOS App" 
                 className="w-full max-w-[240px] mx-auto rounded-lg shadow-lg opacity-70" 
               />
