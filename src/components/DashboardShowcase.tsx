@@ -1,6 +1,7 @@
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import CanvasRevealCard from './CanvasRevealCard';
+import { useTypewriter } from '@/hooks/useTypewriter';
 
 const demoImages = [
   {
@@ -34,29 +35,10 @@ const demoImages = [
 ];
 
 const DashboardShowcase: React.FC = () => {
-  const textRef = useRef<HTMLHeadingElement>(null);
-  
-  useEffect(() => {
-    if (!textRef.current) return;
-    
-    const text = textRef.current.innerText;
-    textRef.current.innerText = '';
-    
-    let i = 0;
-    const typeWriter = () => {
-      if (i < text.length) {
-        if (textRef.current) {
-          textRef.current.innerText += text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 70);
-        }
-      }
-    };
-    
-    setTimeout(() => {
-      typeWriter();
-    }, 500);
-  }, []);
+  const { elementRef } = useTypewriter(["Our Application Showcase"], { 
+    speed: 1.2,
+    startDelay: 500
+  });
 
   return (
     <section id="dashboard-showcase" className="py-24 relative overflow-hidden bg-gradient-to-b from-stalight-dark to-black">
@@ -67,7 +49,10 @@ const DashboardShowcase: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 ref={textRef} className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-gradient-primary">
+          <h2 
+            ref={elementRef} 
+            className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-transparent bg-clip-text bg-gradient-to-r from-stalight-primary to-stalight-blue animate-gradient-x"
+          >
             Our Application Showcase
           </h2>
           <p className="text-xl text-white/80 animate-fade-in">
@@ -76,14 +61,14 @@ const DashboardShowcase: React.FC = () => {
         </div>
         
         <div className="showcase-grid">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {demoImages.map((image, idx) => (
               <CanvasRevealCard
                 key={idx}
                 imageSrc={image.src}
                 title={image.title}
-                spotlight={false}
-                className="transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-stalight-primary/20"
+                spotlight={true}
+                className="transition-all duration-500 hover:shadow-xl"
               >
                 <p className="text-white/70 text-sm">
                   Interactive dashboard interface with real-time data visualization.
