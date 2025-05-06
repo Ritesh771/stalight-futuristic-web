@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 
 interface TypewriterOptions {
@@ -21,7 +20,7 @@ type TypewriterState = 'typing' | 'pausing' | 'erasing' | 'transitioning';
  * @returns Object with the current text, ref to attach to the element, and cursor state
  */
 export const useTypewriter = (
-  texts: string | string[], 
+  texts: string | string[],
   options: TypewriterOptions = {}
 ) => {
   const textsArray = Array.isArray(texts) ? texts : [texts];
@@ -31,29 +30,29 @@ export const useTypewriter = (
   const currentIndex = useRef(0);
   const charIndex = useRef(0);
   const state = useRef<TypewriterState>('typing');
-  
-  const { 
-    delay = 40, // Increased typing speed (was 70)
-    startDelay = 500, 
-    speed = 2,  // Increased speed multiplier (was 1)
-    pauseTime = 1500,
-    eraseDelay = 30, // Faster erase speed (was 70)
-    eraseSpeed = 2,  // Increased erase speed multiplier (was 1.5)
+
+  const {
+    delay = 70, // Typing speed
+    startDelay = 500,
+    speed = 1,  // Typing speed multiplier
+    pauseTime = 1800, // Pause time after typing
+    eraseDelay = 70, // Delay before erasing
+    eraseSpeed = 1.5,  // Erasing speed multiplier
     loop = true,
     showCursor: cursorOption = true
   } = options;
-  
+
   useEffect(() => {
     if (!elementRef.current || textsArray.length === 0) return;
-    
+
     let animationFrame: number;
     let timeout: NodeJS.Timeout;
-    
+
     const typeChar = () => {
       if (!elementRef.current) return;
-      
+
       const currentSentence = textsArray[currentIndex.current];
-      
+
       if (state.current === 'typing') {
         if (charIndex.current < currentSentence.length) {
           setCurrentText(currentSentence.substring(0, charIndex.current + 1));
@@ -92,32 +91,32 @@ export const useTypewriter = (
         }
       }
     };
-    
+
     // Start the typewriter effect after initial delay
     timeout = setTimeout(() => {
       animationFrame = requestAnimationFrame(typeChar);
-      
+
       // Blinking cursor effect
       if (cursorOption) {
         const cursorInterval = setInterval(() => {
           setShowCursor(prev => !prev);
         }, 500);
-        
+
         return () => {
           clearInterval(cursorInterval);
         };
       }
     }, startDelay);
-    
+
     return () => {
       clearTimeout(timeout);
       cancelAnimationFrame(animationFrame);
     };
   }, [textsArray, delay, startDelay, speed, pauseTime, eraseDelay, eraseSpeed, loop, cursorOption]);
-  
-  return { 
-    text: currentText, 
-    ref: elementRef, 
+
+  return {
+    text: currentText,
+    ref: elementRef,
     cursor: cursorOption && showCursor ? '|' : ''
   };
 };
