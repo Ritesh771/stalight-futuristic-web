@@ -17,12 +17,12 @@ const Hero: React.FC = () => {
   ];
   
   const { text, ref: typewriterRef, cursor } = useTypewriter(typewriterTexts, {
-    delay: 70,
+    delay: 40, // Faster typing speed (was 70)
     startDelay: 500,
-    speed: 1,
+    speed: 2,  // Increased speed multiplier (was 1)
     pauseTime: 1800,
-    eraseDelay: 50,
-    eraseSpeed: 1.5,
+    eraseDelay: 30, // Faster erase speed (was 50)
+    eraseSpeed: 2,  // Increased erase speed (was 1.5)
     loop: true,
     showCursor: true
   });

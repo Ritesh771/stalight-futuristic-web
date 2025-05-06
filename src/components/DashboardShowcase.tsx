@@ -36,9 +36,9 @@ const demoImages = [
 
 const DashboardShowcase: React.FC = () => {
   const { text, ref: typewriterRef, cursor } = useTypewriter("Our Application Showcase", {
-    delay: 70,
+    delay: 40, // Faster typing
     startDelay: 500,
-    speed: 1.2,
+    speed: 2,  // Increased speed
     loop: false
   });
 

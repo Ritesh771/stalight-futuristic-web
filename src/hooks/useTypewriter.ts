@@ -33,12 +33,12 @@ export const useTypewriter = (
   const state = useRef<TypewriterState>('typing');
   
   const { 
-    delay = 70, 
+    delay = 40, // Increased typing speed (was 70)
     startDelay = 500, 
-    speed = 1,
+    speed = 2,  // Increased speed multiplier (was 1)
     pauseTime = 1500,
-    eraseDelay = 70,
-    eraseSpeed = 1.5,
+    eraseDelay = 30, // Faster erase speed (was 70)
+    eraseSpeed = 2,  // Increased erase speed multiplier (was 1.5)
     loop = true,
     showCursor: cursorOption = true
   } = options;
@@ -81,11 +81,11 @@ export const useTypewriter = (
           }, eraseDelay / eraseSpeed);
         } else {
           state.current = 'transitioning';
-          currentIndex.current = (currentIndex.current + 1) % textsArray.length;
-          if (!loop && currentIndex.current === 0) {
-            return;
-          }
           timeout = setTimeout(() => {
+            currentIndex.current = (currentIndex.current + 1) % textsArray.length;
+            if (!loop && currentIndex.current === 0) {
+              return;
+            }
             state.current = 'typing';
             animationFrame = requestAnimationFrame(typeChar);
           }, startDelay);
