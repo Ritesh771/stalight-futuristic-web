@@ -2,7 +2,7 @@ Here's a regenerated version of the README file with all references to Lovable r
 
 ---
 
-# Welcome to Your Project
+# Welcome to Landing Page of Stalight Technology
 
 ## Project Info
 
@@ -22,7 +22,7 @@ Follow these steps:
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
-git clone <>
+git clone <https://github.com/Ritesh771/stalight-futuristic-web.git>
 
 # Step 2: Navigate to the project directory.
 cd <stalight-futuristic-web>
