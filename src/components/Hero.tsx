@@ -1,12 +1,31 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, ChevronRight, ExternalLink } from 'lucide-react';
+import { ArrowDown, ChevronRight } from 'lucide-react';
 import GlassmorphicButton from './GlassmorphicButton';
+import { useTypewriter } from '@/hooks/useTypewriter';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const floatingElementsRef = useRef<HTMLDivElement>(null);
   const waveRef = useRef<HTMLDivElement>(null);
+  
+  const typewriterTexts = [
+    "Revolutionize Education with Stalight Technology.",
+    "Bridging AI, Blockchain, and Learning Excellence.",
+    "Empowering the Future of Smarter Campuses."
+  ];
+  
+  const { text, ref: typewriterRef, cursor } = useTypewriter(typewriterTexts, {
+    delay: 70,
+    startDelay: 500,
+    speed: 1,
+    pauseTime: 1800,
+    eraseDelay: 50,
+    eraseSpeed: 1.5,
+    loop: true,
+    showCursor: true
+  });
   
   useEffect(() => {
     const parallaxEffect = () => {
@@ -54,12 +73,57 @@ const Hero: React.FC = () => {
         revealObserver.observe(item);
       });
     };
+    
+    // Update scroll progress indicator
+    const updateScrollProgress = () => {
+      const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPosition = window.scrollY;
+      const scrolled = (scrollPosition / totalHeight) * 100;
+      
+      const progressIndicator = document.querySelector('.scroll-progress-indicator');
+      const progressCircle = document.querySelector('.scroll-progress-circle-bar');
+      const progressPercentage = document.querySelector('.scroll-progress-percentage');
+      
+      if (progressIndicator && progressCircle && progressPercentage) {
+        if (scrollPosition > 100) {
+          progressIndicator.classList.remove('opacity-0');
+          progressIndicator.classList.add('opacity-100');
+        } else {
+          progressIndicator.classList.remove('opacity-100');
+          progressIndicator.classList.add('opacity-0');
+        }
+        
+        const circumference = 2 * Math.PI * 18;
+        const offset = circumference - (scrolled / 100) * circumference;
+        (progressCircle as SVGElement).style.strokeDasharray = `${circumference}`;
+        (progressCircle as SVGElement).style.strokeDashoffset = `${offset}`;
+        (progressPercentage as HTMLElement).textContent = `${Math.round(scrolled)}%`;
+      }
+    };
 
-    window.addEventListener('scroll', parallaxEffect);
+    // Set up event listeners using requestAnimationFrame for smoother animations
+    let lastScrollPosition = 0;
+    let ticking = false;
+
+    const handleScroll = () => {
+      lastScrollPosition = window.scrollY;
+      
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          parallaxEffect();
+          updateScrollProgress();
+          ticking = false;
+        });
+        
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
     initScrollReveal();
     
     return () => {
-      window.removeEventListener('scroll', parallaxEffect);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -115,10 +179,16 @@ const Hero: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-30">
         <div ref={heroRef} className="text-center max-w-5xl mx-auto scroll-reveal-item">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 font-poppins text-gradient">
-            Revolutionize Education with Stalight Technology
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 font-poppins typewriter-container">
+            <span 
+              ref={typewriterRef} 
+              className="text-gradient inline-block"
+            >
+              {text}
+            </span>
+            <span className={`typewriter-cursor ${cursor ? 'opacity-100' : 'opacity-0'}`}>{cursor}</span>
           </h1>
-          <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto typewriter-subtitle">
             Empowering educators and students with cutting-edge AI and blockchain solutions for a smarter, more connected learning experience in the digital age.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center relative">
@@ -155,8 +225,8 @@ const Hero: React.FC = () => {
       <div className="fixed bottom-4 right-4 z-50 w-12 h-12 rounded-full glass-card flex items-center justify-center opacity-0 scroll-progress-indicator transition-opacity duration-300">
         <div className="scroll-progress-circle">
           <svg className="w-10 h-10">
-            <circle className="text-gray-300" strokeWidth="2" stroke="currentColor" fill="transparent" r="18" cx="20" cy="20" />
-            <circle className="text-stalight-primary scroll-progress-circle-bar" strokeWidth="2" stroke="currentColor" fill="transparent" r="18" cx="20" cy="20" />
+            <circle className="text-gray-300/30" strokeWidth="2" stroke="currentColor" fill="transparent" r="18" cx="20" cy="20" />
+            <circle className="text-stalight-primary scroll-progress-circle-bar" strokeWidth="2" stroke="currentColor" fill="transparent" r="18" cx="20" cy="20" strokeLinecap="round" strokeDasharray="113" strokeDashoffset="113" />
           </svg>
           <span className="absolute text-xs text-white scroll-progress-percentage">0%</span>
         </div>

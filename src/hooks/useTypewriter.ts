@@ -1,52 +1,125 @@
 
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface TypewriterOptions {
   delay?: number;
   startDelay?: number;
   speed?: number;
+  pauseTime?: number;
+  eraseDelay?: number;
+  eraseSpeed?: number;
+  loop?: boolean;
+  showCursor?: boolean;
 }
 
+type TypewriterState = 'typing' | 'pausing' | 'erasing' | 'transitioning';
+
 /**
- * A hook that adds a typewriter effect to a DOM element
- * @param text The text to type
+ * A hook that adds a dynamic typewriter effect to a DOM element
+ * @param texts Array of texts to type
  * @param options Configuration options for the typewriter effect
- * @returns Ref to attach to the element
+ * @returns Object with the current text, ref to attach to the element, and cursor state
  */
-export const useTypewriter = (text: string, options: TypewriterOptions = {}) => {
+export const useTypewriter = (
+  texts: string | string[], 
+  options: TypewriterOptions = {}
+) => {
+  const textsArray = Array.isArray(texts) ? texts : [texts];
+  const [currentText, setCurrentText] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
   const elementRef = useRef<HTMLElement>(null);
-  const { delay = 70, startDelay = 500, speed = 1 } = options;
+  const currentIndex = useRef(0);
+  const charIndex = useRef(0);
+  const state = useRef<TypewriterState>('typing');
+  
+  const { 
+    delay = 70, 
+    startDelay = 500, 
+    speed = 1,
+    pauseTime = 1500,
+    eraseDelay = 70,
+    eraseSpeed = 1.5,
+    loop = true,
+    showCursor: cursorOption = true
+  } = options;
   
   useEffect(() => {
-    if (!elementRef.current) return;
+    if (!elementRef.current || textsArray.length === 0) return;
     
-    const element = elementRef.current;
-    element.innerText = '';
+    let animationFrame: number;
+    let timeout: NodeJS.Timeout;
     
-    let i = 0;
-    const typeWriter = () => {
-      if (i < text.length) {
-        if (elementRef.current) {
-          elementRef.current.innerText += text.charAt(i);
-          i++;
-          setTimeout(typeWriter, delay / speed);
+    const typeChar = () => {
+      if (!elementRef.current) return;
+      
+      const currentSentence = textsArray[currentIndex.current];
+      
+      if (state.current === 'typing') {
+        if (charIndex.current < currentSentence.length) {
+          setCurrentText(currentSentence.substring(0, charIndex.current + 1));
+          charIndex.current++;
+          timeout = setTimeout(() => {
+            animationFrame = requestAnimationFrame(typeChar);
+          }, delay / speed);
+        } else {
+          state.current = 'pausing';
+          timeout = setTimeout(() => {
+            animationFrame = requestAnimationFrame(typeChar);
+          }, pauseTime);
+        }
+      } else if (state.current === 'pausing') {
+        state.current = 'erasing';
+        timeout = setTimeout(() => {
+          animationFrame = requestAnimationFrame(typeChar);
+        }, eraseDelay);
+      } else if (state.current === 'erasing') {
+        if (charIndex.current > 0) {
+          charIndex.current--;
+          setCurrentText(currentSentence.substring(0, charIndex.current));
+          timeout = setTimeout(() => {
+            animationFrame = requestAnimationFrame(typeChar);
+          }, eraseDelay / eraseSpeed);
+        } else {
+          state.current = 'transitioning';
+          currentIndex.current = (currentIndex.current + 1) % textsArray.length;
+          if (!loop && currentIndex.current === 0) {
+            return;
+          }
+          timeout = setTimeout(() => {
+            state.current = 'typing';
+            animationFrame = requestAnimationFrame(typeChar);
+          }, startDelay);
         }
       }
     };
     
-    const timer = setTimeout(() => {
-      typeWriter();
+    // Start the typewriter effect after initial delay
+    timeout = setTimeout(() => {
+      animationFrame = requestAnimationFrame(typeChar);
+      
+      // Blinking cursor effect
+      if (cursorOption) {
+        const cursorInterval = setInterval(() => {
+          setShowCursor(prev => !prev);
+        }, 500);
+        
+        return () => {
+          clearInterval(cursorInterval);
+        };
+      }
     }, startDelay);
     
     return () => {
-      clearTimeout(timer);
-      if (elementRef.current) {
-        elementRef.current.innerText = text;
-      }
+      clearTimeout(timeout);
+      cancelAnimationFrame(animationFrame);
     };
-  }, [text, delay, startDelay, speed]);
+  }, [textsArray, delay, startDelay, speed, pauseTime, eraseDelay, eraseSpeed, loop, cursorOption]);
   
-  return elementRef;
+  return { 
+    text: currentText, 
+    ref: elementRef, 
+    cursor: cursorOption && showCursor ? '|' : ''
+  };
 };
 
 export default useTypewriter;

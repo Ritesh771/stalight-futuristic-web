@@ -21,6 +21,7 @@ const CanvasRevealCard: React.FC<CanvasRevealCardProps> = ({
 }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -64,6 +65,8 @@ const CanvasRevealCard: React.FC<CanvasRevealCardProps> = ({
       )}
       onClick={onClick}
       onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={spotlight ? {
         '--x': `${position.x}px`,
         '--y': `${position.y}px`,
@@ -83,8 +86,8 @@ const CanvasRevealCard: React.FC<CanvasRevealCardProps> = ({
           />
           <div className="canvas-dots absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700"></div>
           
-          {/* Add a gradient overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          {/* Enhanced gradient overlay with pulse effect on hover */}
+          <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isHovered ? 'pulse-soft-light' : ''}`}></div>
         </div>
       )}
       <div className="p-4 glass-card backdrop-blur-md bg-black/30 border-t border-white/10">
