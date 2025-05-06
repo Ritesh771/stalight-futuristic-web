@@ -1,6 +1,7 @@
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import CanvasRevealCard from './CanvasRevealCard';
+import useTypewriter from '@/hooks/useTypewriter';
 
 const demoImages = [
   {
@@ -34,29 +35,19 @@ const demoImages = [
 ];
 
 const DashboardShowcase: React.FC = () => {
-  const textRef = useRef<HTMLHeadingElement>(null);
+  const typewriterTexts = [
+    "Our Application Showcase",
+    "Powerful Dashboard Solutions",
+    "Interactive User Interfaces"
+  ];
   
-  useEffect(() => {
-    if (!textRef.current) return;
-    
-    const text = textRef.current.innerText;
-    textRef.current.innerText = '';
-    
-    let i = 0;
-    const typeWriter = () => {
-      if (i < text.length) {
-        if (textRef.current) {
-          textRef.current.innerText += text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 70);
-        }
-      }
-    };
-    
-    setTimeout(() => {
-      typeWriter();
-    }, 500);
-  }, []);
+  const { text, showCursor } = useTypewriter(typewriterTexts, {
+    speed: 1.5,
+    eraseSpeed: 25,
+    delay: 70,
+    eraseDelay: 1500,
+    pauseBetween: 800
+  });
 
   return (
     <section id="dashboard-showcase" className="py-24 relative overflow-hidden bg-gradient-to-b from-stalight-dark to-black">
@@ -67,10 +58,13 @@ const DashboardShowcase: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 ref={textRef} className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-gradient-primary">
-            Our Application Showcase
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-gradient-primary">
+            <div className="typewriter-container inline-block">
+              <span className="typewriter-text">{text}</span>
+              <span className={`typewriter-cursor ${showCursor ? 'visible' : 'invisible'}`}>|</span>
+            </div>
           </h2>
-          <p className="text-xl text-white/80 animate-fade-in">
+          <p className="text-xl text-white/80 animate-fade-in backdrop-blur-sm p-4 rounded-lg bg-white/5 inline-block">
             Explore our powerful dashboard solutions and interfaces
           </p>
         </div>
@@ -82,7 +76,7 @@ const DashboardShowcase: React.FC = () => {
                 key={idx}
                 imageSrc={image.src}
                 title={image.title}
-                spotlight={false}
+                spotlight={true}
                 className="transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-stalight-primary/20"
               >
                 <p className="text-white/70 text-sm">

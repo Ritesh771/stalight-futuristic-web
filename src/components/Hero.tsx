@@ -1,12 +1,29 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, ChevronRight, ExternalLink } from 'lucide-react';
+import { ArrowDown, ChevronRight } from 'lucide-react';
 import GlassmorphicButton from './GlassmorphicButton';
+import useTypewriter from '@/hooks/useTypewriter';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const floatingElementsRef = useRef<HTMLDivElement>(null);
   const waveRef = useRef<HTMLDivElement>(null);
+
+  // Dynamic typewriter text array
+  const typewriterTexts = [
+    "Revolutionize Education with Stalight Technology.",
+    "Bridging AI, Blockchain, and Learning Excellence.",
+    "Empowering the Future of Smarter Campuses."
+  ];
+  
+  const { text, showCursor } = useTypewriter(typewriterTexts, {
+    speed: 1.5,
+    eraseSpeed: 25,
+    delay: 60,
+    eraseDelay: 2000,
+    pauseBetween: 1000
+  });
   
   useEffect(() => {
     const parallaxEffect = () => {
@@ -55,11 +72,35 @@ const Hero: React.FC = () => {
       });
     };
 
-    window.addEventListener('scroll', parallaxEffect);
+    // Use requestAnimationFrame for smoother scroll effects
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          parallaxEffect();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
     initScrollReveal();
     
+    // Initialize a progressive loading animation
+    const progressiveReveal = () => {
+      const elements = document.querySelectorAll('.progressive-reveal');
+      elements.forEach((el, index) => {
+        setTimeout(() => {
+          el.classList.add('revealed');
+        }, 200 * index);
+      });
+    };
+
+    progressiveReveal();
+    
     return () => {
-      window.removeEventListener('scroll', parallaxEffect);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -116,12 +157,15 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 relative z-30">
         <div ref={heroRef} className="text-center max-w-5xl mx-auto scroll-reveal-item">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 font-poppins text-gradient">
-            Revolutionize Education with Stalight Technology
+            <div className="typewriter-container text-gradient-primary">
+              <span className="typewriter-text">{text}</span>
+              <span className={`typewriter-cursor ${showCursor ? 'visible' : 'invisible'}`}>|</span>
+            </div>
           </h1>
-          <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto progressive-reveal backdrop-blur-sm p-4 rounded-lg bg-white/5">
             Empowering educators and students with cutting-edge AI and blockchain solutions for a smarter, more connected learning experience in the digital age.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center relative">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center relative progressive-reveal">
             <GlassmorphicButton 
               onClick={() => scrollToSection('about')}
               className="bg-stalight-primary text-white font-medium py-6 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(155,135,245,0.7)] relative z-10"
