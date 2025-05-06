@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @import './wave-animations.css';
 @import './components/advanced-animations.css';
@@ -191,25 +192,6 @@
   .backdrop-glow {
     @apply before:absolute before:inset-0 before:bg-gradient-to-br before:from-stalight-primary/20 before:to-stalight-blue/10 before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100;
   }
-  
-  /* Typewriter Effect */
-  .typewriter-container {
-    @apply relative;
-  }
-  
-  .typewriter-cursor {
-    @apply inline-block ml-1 text-gradient-primary;
-    animation: blink 0.8s ease-in-out infinite alternate;
-  }
-  
-  .typewriter-subtitle {
-    opacity: 0;
-    animation: fade-in 1s ease forwards 1s;
-  }
-  
-  .pulse-soft-light {
-    animation: pulse-soft-light 4s ease-in-out infinite;
-  }
 }
 
 @keyframes float {
@@ -289,22 +271,6 @@
 @keyframes rotate-slow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
-
-@keyframes blink {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-
-@keyframes pulse-soft-light {
-  0%, 100% { 
-    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(155,135,245,0.05) 80%, transparent);
-    opacity: 1;
-  }
-  50% { 
-    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(155,135,245,0.10) 80%, transparent);
-    opacity: 0.9;
-  }
 }
 
 /* Responsive helper classes */
