@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface TypewriterOptions {
   delay?: number;
@@ -50,51 +50,57 @@ export const useTypewriter = (texts: string[], options: TypewriterOptions = {}) 
   useEffect(() => {
     if (texts.length === 0) return;
     
+    let timer: ReturnType<typeof setTimeout>;
+    
     const typeText = () => {
       const currentFullText = texts[currentTextIndex];
       
-      // Calculate current text based on typing direction (typing or deleting)
-      setCurrentText(prevText => {
-        if (isDeleting) {
-          // Deleting text
+      if (isDeleting) {
+        // Deleting text
+        setCurrentText(prevText => {
           const newText = prevText.substring(0, prevText.length - 1);
+          
           if (newText === '') {
             setIsDeleting(false);
             const nextIndex = (currentTextIndex + 1) % texts.length;
             setCurrentTextIndex(nextIndex);
           }
+          
           return newText;
-        } else {
-          // Typing text
+        });
+        
+        timer = setTimeout(typeText, deleteSpeed / speed);
+      } else {
+        // Typing text
+        setCurrentText(prevText => {
           const nextChar = currentFullText.substring(prevText.length, prevText.length + 1);
           const newText = prevText + nextChar;
           
           if (newText === currentFullText) {
             setIsTypingComplete(true);
-            setTimeout(() => {
+            timer = setTimeout(() => {
               setIsTypingComplete(false);
-              setIsDeleting(true);
+              if (texts.length > 1 && loop) {
+                setIsDeleting(true);
+                typeText();
+              }
             }, pauseBetweenTexts);
             return newText;
           }
           
+          timer = setTimeout(typeText, delay / speed);
           return newText;
-        }
-      });
+        });
+      }
     };
     
     // Initial delay before starting
-    const initialTimer = setTimeout(() => {
-      // Set typing interval
-      const typingInterval = setInterval(() => {
-        typeText();
-      }, isDeleting ? deleteSpeed / speed : delay / speed);
-      
-      return () => clearInterval(typingInterval);
+    timer = setTimeout(() => {
+      typeText();
     }, startDelay);
     
-    return () => clearTimeout(initialTimer);
-  }, [texts, currentTextIndex, isDeleting, isTypingComplete, delay, deleteSpeed, pauseBetweenTexts, speed, startDelay]);
+    return () => clearTimeout(timer);
+  }, [texts, currentTextIndex, isDeleting, isTypingComplete, delay, deleteSpeed, pauseBetweenTexts, speed, startDelay, loop]);
   
   // Combine text and cursor for display
   const displayText = showCursor 
@@ -105,7 +111,8 @@ export const useTypewriter = (texts: string[], options: TypewriterOptions = {}) 
     text: displayText, 
     currentTextIndex,
     isTypingComplete,
-    isDeleting
+    isDeleting,
+    rawText: currentText // Add raw text without cursor for styling purposes
   };
 };
 

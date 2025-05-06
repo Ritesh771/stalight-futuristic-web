@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @import './wave-animations.css';
 @import './components/advanced-animations.css';
@@ -192,6 +191,42 @@
   .backdrop-glow {
     @apply before:absolute before:inset-0 before:bg-gradient-to-br before:from-stalight-primary/20 before:to-stalight-blue/10 before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100;
   }
+  
+  .typewriter-text {
+    @apply relative inline-block;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .typewriter-text::after {
+    content: '|';
+    position: relative;
+    animation: blink 1s infinite;
+    opacity: 1;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 15s ease infinite;
+  }
+  
+  @keyframes gradient-x {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 }
 
 @keyframes float {
@@ -249,7 +284,7 @@
 @keyframes reveal {
   from { 
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to { 
     opacity: 1;

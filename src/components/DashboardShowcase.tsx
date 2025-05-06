@@ -35,11 +35,16 @@ const demoImages = [
 ];
 
 const DashboardShowcase: React.FC = () => {
-  const { text: headingText } = useTypewriter(["Our Application Showcase"], { 
-    speed: 1.2,
-    startDelay: 500,
-    showCursor: true
-  });
+  const { text: headingText } = useTypewriter(
+    ["Our Application Showcase", "Explore Our Interfaces", "Innovative Dashboard Solutions"], 
+    { 
+      speed: 1.2,
+      startDelay: 500,
+      pauseBetweenTexts: 3000,
+      showCursor: true,
+      deleteSpeed: 30
+    }
+  );
 
   return (
     <section id="dashboard-showcase" className="py-24 relative overflow-hidden bg-gradient-to-b from-stalight-dark to-black">
@@ -49,9 +54,9 @@ const DashboardShowcase: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="max-w-3xl mx-auto text-center mb-16 scroll-reveal-item">
           <h2 
-            className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-transparent bg-clip-text bg-gradient-to-r from-stalight-primary to-stalight-blue animate-gradient-x"
+            className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-transparent bg-clip-text bg-gradient-to-r from-stalight-primary to-stalight-blue animate-gradient-x min-h-[3rem]"
           >
             {headingText}
           </h2>
@@ -63,17 +68,18 @@ const DashboardShowcase: React.FC = () => {
         <div className="showcase-grid">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {demoImages.map((image, idx) => (
-              <CanvasRevealCard
-                key={idx}
-                imageSrc={image.src}
-                title={image.title}
-                spotlight={true}
-                className="transition-all duration-500 hover:shadow-xl"
-              >
-                <p className="text-white/70 text-sm">
-                  Interactive dashboard interface with real-time data visualization.
-                </p>
-              </CanvasRevealCard>
+              <div key={idx} className="scroll-reveal-item" style={{ animationDelay: `${idx * 150}ms` }}>
+                <CanvasRevealCard
+                  imageSrc={image.src}
+                  title={image.title}
+                  spotlight={true}
+                  className="transition-all duration-500 hover:shadow-xl hover:scale-105"
+                >
+                  <p className="text-white/70 text-sm">
+                    Interactive dashboard interface with real-time data visualization.
+                  </p>
+                </CanvasRevealCard>
+              </div>
             ))}
           </div>
         </div>
