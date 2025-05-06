@@ -10,10 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
   initScrollTriggeredTransformations();
   initWavyBackground();
   setupReadMoreButtons();
-  enhanceTypewriterEffect();
 });
 
-// Initialize scroll reveal animation with improved smoothness
+// Initialize scroll reveal animation
 function initScrollReveal() {
   const revealItems = document.querySelectorAll('.scroll-reveal-item');
   
@@ -22,36 +21,16 @@ function initScrollReveal() {
   const revealCallback = (entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Add a slight delay based on the data-delay attribute or index for cascade effect
-        const delay = entry.target.dataset.delay || 0;
-        setTimeout(() => {
-          entry.target.classList.add('revealed');
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }, delay);
-        
+        entry.target.classList.add('revealed');
         // Once revealed, no need to observe anymore
         observer.unobserve(entry.target);
       }
     });
   };
   
-  // Prepare items for reveal by setting initial styles
-  revealItems.forEach((item, index) => {
-    if (!item.style.opacity) {
-      item.style.opacity = '0';
-      item.style.transform = 'translateY(30px)';
-      item.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-      // Set a data-delay attribute if it doesn't exist
-      if (!item.dataset.delay) {
-        item.dataset.delay = (index * 100).toString();
-      }
-    }
-  });
-  
   const revealObserver = new IntersectionObserver(revealCallback, {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -100px 0px'
   });
   
   revealItems.forEach(item => {
@@ -59,7 +38,7 @@ function initScrollReveal() {
   });
 }
 
-// Initialize scroll progress indicator with smoother animation
+// Initialize scroll progress indicator
 function initScrollProgress() {
   const progressIndicator = document.querySelector('.scroll-progress-indicator');
   const progressCircle = document.querySelector('.scroll-progress-circle-bar');
@@ -67,99 +46,40 @@ function initScrollProgress() {
   
   if (!progressIndicator || !progressCircle || !progressText) return;
   
-  let lastScrollPercent = 0;
-  let animationFrameId = null;
-  
-  // Using requestAnimationFrame for smoother updates
-  const updateScrollProgress = () => {
+  window.addEventListener('scroll', () => {
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = scrollTop / docHeight;
     const scrollPercentRounded = Math.round(scrollPercent * 100);
     
-    // Smoothly interpolate between last value and current
-    lastScrollPercent = lastScrollPercent + (scrollPercent - lastScrollPercent) * 0.1;
-    
     // Show the progress indicator once scrolling starts
     if (scrollTop > 100) {
-      progressIndicator.style.opacity = '1';
+      progressIndicator.style.opacity = 1;
     } else {
-      progressIndicator.style.opacity = '0';
+      progressIndicator.style.opacity = 0;
     }
-    
-    // Make sure circle radius is always positive to fix the negative radius error
-    const radius = 18;
-    const circumference = 2 * Math.PI * radius;
-    
-    // Calculate dashoffset ensuring it's never negative
-    const dashoffset = circumference - (Math.max(0, lastScrollPercent) * circumference);
     
     // Update the circle progress and text
-    if (progressCircle) {
-      progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
-      progressCircle.style.strokeDashoffset = `${Math.max(0, dashoffset)}`;
-    }
-    
-    if (progressText) {
-      progressText.textContent = `${scrollPercentRounded}%`;
-    }
-    
-    animationFrameId = requestAnimationFrame(updateScrollProgress);
-  };
-  
-  window.addEventListener('scroll', () => {
-    if (!animationFrameId) {
-      animationFrameId = requestAnimationFrame(updateScrollProgress);
-    }
-  });
-  
-  // Initial update
-  updateScrollProgress();
-  
-  // Cleanup
-  window.addEventListener('beforeunload', () => {
-    if (animationFrameId) {
-      cancelAnimationFrame(animationFrameId);
-    }
+    const dashoffset = 113 - (scrollPercent * 113);
+    progressCircle.style.strokeDashoffset = dashoffset;
+    progressText.textContent = `${scrollPercentRounded}%`;
   });
 }
 
-// Enhance typewriter effect with additional CSS
-function enhanceTypewriterEffect() {
-  const typewriterTexts = document.querySelectorAll('.typewriter-text');
-  
-  if (typewriterTexts.length === 0) return;
-  
-  typewriterTexts.forEach(text => {
-    // Add subtle text shadow for better visibility
-    text.style.textShadow = '0 0 8px rgba(155,135,245,0.3)';
-  });
-}
-
-// Initialize parallax scrolling effect with improved smoothness
+// Initialize parallax scrolling effect
 function initParallaxScrolling() {
   const parallaxElements = document.querySelectorAll('.parallax-element');
   
   if (parallaxElements.length === 0) return;
   
-  let lastScrollY = window.scrollY;
-  let ticking = false;
-  
   window.addEventListener('scroll', () => {
-    lastScrollY = window.scrollY;
+    const scrollTop = window.scrollY;
     
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        parallaxElements.forEach(element => {
-          const speed = element.dataset.speed || 0.5;
-          const yPos = -(lastScrollY * speed);
-          element.style.transform = `translate3d(0, ${yPos}px, 0)`;
-        });
-        ticking = false;
-      });
-      
-      ticking = true;
-    }
+    parallaxElements.forEach(element => {
+      const speed = element.dataset.speed || 0.5;
+      const yPos = -(scrollTop * speed);
+      element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+    });
   });
 }
 
