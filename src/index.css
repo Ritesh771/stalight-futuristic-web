@@ -8,43 +8,43 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%; /* Dark background */
-    --foreground: 0 0% 98%; /* Light text */
+    --background: 222 47% 4%; /* Darker, richer background */
+    --foreground: 0 0% 98%;
     
-    --card: 240 10% 3.9%;
+    --card: 222 47% 4%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 240 10% 3.9%;
+    --popover: 222 47% 4%;
     --popover-foreground: 0 0% 98%;
     
-    --primary: 255 90% 60%; /* Purple */
+    --primary: 262 83% 58%; /* Brighter purple */
     --primary-foreground: 0 0% 98%;
     
-    --secondary: 240 3.7% 15.9%;
+    --secondary: 217 33% 17%;
     --secondary-foreground: 0 0% 98%;
     
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
     
-    --accent: 240 3.7% 15.9%;
+    --accent: 262 83% 58%;
     --accent-foreground: 0 0% 98%;
     
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 262 83% 58%;
     
     --radius: 0.75rem;
   }
 
   * {
-    @apply border-border selection:bg-stalight-primary/20 selection:text-white;
+    @apply border-border selection:bg-primary/20 selection:text-white;
   }
   
   body {
-    @apply bg-stalight-dark text-white antialiased font-inter overflow-x-hidden;
+    @apply bg-background text-foreground antialiased font-inter overflow-x-hidden;
   }
 
   html {
@@ -79,7 +79,7 @@
   }
   
   .text-gradient-primary {
-    @apply bg-gradient-to-br from-stalight-primary via-stalight-light to-white/90 bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-primary via-primary/80 to-white/90 bg-clip-text text-transparent;
   }
 
   .font-poppins {
@@ -169,7 +169,7 @@
   
   /* Interactive elements */
   .story-link {
-    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-stalight-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
   }
   
   .hover-scale {
@@ -189,7 +189,7 @@
   }
   
   .backdrop-glow {
-    @apply before:absolute before:inset-0 before:bg-gradient-to-br before:from-stalight-primary/20 before:to-stalight-blue/10 before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100;
+    @apply before:absolute before:inset-0 before:bg-gradient-to-br before:from-primary/20 before:to-primary/10 before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100;
   }
 
   .typewriter-container {
@@ -201,7 +201,7 @@
   }
 
   .typewriter-cursor {
-    @apply inline-block w-[2px] h-[1.2em] -mb-[0.2em] align-middle animate-pulse-soft;
+    @apply inline-block w-0.5 h-6 bg-primary animate-blink;
   }
 
   .progressive-reveal {
@@ -214,111 +214,99 @@
 }
 
 @keyframes float {
-  0%, 100% { 
-    transform: translateY(0) rotate(0deg); 
+  0%, 100% {
+    transform: translateY(0);
   }
-  25% { 
-    transform: translateY(-15px) rotate(2deg); 
-  }
-  50% { 
-    transform: translateY(0) rotate(0deg); 
-  }
-  75% { 
-    transform: translateY(15px) rotate(-2deg); 
+  50% {
+    transform: translateY(-20px);
   }
 }
 
 @keyframes float-reverse {
-  0%, 100% { 
-    transform: translateY(0) rotate(0deg); 
+  0%, 100% {
+    transform: translateY(0);
   }
-  25% { 
-    transform: translateY(15px) rotate(-2deg); 
-  }
-  50% { 
-    transform: translateY(0) rotate(0deg); 
-  }
-  75% { 
-    transform: translateY(-15px) rotate(2deg); 
+  50% {
+    transform: translateY(20px);
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { 
-    opacity: 0.7;
-    filter: blur(20px);
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(155,135,245,0.3);
   }
-  50% { 
-    opacity: 0.3;
-    filter: blur(30px);
+  50% {
+    box-shadow: 0 0 40px rgba(155,135,245,0.6);
   }
 }
 
 @keyframes pulse-soft {
-  0%, 100% { 
+  0%, 100% {
     opacity: 1;
-    transform: scale(1);
   }
-  50% { 
+  50% {
     opacity: 0.7;
-    transform: scale(0.97);
   }
 }
 
 @keyframes reveal {
-  from { 
+  0% {
     opacity: 0;
     transform: translateY(20px);
   }
-  to { 
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes slide-in {
-  from { 
-    transform: translateX(-10px);
+  0% {
     opacity: 0;
+    transform: translateX(-10px);
   }
-  to { 
-    transform: translateX(0);
+  100% {
     opacity: 1;
+    transform: translateX(0);
   }
 }
 
 @keyframes rotate-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* Add smooth typewriter effect */
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
-/* Responsive helper classes */
 @media (max-width: 640px) {
   .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    @apply px-4;
   }
   
   h1 {
-    font-size: 2.5rem !important;
+    @apply text-3xl;
   }
   
   h2 {
-    font-size: 2rem !important;
+    @apply text-2xl;
   }
   
   .glass-card {
-    padding: 1rem !important;
+    @apply p-4;
   }
 }
 
-/* Improved animation for mobile devices */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

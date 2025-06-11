@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import GlassmorphicCard from './GlassmorphicCard';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, X } from 'lucide-react';
 import GlassmorphicButton from './GlassmorphicButton';
 
 const blogPosts = [
@@ -49,31 +48,14 @@ const blogPosts = [
 ];
 
 const Blog: React.FC = () => {
-  const [expandedContent, setExpandedContent] = useState<string | null>(null);
+  const [selectedPost, setSelectedPost] = useState<typeof blogPosts[0] | null>(null);
 
-  const toggleContent = (contentId: string) => {
-    if (expandedContent === contentId) {
-      setExpandedContent(null);
-    } else {
-      setExpandedContent(contentId);
-    }
+  const handleBlogClick = (post: typeof blogPosts[0]) => {
+    setSelectedPost(post);
   };
 
-  const handleViewAllArticles = () => {
-    // In a real app, this would navigate to a blog listing page
-    console.log('View All Articles clicked');
-    // For demonstration, just scroll to the top for now
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleBlogClick = (url: string, contentId: string) => {
-    if (url.startsWith('#')) {
-      // Toggle expanded content
-      toggleContent(contentId);
-    } else {
-      // External navigation - open in new tab
-      window.open(url, '_blank');
-    }
+  const closeModal = () => {
+    setSelectedPost(null);
   };
 
   return (
@@ -149,35 +131,58 @@ const Blog: React.FC = () => {
                   <p className="text-white/70 mb-4">
                     {post.excerpt}
                   </p>
-                  
-                  {/* Expandable content section */}
-                  <div id={post.id} className={`expandable-content mb-4 ${expandedContent === post.id ? 'expanded' : ''}`}>
-                    <p className="text-white/70 mt-4 pt-4 border-t border-white/10">
-                      {post.fullContent}
-                    </p>
-                  </div>
                 </div>
                 <Button 
                   variant="link" 
                   className="text-stalight-primary hover:text-stalight-primary/80 p-0 flex items-center gap-2 mt-2 transition-all duration-300 group read-more-button"
-                  onClick={() => handleBlogClick(post.link, post.id)}
+                  onClick={() => handleBlogClick(post)}
                 >
-                  {expandedContent === post.id ? 'Read less' : 'Read more'} <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                  Read more <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Button>
               </GlassmorphicCard>
             </div>
           ))}
         </div>
-        
-        <div className="text-center mt-12 scroll-reveal-item">
-          <Button 
-            className="bg-stalight-primary hover:bg-stalight-primary/80 text-white transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(155,135,245,0.5)] py-6 px-8 rounded-full view-all-button"
-            onClick={handleViewAllArticles}
-          >
-            View All Articles
-          </Button>
-        </div>
       </div>
+
+      {/* Blog Post Modal */}
+      {selectedPost && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-stalight-dark/95 rounded-2xl p-8 shadow-2xl border border-white/10">
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors duration-300"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            
+            <div className="rounded-lg overflow-hidden mb-6 h-64 bg-gradient-to-br from-stalight-primary/20 to-stalight-blue/20">
+              <img 
+                src={selectedPost.image} 
+                alt={selectedPost.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-stalight-primary text-sm font-medium px-3 py-1 rounded-full bg-stalight-primary/10 backdrop-blur-sm">
+                {selectedPost.category}
+              </span>
+              <span className="text-white/60 text-sm">{selectedPost.date}</span>
+            </div>
+            
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 font-poppins text-white">
+              {selectedPost.title}
+            </h2>
+            
+            <div className="prose prose-invert max-w-none">
+              <p className="text-white/80 leading-relaxed">
+                {selectedPost.fullContent}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
