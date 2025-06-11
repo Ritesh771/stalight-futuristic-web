@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, 
@@ -60,7 +59,6 @@ const FloatingDock: React.FC = () => {
         'about',
         'products',
         'neuro-campus',
-        'testimonials',
         'blog',
         'contact'
       ];
@@ -108,12 +106,6 @@ const FloatingDock: React.FC = () => {
         label="NEURO CAMPUS"
         onClick={() => scrollToSection('neuro-campus')}
         active={activeSection === 'neuro-campus'}
-      />
-      <DockItem 
-        icon={<Users className="h-6 w-6 text-white" />} 
-        label="Testimonials"
-        onClick={() => scrollToSection('testimonials')}
-        active={activeSection === 'testimonials'}
       />
       <DockItem 
         icon={<BookOpen className="h-6 w-6 text-white" />} 

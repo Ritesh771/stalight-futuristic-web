@@ -1,29 +1,12 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import GlassmorphicButton from './GlassmorphicButton';
-import useTypewriter from '@/hooks/useTypewriter';
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const floatingElementsRef = useRef<HTMLDivElement>(null);
   const waveRef = useRef<HTMLDivElement>(null);
-
-  // Dynamic typewriter text array
-  const typewriterTexts = [
-    "Revolutionize Education with Stalight Technology.",
-    "Bridging AI, Blockchain, and Learning Excellence.",
-    "Empowering the Future of Smarter Campuses."
-  ];
-  
-  const { text, showCursor } = useTypewriter(typewriterTexts, {
-    speed: 1.5,
-    eraseSpeed: 25,
-    delay: 60,
-    eraseDelay: 2000,
-    pauseBetween: 1000
-  });
   
   useEffect(() => {
     const parallaxEffect = () => {
@@ -72,7 +55,6 @@ const Hero: React.FC = () => {
       });
     };
 
-    // Use requestAnimationFrame for smoother scroll effects
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -87,7 +69,6 @@ const Hero: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     initScrollReveal();
     
-    // Initialize a progressive loading animation
     const progressiveReveal = () => {
       const elements = document.querySelectorAll('.progressive-reveal');
       elements.forEach((el, index) => {
@@ -112,9 +93,8 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-hero-pattern bg-cover bg-center"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-stalight-dark/60 to-stalight-dark/90"></div>
+    <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-background/60 to-background/90"></div>
       
       <div ref={waveRef} className="absolute inset-0 pointer-events-none overflow-hidden wavy-background">
         <div className="wave-lines"></div>
@@ -123,9 +103,9 @@ const Hero: React.FC = () => {
       
       <div className="absolute inset-0 perspective-[1000px]">
         <div ref={floatingElementsRef} className="relative h-full w-full">
-          <div className="absolute top-1/4 left-1/5 w-32 h-32 rounded-full bg-stalight-primary/20 blur-3xl animate-float parallax-element" data-speed="0.3"></div>
-          <div className="absolute bottom-1/4 right-1/5 w-40 h-40 rounded-full bg-stalight-blue/20 blur-3xl animate-float parallax-element" data-speed="0.5" style={{ animationDelay: '-3s' }}></div>
-          <div className="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-stalight-accent/10 blur-3xl animate-float parallax-element" data-speed="0.2" style={{ animationDelay: '-1.5s' }}></div>
+          <div className="absolute top-1/4 left-1/5 w-32 h-32 rounded-full bg-primary/20 blur-3xl animate-float parallax-element" data-speed="0.3"></div>
+          <div className="absolute bottom-1/4 right-1/5 w-40 h-40 rounded-full bg-primary/20 blur-3xl animate-float parallax-element" data-speed="0.5" style={{ animationDelay: '-3s' }}></div>
+          <div className="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-primary/10 blur-3xl animate-float parallax-element" data-speed="0.2" style={{ animationDelay: '-1.5s' }}></div>
           
           <div className="absolute top-1/3 left-1/3 w-16 h-16 glass-card rounded-xl animate-float transform rotate-12 transform-style-3d scroll-transform" 
                data-transform="rotate" data-speed="0.1" data-max-value="45" style={{ animationDelay: '-2s' }}></div>
@@ -155,31 +135,28 @@ const Hero: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-30">
-        <div ref={heroRef} className="text-center max-w-5xl mx-auto scroll-reveal-item">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 font-poppins text-gradient">
-            <div className="typewriter-container text-gradient-primary">
-              <span className="typewriter-text">{text}</span>
-              <span className={`typewriter-cursor ${showCursor ? 'visible' : 'invisible'}`}>|</span>
-            </div>
+        <div ref={heroRef} className="text-center max-w-4xl mx-auto scroll-reveal-item">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 font-poppins text-gradient-primary">
+                      Stalight – Where Innovation Ignites Intelligence
           </h1>
-          <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto progressive-reveal backdrop-blur-sm p-4 rounded-lg bg-white/5">
-            Empowering educators and students with cutting-edge AI and blockchain solutions for a smarter, more connected learning experience in the digital age.
+          <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto progressive-reveal backdrop-blur-sm p-4 rounded-lg bg-white/5">
+            We build intelligent systems for campuses, safety, and automation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center relative progressive-reveal">
             <GlassmorphicButton 
-              onClick={() => scrollToSection('about')}
-              className="bg-stalight-primary text-white font-medium py-6 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(155,135,245,0.7)] relative z-10"
+              onClick={() => scrollToSection('neuro-campus')}
+              className="bg-primary text-white font-medium py-4 px-6 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(155,135,245,0.7)] relative z-10"
               glowEffect={true}
             >
-              <span className="relative z-10 font-bold text-white">Get Started</span>
+              <span className="relative z-10 font-bold text-white">Explore Neuro Campus</span>
               <ChevronRight className="ml-2 h-5 w-5 relative z-10" />
             </GlassmorphicButton>
             <GlassmorphicButton 
               variant="outline" 
-              onClick={() => scrollToSection('products')}
-              className=" hover:bg-white/10 text-white font-medium py-6 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] relative z-10"
+              onClick={() => scrollToSection('contact')}
+              className="hover:bg-white/10 text-white font-medium py-4 px-6 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] relative z-10"
             >
-              Learn More
+              Contact Us
             </GlassmorphicButton>
           </div>
         </div>
@@ -191,19 +168,9 @@ const Hero: React.FC = () => {
           className="text-white/60 hover:text-white rounded-full p-2 hover:bg-white/5 transition-all duration-300 relative z-10" 
           onClick={() => scrollToSection('about')}
         >
-          <ArrowDown className="h-8 w-8 animate-pulse-soft" />
+          <ChevronRight className="h-6 w-6 animate-pulse-soft" />
           <span className="sr-only">Scroll Down</span>
         </Button>
-      </div>
-      
-      <div className="fixed bottom-4 right-4 z-50 w-12 h-12 rounded-full glass-card flex items-center justify-center opacity-0 scroll-progress-indicator transition-opacity duration-300">
-        <div className="scroll-progress-circle">
-          <svg className="w-10 h-10">
-            <circle className="text-gray-300" strokeWidth="2" stroke="currentColor" fill="transparent" r="18" cx="20" cy="20" />
-            <circle className="text-stalight-primary scroll-progress-circle-bar" strokeWidth="2" stroke="currentColor" fill="transparent" r="18" cx="20" cy="20" />
-          </svg>
-          <span className="absolute text-xs text-white scroll-progress-percentage">0%</span>
-        </div>
       </div>
     </section>
   );

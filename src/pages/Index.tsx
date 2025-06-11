@@ -1,4 +1,3 @@
-
 import React from 'react';
 import ThreeBackground from '@/components/ThreeBackground';
 import Navbar from '@/components/Navbar';
@@ -6,17 +5,17 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Products from '@/components/Products';
 import UpcomingProjects from '@/components/UpcomingProjects';
-import Testimonials from '@/components/Testimonials';
 import DashboardShowcase from '@/components/DashboardShowcase';
 import Blog from '@/components/Blog';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import DownloadApp from '@/components/DownloadApp';
 import FloatingDock from '@/components/FloatingDock';
+import LeadershipTeam from '@/components/LeadershipTeam';
 
 const Index: React.FC = () => {
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative px-2 sm:px-4 md:px-8">
       {/* Enhanced Aurora Background for entire site */}
       <div className="fixed inset-0 z-0 opacity-30 pointer-events-none">
         <div className="aurora-bg w-full h-full"></div>
@@ -40,11 +39,11 @@ const Index: React.FC = () => {
       <section id="projects">
         <UpcomingProjects />
       </section>
-      <section id="testimonials">
-        <Testimonials />
-      </section>
       <section id="blog">
         <Blog />
+      </section>
+      <section id="leadership">
+        <LeadershipTeam />
       </section>
       <section id="contact">
         <Contact />

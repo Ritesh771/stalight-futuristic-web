@@ -1,160 +1,112 @@
+import React from 'react';
+import { ArrowRight, Download, Smartphone } from 'lucide-react';
 
-import React, { useState, useEffect, useRef } from 'react';
-import GlassmorphicCard from './GlassmorphicCard';
-import { Button } from '@/components/ui/button';
-import { Download, Smartphone, Loader2 } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
-
-const DownloadApp: React.FC = () => {
-  const [isDownloading, setIsDownloading] = useState(false);
-  const [isShowingIosMessage, setIsShowingIosMessage] = useState(false);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    if (!headingRef.current) return;
-    
-    const text = headingRef.current.innerText;
-    headingRef.current.innerText = '';
-    
-    let i = 0;
-    const typeWriter = () => {
-      if (i < text.length) {
-        if (headingRef.current) {
-          headingRef.current.innerText += text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 80);
-        }
-      }
-    };
-    
-    setTimeout(() => {
-      typeWriter();
-    }, 500);
-  }, []);
-
-  const handleAndroidDownload = () => {
-    setIsDownloading(true);
-    // Direct download link for the APK
-    const directDownloadLink = "https://drive.google.com/uc?export=download&id=13AkUQSOv3AUR3BkjsHYuuxIiGwoUp6B9";
-    
-    // Create a temporary anchor element
-    const link = document.createElement('a');
-    link.href = directDownloadLink;
-    link.setAttribute('download', 'neuro-campus.apk');
-    document.body.appendChild(link);
-    
-    // Trigger click to start download
-    link.click();
-    
-    // Remove the element after a delay
-    setTimeout(() => {
-      document.body.removeChild(link);
-      setIsDownloading(false);
-      toast({
-        title: "Download started",
-        description: "Your NEURO CAMPUS Android APK download has started."
-      });
-    }, 1000);
-  };
-
-  const handleIOSClick = () => {
-    setIsShowingIosMessage(true);
-    toast({
-      title: "iOS app coming soon",
-      description: "The iOS version of NEURO CAMPUS is currently being built."
-    });
-    
-    // Hide the message after 3 seconds
-    setTimeout(() => {
-      setIsShowingIosMessage(false);
-    }, 3000);
-  };
-
+const DownloadApp = () => {
   return (
-    <section id="neuro-campus" className="py-24 relative overflow-hidden bg-gradient-to-b from-black to-stalight-dark">
-      {/* Enhanced Aurora Background with extra glow */}
-      <div className="absolute inset-0 z-0">
-        <div className="aurora-bg w-full h-full opacity-60"></div>
-      </div>
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-stalight-primary/10 blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-stalight-blue/10 blur-3xl"></div>
+    <section className="relative py-20 overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20" />
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 ref={headingRef} className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-gradient-primary">
-            NEURO CAMPUS
+      <div className="container mx-auto px-4 relative">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+            Download NEURO CAMPUS™
           </h2>
-          <p className="text-xl text-white/80 mb-8 animate-fade-in">
-            Experience the future of education technology on your mobile device
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            Experience the future of campus management with our powerful mobile app. 
+            Access all features on the go with enhanced security and real-time updates.
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-          <GlassmorphicCard className="p-8 flex flex-col items-center justify-center hover:transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-stalight-primary/20">
-            <div className="mb-6 overflow-hidden rounded-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                alt="Android App" 
-                className="w-full max-w-[240px] mx-auto rounded-lg shadow-lg transition-transform hover:scale-105 duration-700" 
-              />
-            </div>
-            <h3 className="text-2xl font-bold mb-4 text-gradient-primary">Android Version</h3>
-            <p className="text-lg text-white/80 mb-6 text-center">
-              Download our NEURO CAMPUS app for Android and transform your learning experience today.
-            </p>
-            <Button 
-              onClick={handleAndroidDownload} 
-              className="bg-gradient-to-r from-stalight-primary to-stalight-blue hover:from-stalight-blue hover:to-stalight-primary text-white font-semibold py-2 px-6 rounded-full transition-all duration-500"
-              disabled={isDownloading}
-            >
-              {isDownloading ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Downloading...
-                </>
-              ) : (
-                <>
-                  <Download className="mr-2 h-5 w-5" />
-                  Download for Android
-                </>
-              )}
-            </Button>
-          </GlassmorphicCard>
-          
-          <GlassmorphicCard className="p-8 flex flex-col items-center justify-center hover:transform hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-stalight-blue/20">
-            <div className="mb-6 relative overflow-hidden rounded-lg">
-              <img 
-                src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                alt="iOS App" 
-                className="w-full max-w-[240px] mx-auto rounded-lg shadow-lg opacity-70 transition-transform hover:scale-105 duration-700" 
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-gradient-to-r from-stalight-primary/80 to-stalight-blue/80 px-4 py-2 rounded-lg rotate-12 text-white font-bold animate-pulse-soft shadow-lg">
-                  Coming Soon
+
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* App Mockups */}
+          <div className="relative">
+            <div className="flex flex-col md:flex-row justify-center gap-8">
+              <div className="relative group">
+                <div className="w-48 sm:w-56 md:w-64 h-96 max-h-[420px] rounded-2xl overflow-hidden border border-white/10 shadow-lg bg-black/10 flex items-center justify-center mx-auto">
+                  <img 
+                    src="/images/app-mockups/android-real.png" 
+                    alt="Android App" 
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-purple-500/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+                  Android
+                </div>
+              </div>
+              <div className="relative group mt-12 md:mt-0">
+                <div className="w-48 sm:w-56 md:w-64 h-96 max-h-[420px] rounded-2xl overflow-hidden border border-white/10 shadow-lg bg-black/10 flex items-center justify-center mx-auto">
+                  <img 
+                    src="/images/app-mockups/ios-real.png" 
+                    alt="iOS App" 
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+                  iOS
                 </div>
               </div>
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-gradient-primary">iOS Version</h3>
-            <p className="text-lg text-white/80 mb-6 text-center">
-              Our iOS version is currently under development. Stay tuned for updates!
-            </p>
-            <Button 
-              onClick={handleIOSClick} 
-              className="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-semibold py-2 px-6 rounded-full transition-all duration-500"
-            >
-              {isShowingIosMessage ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Building Soon...
-                </>
-              ) : (
-                <>
-                  <Smartphone className="mr-2 h-5 w-5" />
-                  iOS Coming Soon
-                </>
-              )}
-            </Button>
-          </GlassmorphicCard>
+          </div>
+
+          {/* Features and Download */}
+          <div className="space-y-8 mt-16 md:mt-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10">
+                <Smartphone className="w-8 h-8 text-purple-400 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Cross-Platform</h3>
+                <p className="text-gray-300">Available for both Android and iOS devices</p>
+              </div>
+              <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10">
+                <Download className="w-8 h-8 text-blue-400 mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Easy Setup</h3>
+                <p className="text-gray-300">Quick installation and seamless onboarding</p>
+              </div>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm p-8 rounded-xl border border-white/10">
+              <h3 className="text-2xl font-semibold mb-4">Key Features</h3>
+              <ul className="space-y-3">
+                <li className="flex items-center text-gray-300">
+                  <span className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
+                  Real-time notifications and updates
+                </li>
+                <li className="flex items-center text-gray-300">
+                  <span className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
+                  Secure authentication and data protection
+                </li>
+                <li className="flex items-center text-gray-300">
+                  <span className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
+                  Offline access to essential features
+                </li>
+                <li className="flex items-center text-gray-300">
+                  <span className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
+                  Seamless integration with web platform
+                </li>
+              </ul>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://drive.google.com/uc?export=download&id=13AkUQSOv3AUR3BkjsHYuuxIiGwoUp6B9"
+                className="inline-flex items-center justify-center px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl transition-colors duration-300"
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Download className="w-5 h-5 mr-2" />
+                Download for Android
+              </a>
+              <button
+                className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-xl opacity-60 cursor-not-allowed"
+                disabled
+                type="button"
+              >
+                <Download className="w-5 h-5 mr-2" />
+                iOS Coming Soon
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

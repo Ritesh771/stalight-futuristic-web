@@ -1,4 +1,3 @@
-
 import React from 'react';
 import CanvasRevealCard from './CanvasRevealCard';
 import useTypewriter from '@/hooks/useTypewriter';
@@ -27,10 +26,6 @@ const demoImages = [
   {
     src: "/lovable-uploads/904a99d9-9437-400c-9d5c-be969f43a002.png",
     title: "Admin Notifications Panel"
-  },
-  {
-    src: "/lovable-uploads/e67c8bb8-4937-4d34-88a3-4057ffe0cf00.png",
-    title: "Analytics & Reports Dashboard"
   }
 ];
 
@@ -50,7 +45,7 @@ const DashboardShowcase: React.FC = () => {
   });
 
   return (
-    <section id="dashboard-showcase" className="py-24 relative overflow-hidden bg-gradient-to-b from-stalight-dark to-black">
+    <section id="dashboard-showcase" className="py-24 relative overflow-hidden bg-gradient-to-b from-background to-black">
       {/* Enhanced Aurora Background */}
       <div className="absolute inset-0 z-0 opacity-40">
         <div className="aurora-bg w-full h-full"></div>
@@ -58,11 +53,8 @@ const DashboardShowcase: React.FC = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-gradient-primary">
-            <div className="typewriter-container inline-block">
-              <span className="typewriter-text">{text}</span>
-              <span className={`typewriter-cursor ${showCursor ? 'visible' : 'invisible'}`}>|</span>
-            </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-poppins text-gradient-primary">
+            Our Application Showcase
           </h2>
           <p className="text-xl text-white/80 animate-fade-in backdrop-blur-sm p-4 rounded-lg bg-white/5 inline-block">
             Explore our powerful dashboard solutions and interfaces
@@ -77,7 +69,7 @@ const DashboardShowcase: React.FC = () => {
                 imageSrc={image.src}
                 title={image.title}
                 spotlight={true}
-                className="transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-stalight-primary/20"
+                className="transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-primary/20"
               >
                 <p className="text-white/70 text-sm">
                   Interactive dashboard interface with real-time data visualization.
@@ -91,4 +83,4 @@ const DashboardShowcase: React.FC = () => {
   );
 };
 
-export default DashboardShowcase;
+export default DashboardShowcase; 
