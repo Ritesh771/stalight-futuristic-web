@@ -88,7 +88,7 @@ const DownloadApp = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://drive.google.com/uc?export=download&id=13AkUQSOv3AUR3BkjsHYuuxIiGwoUp6B9"
+                href="https://drive.google.com/uc?export=download&id=1QX9BTHvKMv4FCsxODy10WlWrFjV3ntQe"
                 className="inline-flex items-center justify-center px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl transition-colors duration-300"
                 download
                 target="_blank"
