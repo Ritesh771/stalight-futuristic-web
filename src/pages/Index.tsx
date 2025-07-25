@@ -11,7 +11,6 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import DownloadApp from '@/components/DownloadApp';
 import FloatingDock from '@/components/FloatingDock';
-import LeadershipTeam from '@/components/LeadershipTeam';
 
 const Index: React.FC = () => {
   return (
@@ -41,9 +40,6 @@ const Index: React.FC = () => {
       </section>
       <section id="blog">
         <Blog />
-      </section>
-      <section id="leadership">
-        <LeadershipTeam />
       </section>
       <section id="contact">
         <Contact />

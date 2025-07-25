@@ -17,8 +17,8 @@ const Products: React.FC = () => {
 
           {/* Flagship Product */}
           <div className="glass-card p-6 md:p-8 rounded-xl mb-16">
-            <div className="flex flex-col lg:flex-row gap-8 items-start">
-              <div className="flex-1">
+            <div className="flex flex-col lg:flex-row gap-8 items-stretch lg:items-center">
+              <div className="flex-1 flex flex-col justify-center">
                 <div className="flex items-center gap-2 mb-4">
                   <h3 className="text-2xl md:text-3xl font-bold text-gradient-primary">NEURO CAMPUS™</h3>
                   <span className="px-3 py-1 text-sm bg-primary/20 text-primary rounded-full whitespace-nowrap">Flagship Product</span>
@@ -87,20 +87,26 @@ const Products: React.FC = () => {
                   Learn More <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
-              <div className="flex-1 w-full lg:w-auto">
-                <div className="aspect-video rounded-lg overflow-hidden glass-card hover:scale-105 transition-transform">
+              <div className="flex-1 flex flex-col items-center justify-center w-full lg:w-auto">
+                <div className="aspect-video rounded-lg overflow-hidden glass-card hover:scale-105 transition-transform w-full max-w-md">
                   <img 
                     src="/images/neuro-campus-dashboard.png" 
                     alt="Neuro Campus Dashboard" 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="mt-4 flex flex-col items-center">
-                  <span className="inline-flex items-center gap-2 px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                    <svg xmlns='http://www.w3.org/2000/svg' className='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M7 16V4a1 1 0 011-1h8a1 1 0 011 1v12m-4 4h-4a1 1 0 01-1-1v-1h6v1a1 1 0 01-1 1z' /></svg>
-                    Available on Web & Mobile
-                  </span>
-                </div>
+                <span className="mt-4 inline-flex items-center gap-2 px-4 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
+                  <svg xmlns='http://www.w3.org/2000/svg' className='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M7 16V4a1 1 0 011-1h8a1 1 0 011 1v12m-4 4h-4a1 1 0 01-1-1v-1h6v1a1 1 0 01-1 1z' /></svg>
+                  Available on Web & Mobile
+                </span>
+                <a
+                  href="https://neurocampus.netlify.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-block px-5 py-2 rounded-lg bg-gradient-to-r from-primary to-stalight-blue text-white font-semibold shadow-lg hover:scale-105 hover:from-stalight-blue hover:to-primary transition-all duration-300"
+                >
+                  Click here to Access the demo of product
+                </a>
               </div>
             </div>
           </div>

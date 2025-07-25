@@ -11,7 +11,7 @@ const About: React.FC = () => {
               About Stalight Technology
             </h2>
             <p className="text-xl text-white/80 mb-8">
-              Stalight Technology Pvt. Ltd. is an AI-first Indian startup focused on building scalable, intelligent, and secure systems across education, public safety, and developer automation.
+              Stalight Technology is an AI-first Indian startup focused on building scalable, intelligent, and secure systems across education, public safety, and developer automation.
             </p>
             <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10">
               <p className="text-white/70 mb-2">Reg No: UDYAM-KR-03-0515698</p>
@@ -24,24 +24,24 @@ const About: React.FC = () => {
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
                 <Brain className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">AI + Automation Focused</h3>
-              <p className="text-white/70">Cutting-edge AI solutions for modern challenges</p>
+              <h3 className="text-xl font-semibold mb-2">AI-Driven Innovation</h3>
+              <p className="text-white/70">Advanced artificial intelligence and automation for transformative impact</p>
             </div>
 
             <div className="glass-card p-6 rounded-xl text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
                 <Shield className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Real-World Problem Solvers</h3>
-              <p className="text-white/70">Practical solutions for everyday challenges</p>
+              <h3 className="text-xl font-semibold mb-2">Practical Impact</h3>
+              <p className="text-white/70">Solutions engineered to address real-world needs and deliver measurable results</p>
             </div>
 
             <div className="glass-card p-6 rounded-xl text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
                 <Zap className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Secure & Future-Proof</h3>
-              <p className="text-white/70">Built to scale with tomorrow's needs</p>
+              <h3 className="text-xl font-semibold mb-2">Secure & Scalable by Design</h3>
+              <p className="text-white/70">Robust, future-ready platforms built for security, compliance, and growth</p>
             </div>
           </div>
         </div>

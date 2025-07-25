@@ -6,43 +6,43 @@ import GlassmorphicButton from './GlassmorphicButton';
 
 const blogPosts = [
   {
-    title: "The Future of AI in Education",
-    excerpt: "Explore how artificial intelligence is reshaping the educational landscape and creating new opportunities for personalized learning experiences. AI-powered tools are revolutionizing how students learn, providing adaptive content and real-time feedback.",
-    fullContent: "Artificial intelligence is transforming education at an unprecedented pace. Machine learning algorithms can now analyze student performance data to create truly personalized learning paths that adapt in real-time to individual strengths and weaknesses. These AI-driven educational platforms can identify knowledge gaps, suggest targeted resources, and even predict areas where a student may struggle in the future. Beyond personalization, AI virtual teaching assistants are available 24/7 to answer questions, provide explanations, and guide students through complex concepts at their own pace. This technology is particularly valuable in regions with teacher shortages or in providing specialized instruction that might not otherwise be available. As natural language processing continues to advance, these AI systems will become increasingly conversational and intuitive, creating learning experiences that closely mirror human instruction while scaling to meet the needs of millions of students simultaneously.",
-    date: "April 10, 2025",
-    image: "/1.jpg", // Replace with actual image when available
-    category: "Technology",
-    link: "#blog/ai-in-education",
+    title: "AI-Powered Personalization: The Next Wave in EdTech",
+    excerpt: "How advanced AI is enabling hyper-personalized learning journeys, boosting student engagement and outcomes across the globe.",
+    fullContent: "The future of education is deeply personal. With the rise of AI-powered analytics, educators can now tailor content, pace, and feedback to each learner’s unique needs. Adaptive learning platforms use real-time data to adjust lessons, recommend resources, and even predict when a student might need extra support. This shift is not just improving test scores—it’s fostering lifelong curiosity and resilience. As AI continues to evolve, expect to see even more granular personalization, from voice-driven tutoring to emotion-aware feedback systems, making learning more inclusive and effective than ever before.",
+    date: "May 10, 2025",
+    image: "/1.jpg",
+    category: "AI & Personalization",
+    link: "#blog/ai-personalization",
     id: "blog-content-1"
   },
   {
-    title: "Blockchain Technology in Academic Credentials",
-    excerpt: "Learn how blockchain is revolutionizing the way academic credentials are verified and maintained in educational institutions. This tamper-proof technology ensures the integrity and authenticity of certificates while simplifying verification processes.",
-    fullContent: "Blockchain technology is solving one of the most persistent challenges in education: the secure, tamper-proof verification of academic credentials. By recording educational achievements on a distributed ledger, blockchain creates permanent, verifiable records that cannot be altered or falsified. This eliminates the need for time-consuming background checks and verification processes that plague both educational institutions and employers. Students gain complete ownership of their credentials, allowing them to share verified accomplishments instantly with potential employers worldwide. For educational institutions, blockchain reduces administrative costs associated with transcript requests and verification processes. The technology also enables micro-credentialing, where specific skills and achievements can be recorded and verified independently of traditional degrees. As global education becomes increasingly modular and lifelong learning becomes the norm, blockchain provides the infrastructure needed to track, verify and share educational accomplishments throughout a person's entire career journey.",
-    date: "April 5, 2025",
-    image: "/2.jpg", // Replace with actual image when available
-    category: "Innovation",
-    link: "#blog/blockchain-credentials",
+    title: "Blockchain: The Future of Academic Integrity & Credentials",
+    excerpt: "Why leading universities and employers are turning to blockchain for secure, verifiable, and portable academic records.",
+    fullContent: "Academic fraud and credential verification have long plagued both institutions and employers. Blockchain technology is changing the game by providing a tamper-proof, decentralized ledger for degrees, certificates, and micro-credentials. Students gain full ownership of their achievements, while employers can instantly verify qualifications with a single click. This not only streamlines hiring but also opens the door to global, lifelong learning records that travel with the individual. As adoption grows, expect blockchain to become the gold standard for academic trust and transparency.",
+    date: "April 28, 2025",
+    image: "/2.jpg",
+    category: "Blockchain & Credentials",
+    link: "#blog/blockchain-future",
     id: "blog-content-2"
   },
   {
-    title: "Transforming Student Assessment with AI",
-    excerpt: "Discover innovative methods of student assessment that leverage artificial intelligence to provide better insights into student performance and personalized learning paths that adapt to individual strengths and weaknesses.",
-    fullContent: "Traditional student assessment methods are being revolutionized by artificial intelligence, shifting from standardized testing to continuous, personalized evaluation. AI-powered assessment tools can analyze not just the final answers, but the entire problem-solving process, identifying exactly where students struggle and succeed. This granular insight allows educators to target instruction precisely where it's needed most. Natural language processing enables automated essay grading that evaluates not just grammar and spelling, but also concept understanding, logical flow, and even creativity. Perhaps most importantly, AI assessment can happen continuously throughout the learning process rather than just at the end, providing immediate feedback that helps students correct misconceptions before they become entrenched. This shifts assessment from being primarily evaluative to being a powerful learning tool itself. These systems also reduce teacher workload, freeing educators to focus on high-value interactions with students rather than grading. As these technologies mature, they promise to create more equitable assessment that recognizes diverse learning styles and provides multiple pathways to demonstrate mastery.",
-    date: "March 28, 2025",
-    image: "/3.jpg", // Replace with actual image when available
-    category: "Education",
-    link: "#blog/ai-assessment",
+    title: "Immersive Learning: How VR & AR Are Transforming Classrooms",
+    excerpt: "Explore the latest breakthroughs in virtual and augmented reality, making learning more interactive, memorable, and accessible.",
+    fullContent: "Virtual and augmented reality are no longer just buzzwords—they’re revolutionizing education. From virtual field trips to interactive science labs, VR and AR are breaking down barriers of cost, location, and accessibility. Students can now experience history, science, and art in ways that were previously unimaginable, leading to higher engagement and deeper understanding. As hardware becomes more affordable and content libraries expand, immersive learning will become a staple in classrooms worldwide, preparing students for the digital future.",
+    date: "April 15, 2025",
+    image: "/3.jpg",
+    category: "VR/AR & Innovation",
+    link: "#blog/immersive-learning",
     id: "blog-content-3"
   },
   {
-    title: "The Impact of Virtual Reality on Classroom Engagement",
-    excerpt: "See how virtual reality is transforming traditional classroom experiences into immersive learning environments that capture students' attention and improve knowledge retention through interactive simulations.",
-    fullContent: "Virtual reality is redefining what's possible in education by creating immersive learning environments that were previously unimaginable. Students can now walk through ancient Rome, explore the human bloodstream from inside a cell, or manipulate virtual models of complex molecular structures. These experiences transform abstract concepts into tangible, interactive explorations that engage multiple senses and learning modalities simultaneously. Research shows that VR learning experiences can significantly increase knowledge retention, with some studies reporting retention rates up to 80% higher than traditional learning methods. Beyond content delivery, VR enables powerful collaborative learning experiences where students from around the world can gather in the same virtual space to solve problems together. The technology is particularly transformative for subjects that benefit from spatial understanding or hands-on practice, from architecture and engineering to surgical training. As VR hardware becomes more affordable and content libraries expand, these immersive learning experiences are increasingly accessible to schools at all resource levels, democratizing access to experiential learning that was once available only through expensive field trips or specialized labs.",
-    date: "March 15, 2025",
-    image: "/4.jpg", // Replace with actual image when available
-    category: "Innovation",
-    link: "#blog/vr-classroom",
+    title: "Data-Driven Decision Making in Education: Trends & Best Practices",
+    excerpt: "How schools and universities are leveraging big data and analytics to improve teaching, learning, and operational efficiency.",
+    fullContent: "Data is the new oil in education. Institutions are harnessing analytics to identify at-risk students, optimize resource allocation, and measure the true impact of teaching strategies. Predictive models help educators intervene early, while dashboards provide real-time insights for administrators. The key to success? Building a culture of data literacy and ethical use, ensuring that analytics empower rather than overwhelm. As data-driven decision making becomes the norm, expect smarter, more agile educational organizations that can adapt to the needs of every learner.",
+    date: "April 2, 2025",
+    image: "/4.jpg",
+    category: "Data & Analytics",
+    link: "#blog/data-driven-education",
     id: "blog-content-4"
   }
 ];

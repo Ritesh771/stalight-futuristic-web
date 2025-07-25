@@ -29,18 +29,14 @@ const NeuroCampusReveal: React.FC = () => {
   const dotsRef = useRef<SVGCircleElement[]>([]);
 
   useEffect(() => {
-    // Create dots for the Gemini effect
+    // Only keep animated dots, remove scroll-based 3D/rotation for smoothness
     if (svgRef.current) {
       const svg = svgRef.current;
       const width = svg.clientWidth;
       const height = svg.clientHeight;
-      
-      // Clear existing dots
       while (svg.firstChild) {
         svg.removeChild(svg.firstChild);
       }
-      
-      // Create new dots
       dotsRef.current = [];
       const dotCount = 200;
       for (let i = 0; i < dotCount; i++) {
@@ -54,32 +50,21 @@ const NeuroCampusReveal: React.FC = () => {
         dotsRef.current.push(circle);
       }
     }
-    
-    // Animate dots
     const animateDots = () => {
       if (!svgRef.current) return;
-      
       const width = svgRef.current.clientWidth;
       const height = svgRef.current.clientHeight;
-      
       dotsRef.current.forEach(dot => {
         const x = parseFloat(dot.getAttribute("cx") || "0");
         const y = parseFloat(dot.getAttribute("cy") || "0");
-        
-        // Random movement
         const newX = x + (Math.random() - 0.5) * 2;
         const newY = y + (Math.random() - 0.5) * 2;
-        
-        // Keep within bounds
         dot.setAttribute("cx", `${newX < 0 ? width : (newX > width ? 0 : newX)}`);
         dot.setAttribute("cy", `${newY < 0 ? height : (newY > height ? 0 : newY)}`);
       });
-      
       requestAnimationFrame(animateDots);
     };
-    
     const animation = requestAnimationFrame(animateDots);
-    
     return () => {
       cancelAnimationFrame(animation);
     };
