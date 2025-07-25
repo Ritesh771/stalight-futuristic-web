@@ -1,6 +1,3 @@
-Here's a regenerated version of the README file with all references to Lovable removed, emphasizing that the project is done by you:
-
----
 
 # Welcome to Landing Page of Stalight Technology
 
