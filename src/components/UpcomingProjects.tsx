@@ -7,43 +7,43 @@ import { ChevronLeft, ChevronRight, Brain, Headset, Gamepad2, Bot, Monitor, Smar
 const projects = [
   {
     icon: <Brain className="h-10 w-10 text-stalight-primary" />,
-    title: "AI-Driven Curriculum Planning",
-    description: "AI-driven tools for creating and optimizing educational curriculums.",
-  },
-  {
-    icon: <Headset className="h-10 w-10 text-stalight-primary" />,
-    title: "Virtual Reality Classrooms",
-    description: "Immersive virtual reality classrooms for enhanced learning experiences.",
-  },
-  {
-    icon: <Gamepad2 className="h-10 w-10 text-stalight-primary" />,
-    title: "Gamified Learning Platform",
-    description: "A platform that gamifies the learning process to increase student engagement.",
-  },
-  {
-    icon: <Bot className="h-10 w-10 text-stalight-primary" />,
-    title: "AI Tutoring System",
-    description: "An AI-driven tutoring system that provides personalized learning experiences.",
+    title: "NeuroCampus AI Platform",
+    description: "A unified AI-powered platform for personalized learning, analytics, and student success tracking across institutions.",
   },
   {
     icon: <Monitor className="h-10 w-10 text-stalight-primary" />,
-    title: "Smart Classrooms",
-    description: "Classrooms equipped with smart technology for interactive learning.",
+    title: "Smart Assessment Suite",
+    description: "Automated, adaptive assessment tools with instant feedback and deep learning analytics for educators and students.",
+  },
+  {
+    icon: <Headset className="h-10 w-10 text-stalight-primary" />,
+    title: "Immersive VR Labs",
+    description: "Virtual reality science and engineering labs for hands-on, safe, and scalable practical learning experiences.",
+  },
+  {
+    icon: <Bot className="h-10 w-10 text-stalight-primary" />,
+    title: "24/7 AI Academic Assistant",
+    description: "Conversational AI assistant for students and faculty, providing real-time help, scheduling, and resource discovery.",
   },
   {
     icon: <Smartphone className="h-10 w-10 text-stalight-primary" />,
-    title: "Augmented Reality Learning",
-    description: "AR-based learning tools for immersive educational experiences.",
+    title: "Mobile Learning Hub",
+    description: "A next-gen mobile app for seamless access to courses, assignments, and collaboration tools on the go.",
   },
   {
     icon: <Route className="h-10 w-10 text-stalight-primary" />,
     title: "Adaptive Learning Pathways",
-    description: "Personalized learning paths that adapt to each student's learning style and pace.",
+    description: "AI-driven personalized learning journeys that adapt in real time to each learner’s strengths and needs.",
   },
   {
     icon: <PenTool className="h-10 w-10 text-stalight-primary" />,
-    title: "AI-Powered Assessment Tools",
-    description: "Advanced assessment tools that use AI to provide instant feedback and insights.",
+    title: "Digital Credentialing & Blockchain",
+    description: "Secure, verifiable digital certificates and transcripts powered by blockchain for global recognition.",
+  },
+  {
+    icon: <Gamepad2 className="h-10 w-10 text-stalight-primary" />,
+    title: "Gamified STEM Challenges",
+    description: "Competitive, gamified STEM problem-solving events and leaderboards to boost engagement and innovation.",
   }
 ];
 
@@ -94,15 +94,7 @@ const UpcomingProjects: React.FC = () => {
 
   return (
     <section id="projects" className="py-24 relative overflow-hidden">
-      {/* Background accents */}
-      <div className="absolute top-1/3 right-0 w-64 h-64 rounded-full bg-stalight-primary/10 blur-3xl"></div>
-      <div className="absolute bottom-0 left-1/4 w-64 h-64 rounded-full bg-stalight-blue/10 blur-3xl"></div>
-      <div className="absolute top-1/2 right-1/4 w-48 h-48 rounded-full bg-stalight-accent/10 blur-3xl animate-pulse-glow"></div>
-      
-      {/* 3D floating elements */}
-      <div className="absolute top-1/3 right-1/3 w-20 h-20 glass-card rounded-xl animate-float transform rotate-12" style={{ animationDelay: '-2s' }}></div>
-      <div className="absolute bottom-1/3 left-1/4 w-16 h-16 glass-card rounded-xl animate-float transform -rotate-12" style={{ animationDelay: '-4s' }}></div>
-      
+      {/* Removed animated background accents for smoothness */}
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16 animate-reveal">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 font-poppins text-gradient-primary">

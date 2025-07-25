@@ -9,34 +9,9 @@ const Hero = () => {
   const waveRef = useRef(null);
 
   useEffect(() => {
-    const parallaxEffect = () => {
-      const scrollValue = window.scrollY;
-
-      if (heroRef.current) {
-        heroRef.current.style.transform = `translateY(${scrollValue * 0.3}px)`;
-        heroRef.current.style.opacity = `${1 - scrollValue * 0.002}`;
-      }
-
-      if (floatingElementsRef.current) {
-        const elements = floatingElementsRef.current.children;
-        for (let i = 0; i < elements.length; i++) {
-          const element = elements[i];
-          const speed = 0.05 + i * 0.02;
-          const yPos = -scrollValue * speed;
-          const xPos = i % 2 === 0 ? scrollValue * 0.1 : -scrollValue * 0.1;
-          const rotation = scrollValue * (i % 2 === 0 ? 0.05 : -0.05);
-          element.style.transform = `translate3d(${xPos}px, ${yPos}px, 0) rotate(${rotation}deg)`;
-        }
-      }
-
-      if (waveRef.current) {
-        waveRef.current.style.transform = `translateY(${scrollValue * 0.2}px)`;
-      }
-    };
-
+    // Removed parallaxEffect and scroll event for smoothness
     const initScrollReveal = () => {
       const revealItems = document.querySelectorAll('.scroll-reveal-item');
-
       const revealCallback = (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -44,31 +19,15 @@ const Hero = () => {
           }
         });
       };
-
       const revealObserver = new IntersectionObserver(revealCallback, {
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px',
       });
-
       revealItems.forEach((item) => {
         revealObserver.observe(item);
       });
     };
-
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          parallaxEffect();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
     initScrollReveal();
-
     const progressiveReveal = () => {
       const elements = document.querySelectorAll('.progressive-reveal');
       elements.forEach((el, index) => {
@@ -77,12 +36,8 @@ const Hero = () => {
         }, 200 * index);
       });
     };
-
     progressiveReveal();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    // No scroll event listener
   }, []);
 
   const scrollToSection = (sectionId) => {
@@ -139,16 +94,17 @@ const Hero = () => {
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 font-poppins bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600 animate-fade-in">
             Igniting Intelligence through Innovation
           </h1>
+          <p className="text-xl md:text-2xl text-gradient-primary font-semibold mb-2">Empowering the Future with Trusted AI Solutions</p>
           <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto progressive-reveal backdrop-blur-sm p-4 rounded-lg bg-white/5">
             We build intelligent systems for campuses, safety, and automation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center relative progressive-reveal">
             <GlassmorphicButton
-              onClick={() => scrollToSection('neuro-campus')}
+              onClick={() => window.open('https://neurocampus.netlify.app', '_blank')}
               className="bg-primary text-white font-medium py-4 px-6 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(155,135,245,0.7)] relative z-10"
               glowEffect={true}
             >
-              <span className="relative z-10 font-bold text-white">Explore Neuro Campus</span>
+              <span className="relative z-10 font-bold text-white">Request a Demo</span>
               <ChevronRight className="ml-2 h-5 w-5 relative z-10" />
             </GlassmorphicButton>
             <GlassmorphicButton
