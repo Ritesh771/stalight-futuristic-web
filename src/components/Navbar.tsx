@@ -6,8 +6,7 @@ const navItems = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
   { name: 'Products', href: '#products' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Blog', href: '#blog' },
+  { name: 'Neuro Campus', href: '#neuro-campus' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -27,6 +26,23 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled]);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      // Close mobile menu if open
+      setMobileMenuOpen(false);
+      
+      // Smooth scroll to the target element
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -36,9 +52,13 @@ const Navbar: React.FC = () => {
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <a href="#home" className="flex items-center">
-          <span className="text-2xl font-bold font-poppins text-gradient-primary">Stalight</span>
-          <span className="ml-1 text-xl font-light font-poppins">Technology</span>
+        <a 
+          href="#home" 
+          className="flex items-center"
+          onClick={(e) => handleNavClick(e, '#home')}
+        >
+          <span className="text-2xl font-bold font-inter text-gradient-stalight">Stalight</span>
+          <span className="ml-1 text-xl font-light font-inter text-white/90">Technology</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -47,7 +67,8 @@ const Navbar: React.FC = () => {
             <li key={item.name}>
               <a 
                 href={item.href}
-                className="text-white/80 hover:text-stalight-primary transition-colors duration-300 relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-stalight-primary hover:after:w-full after:transition-all after:duration-300"
+                className="text-white/80 hover:text-[#9b87f5] transition-colors duration-300 relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-[#9b87f5] hover:after:w-full after:transition-all after:duration-300"
+                onClick={(e) => handleNavClick(e, item.href)}
               >
                 {item.name}
               </a>
@@ -74,8 +95,8 @@ const Navbar: React.FC = () => {
               <li key={item.name}>
                 <a 
                   href={item.href}
-                  className="block py-2 text-white/80 hover:text-stalight-primary transition-colors duration-300"
-                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 text-white/80 hover:text-[#9b87f5] transition-colors duration-300"
+                  onClick={(e) => handleNavClick(e, item.href)}
                 >
                   {item.name}
                 </a>

@@ -40,8 +40,8 @@ const WhyChooseUs: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6 font-poppins text-gradient-primary">
-              Why Choose Stalight Technology?
+            <h2 className="text-4xl font-bold mb-6 font-bungee">
+              Why Choose <span className="text-gradient-stalight">Stalight Technology</span>?
             </h2>
             <p className="text-xl text-white/80">
               Experience the difference with our innovative solutions

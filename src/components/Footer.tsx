@@ -27,7 +27,10 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="pt-16 pb-8 relative overflow-hidden bg-black">
+    <footer className="pt-8 sm:pt-12 lg:pt-16 pb-8 relative overflow-hidden">
+      {/* Footer Background */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-background/95 to-background/85"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-950/10 via-transparent to-purple-950/10"></div>
       {/* Wave background lines inspired by the reference image */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
         <div className="wave-lines"></div>
@@ -49,8 +52,8 @@ const Footer: React.FC = () => {
           <div className="scroll-reveal-item opacity-0 translate-y-10" style={{ transitionDelay: '0.1s' }}>
             <div className="mb-8 flex justify-center">
               <a href="#home" className="flex items-center" onClick={(e) => handleLinkClick(e, '#home')}>
-                <span className="text-3xl lg:text-4xl font-bold font-poppins text-gradient-primary">Stalight</span>
-                <span className="ml-2 text-2xl lg:text-3xl font-light font-poppins text-white">Technology</span>
+                            <span className="text-3xl lg:text-4xl font-bold font-inter text-gradient-primary">Stalight</span>
+            <span className="ml-2 text-2xl lg:text-3xl font-light font-inter text-white">Technology</span>
               </a>
             </div>
             <p className="text-white/70 mb-8 text-center max-w-2xl">
@@ -75,7 +78,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="border-t border-white/10 pt-8 text-center text-white/50">
-          <p>© {new Date().getFullYear()} Stalight Technology. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} <span className="text-gradient-stalight font-semibold">Stalight Technology</span>. All rights reserved.</p>
         </div>
       </div>
     </footer>

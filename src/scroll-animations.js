@@ -1,48 +1,49 @@
 
-// Initialize scroll animations when the DOM is fully loaded
+// Optimized scroll animations with performance improvements
 document.addEventListener('DOMContentLoaded', function() {
-  initScrollReveal();
-  // initScrollProgress(); // Disabled for performance
-  // initParallaxScrolling(); // Disabled for performance
-  // initScrollZoom(); // Disabled for performance
-  // initStickyScrollAnimation(); // Disabled for performance
-  // initScrollSpeedVariance(); // Disabled for performance
-  // initScrollTriggeredTransformations(); // Disabled for performance
-  // initWavyBackground(); // Disabled for performance
-  setupReadMoreButtons();
+  // Use requestIdleCallback for non-critical initialization
+  if (window.requestIdleCallback) {
+    requestIdleCallback(() => {
+      initOptimizedScrollReveal();
+      setupReadMoreButtons();
+    });
+  } else {
+    // Fallback for browsers without requestIdleCallback
+    setTimeout(() => {
+      initOptimizedScrollReveal();
+      setupReadMoreButtons();
+    }, 100);
+  }
 });
 
-// Throttle helper
-function throttle(fn, wait) {
-  let lastTime = 0;
-  return function(...args) {
-    const now = Date.now();
-    if (now - lastTime >= wait) {
-      fn.apply(this, args);
-      lastTime = now;
-    }
-  };
-}
-
-// Only keep scroll reveal (content fade-in)
-function initScrollReveal() {
+// Optimized scroll reveal with performance improvements
+function initOptimizedScrollReveal() {
   const revealItems = document.querySelectorAll('.scroll-reveal-item');
   if (revealItems.length === 0) return;
+
   const revealCallback = (entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
+        // Immediately unobserve to improve performance
         observer.unobserve(entry.target);
       }
     });
   };
+
   const revealObserver = new IntersectionObserver(revealCallback, {
     threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '0px 0px -50px 0px'
   });
+
   revealItems.forEach(item => {
     revealObserver.observe(item);
   });
+
+  // Auto-cleanup after 30 seconds to prevent memory leaks
+  setTimeout(() => {
+    revealObserver.disconnect();
+  }, 30000);
 }
 
 // Only keep setupReadMoreButtons (not scroll-based)

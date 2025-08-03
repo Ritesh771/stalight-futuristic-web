@@ -216,56 +216,78 @@
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 10px;
-  background: rgba(20, 20, 30, 0.7);
-  backdrop-filter: blur(10px);
+  padding: 12px;
+  background: rgba(20, 20, 30, 0.8);
+  backdrop-filter: blur(15px);
   border-radius: 30px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 0 20px rgba(155, 135, 245, 0.1);
   z-index: 100;
   display: flex;
-  gap: 5px;
-  transition: all 0.3s ease;
+  gap: 8px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: dockFloat 6s ease-in-out infinite;
 }
 
 .floating-dock:hover {
-  transform: translateX(-50%) translateY(-3px);
-  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4);
+  transform: translateX(-50%) translateY(-5px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4), 0 0 30px rgba(155, 135, 245, 0.2);
+  background: rgba(20, 20, 30, 0.9);
 }
 
 .dock-item {
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 15px;
-  transition: all 0.3s ease;
+  border-radius: 18px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  color: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
 }
 
 .dock-item:hover {
-  transform: scale(1.2);
-  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.15) translateY(-2px);
+  color: white;
+}
+
+.dock-item:active {
+  transform: scale(0.95);
 }
 
 .dock-item::after {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: 100%;
+  bottom: 120%;
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
-  background: rgba(20, 20, 30, 0.9);
+  background: rgba(20, 20, 30, 0.95);
   color: white;
-  padding: 5px 12px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
   font-size: 12px;
+  font-weight: 500;
   opacity: 0;
   pointer-events: none;
   white-space: nowrap;
   transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .dock-item:hover::after {
   opacity: 1;
   transform: translateX(-50%) translateY(-5px);
+}
+
+@keyframes dockFloat {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-3px);
+  }
 }

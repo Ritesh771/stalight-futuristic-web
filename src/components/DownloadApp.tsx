@@ -1,58 +1,44 @@
 import React from 'react';
-import { ArrowRight, Download, Smartphone } from 'lucide-react';
+import { ArrowRight, Download, Smartphone, Sparkles, Star } from 'lucide-react';
 
 const DownloadApp = () => {
   return (
-    <section className="relative py-20 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20" />
+    <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
+      {/* Section Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/75 via-background/85 to-background/75"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-950/15 via-transparent to-blue-950/15" />
       
-      <div className="container mx-auto px-4 relative">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-8 lg:mb-12">
+          
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 lg:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-accent">
             Download NEURO CAMPUS™
           </h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-white/80 max-w-2xl mx-auto px-4">
             Experience the future of campus management with our powerful mobile app. 
             Access all features on the go with enhanced security and real-time updates.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* App Mockups */}
-          <div className="relative">
-            <div className="flex flex-col md:flex-row justify-center gap-8">
-              <div className="relative group">
-                <div className="w-48 sm:w-56 md:w-64 h-96 max-h-[420px] rounded-2xl overflow-hidden border border-white/10 shadow-lg bg-black/10 flex items-center justify-center mx-auto">
-                  <img 
-                    src="/images/app-mockups/android-real.png" 
-                    alt="Android App" 
-                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-purple-500/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
-                  Android
-                </div>
-              </div>
-              <div className="relative group mt-12 md:mt-0">
-                <div className="w-48 sm:w-56 md:w-64 h-96 max-h-[420px] rounded-2xl overflow-hidden border border-white/10 shadow-lg bg-black/10 flex items-center justify-center mx-auto">
-                  <img 
-                    src="/images/app-mockups/ios-real.png" 
-                    alt="iOS App" 
-                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
-                  iOS
-                </div>
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Mobile App Illustration */}
+          <div className="relative flex justify-center order-2 lg:order-1">
+            <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg">
+              <img 
+                src="/svg/undraw_mobile-app_qxev.svg"
+                alt="Mobile App"
+                className="w-full opacity-90 hover:opacity-100 transition-opacity duration-300"
+              />
+              <div className="absolute top-2 sm:top-4 right-2 sm:right-4 w-8 h-8 sm:w-12 sm:h-12 bg-primary/20 rounded-full flex items-center justify-center animate-pulse">
+                <Star className="w-4 h-4 sm:w-6 sm:h-6 text-primary" />
               </div>
             </div>
           </div>
 
           {/* Features and Download */}
-          <div className="space-y-8 mt-16 md:mt-0">
+          <div className="space-y-6 lg:space-y-8 order-1 lg:order-2 px-4 lg:px-0">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10">
+              <div className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-white/10">
                 <Smartphone className="w-8 h-8 text-purple-400 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Cross-Platform</h3>
                 <p className="text-gray-300">Available for both Android and iOS devices</p>

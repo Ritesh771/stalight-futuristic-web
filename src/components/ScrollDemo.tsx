@@ -45,7 +45,7 @@ const ScrollDemo: React.FC = () => {
             <div className="sticky-content">
               <h3 className="text-3xl font-bold text-white mb-6">The Future is Here</h3>
               <p className="text-xl text-white/80">
-                Join us at Stalight Technology to revolutionize education for the next generation of learners.
+                Join us at <span className="text-gradient-stalight font-semibold">Stalight Technology</span> to revolutionize education for the next generation of learners.
               </p>
             </div>
           </GlassmorphicCard>

@@ -45,18 +45,22 @@ const DashboardShowcase: React.FC = () => {
   });
 
   return (
-    <section id="dashboard-showcase" className="py-24 relative overflow-hidden bg-gradient-to-b from-background to-black">
+    <section id="dashboard-showcase" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
+      {/* Section Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-black/80 to-background/70"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-950/10 via-transparent to-green-950/10"></div>
+      
       {/* Enhanced Aurora Background */}
-      <div className="absolute inset-0 z-0 opacity-40">
+      <div className="absolute inset-0 z-0 opacity-30">
         <div className="aurora-bg w-full h-full"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-poppins text-gradient-primary">
+        <div className="max-w-3xl mx-auto text-center mb-10 lg:mb-12">
+                      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 lg:mb-4 font-bungee text-gradient-primary">
             Our Application Showcase
           </h2>
-          <p className="text-xl text-white/80 animate-fade-in backdrop-blur-sm p-4 rounded-lg bg-white/5 inline-block">
+          <p className="text-lg sm:text-xl text-white/80 animate-fade-in backdrop-blur-sm p-4 rounded-lg bg-white/5 inline-block font-inter">
             Explore our powerful dashboard solutions and interfaces
           </p>
         </div>
