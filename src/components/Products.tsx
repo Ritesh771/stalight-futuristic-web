@@ -1,29 +1,34 @@
 import React from 'react';
-import { Brain, Shield, Zap, ArrowRight, Bot, BookOpen, Users, Camera, AlertTriangle, GitBranch, MessageSquare } from 'lucide-react';
+import { Brain, Shield, Zap, ArrowRight, Bot, BookOpen, Users, Camera, AlertTriangle, GitBranch, MessageSquare, Sparkles } from 'lucide-react';
 
 const Products: React.FC = () => {
   return (
-    <section id="products" className="py-24 relative overflow-hidden bg-gradient-to-b from-background/95 to-background">
-      <div className="container mx-auto px-4">
+    <section id="products" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
+      {/* Section Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background/70"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-950/10 via-transparent to-blue-950/10"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6 font-poppins text-gradient-primary">
+          <div className="text-center mb-8 lg:mb-12">
+           
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 lg:mb-4 font-bungee bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-accent">
               Our Products
             </h2>
-            <p className="text-xl text-white/80">
-              Innovative solutions designed to transform education and safety
+            <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto px-4 font-inter">
+              Innovative solutions designed to transform education, safety, and development workflows
             </p>
           </div>
 
           {/* Flagship Product */}
-          <div className="glass-card p-6 md:p-8 rounded-xl mb-16">
-            <div className="flex flex-col lg:flex-row gap-8 items-stretch lg:items-center">
+          <div className="glass-card p-4 sm:p-6 lg:p-8 rounded-xl mb-8 lg:mb-12 relative">
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch lg:items-center">
               <div className="flex-1 flex flex-col justify-center">
-                <div className="flex items-center gap-2 mb-4">
-                  <h3 className="text-2xl md:text-3xl font-bold text-gradient-primary">NEURO CAMPUS™</h3>
-                  <span className="px-3 py-1 text-sm bg-primary/20 text-primary rounded-full whitespace-nowrap">Flagship Product</span>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-4">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gradient-primary">NEURO CAMPUS™</h3>
+                  <span className="px-2 sm:px-3 py-1 text-xs sm:text-sm bg-primary/20 text-primary rounded-full self-start">Flagship Product</span>
                 </div>
-                <p className="text-white/80 mb-6">
+                <p className="text-white/80 mb-4 lg:mb-6 text-sm sm:text-base">
                   A next-generation academic platform designed to streamline campus operations while integrating cutting-edge AI, blockchain, and automation features.
                 </p>
                 
@@ -88,6 +93,13 @@ const Products: React.FC = () => {
                 </button>
               </div>
               <div className="flex-1 flex flex-col items-center justify-center w-full lg:w-auto">
+                <div className="relative">
+                  <img 
+                    src="/svg/undraw_dashboard_p93p.svg"
+                    alt="Dashboard Analytics"
+                    className="w-full max-w-lg opacity-90 hover:opacity-100 transition-opacity duration-300 mb-6"
+                  />
+                </div>
                 <div className="aspect-video rounded-lg overflow-hidden glass-card hover:scale-105 transition-transform w-full max-w-md">
                   <img 
                     src="/images/neuro-campus-dashboard.png" 
@@ -103,9 +115,9 @@ const Products: React.FC = () => {
                   href="https://neurocampus.netlify.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-3 inline-block px-5 py-2 rounded-lg bg-gradient-to-r from-primary to-stalight-blue text-white font-semibold shadow-lg hover:scale-105 hover:from-stalight-blue hover:to-primary transition-all duration-300"
+                  className="mt-3 inline-block px-5 py-2 rounded-lg bg-gradient-to-r from-primary to-accent text-white font-semibold shadow-lg hover:scale-105 hover:from-accent hover:to-primary transition-all duration-300"
                 >
-                  Click here to Access the demo of product
+                  Access the demo
                 </a>
               </div>
             </div>
@@ -116,11 +128,18 @@ const Products: React.FC = () => {
             {/* SafeSpace™ */}
             <div className="glass-card p-6 rounded-xl hover:scale-105 transition-transform">
               <div className="flex items-center gap-2 mb-4">
-                <AlertTriangle className="w-6 h-6 text-primary" />
+                <AlertTriangle className="w-6 h-6 text-accent" />
                 <div>
-                  <h3 className="text-2xl font-bold text-gradient-primary">SafeSpace™</h3>
-                  <p className="text-sm text-primary">AI-Powered Women's Safety Platform</p>
+                  <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-accent to-primary">SafeSpace™</h3>
+                  <p className="text-sm text-accent">AI-Powered Women's Safety Platform</p>
                 </div>
+              </div>
+              <div className="flex justify-center mb-4">
+                <img 
+                  src="/svg/undraw_mobile-analytics_bz2a.svg"
+                  alt="Safety Analytics"
+                  className="w-32 h-24 opacity-70"
+                />
               </div>
               <p className="text-white/80 mb-4">
                 Advanced safety system for public spaces and campuses with real-time monitoring and emergency response.
@@ -168,11 +187,18 @@ const Products: React.FC = () => {
             {/* GitSolveAI */}
             <div className="glass-card p-6 rounded-xl hover:scale-105 transition-transform">
               <div className="flex items-center gap-2 mb-4">
-                <GitBranch className="w-6 h-6 text-primary" />
+                <GitBranch className="w-6 h-6 text-purple-400" />
                 <div>
-                  <h3 className="text-2xl font-bold text-gradient-primary">GitSolveAI</h3>
-                  <p className="text-sm text-primary">Smart GitHub Issue Resolution</p>
+                  <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-primary">GitSolveAI</h3>
+                  <p className="text-sm text-purple-400">Smart GitHub Issue Resolution</p>
                 </div>
+              </div>
+              <div className="flex justify-center mb-4">
+                <img 
+                  src="/svg/undraw_developer-avatar_f6ac.svg"
+                  alt="Developer Tools"
+                  className="w-32 h-24 opacity-70"
+                />
               </div>
               <p className="text-white/80 mb-4">
                 AI-powered platform that automates GitHub issue resolution and streamlines CI/CD workflows.
@@ -222,9 +248,16 @@ const Products: React.FC = () => {
               <div className="flex items-center gap-2 mb-4">
                 <Camera className="w-6 h-6 text-primary" />
                 <div>
-                  <h3 className="text-2xl font-bold text-gradient-primary">AI CCTV Surveillance</h3>
+                  <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">AI CCTV Surveillance</h3>
                   <p className="text-sm text-primary">Advanced Campus Security</p>
                 </div>
+              </div>
+              <div className="flex justify-center mb-4">
+                <img 
+                  src="/svg/undraw_firmware_3fxd.svg"
+                  alt="Security System"
+                  className="w-32 h-24 opacity-70"
+                />
               </div>
               <p className="text-white/80 mb-4">
                 Next-generation surveillance system using Computer Vision for enhanced campus security.
