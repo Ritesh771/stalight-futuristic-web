@@ -39,8 +39,7 @@ const DashboardShowcase: React.FC = () => {
   const { text, showCursor } = useTypewriter(typewriterTexts, {
     speed: 1.5,
     eraseSpeed: 25,
-    delay: 70,
-    eraseDelay: 1500,
+  // Removed delays for instant loading
     pauseBetween: 800
   });
 

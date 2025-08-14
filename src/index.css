@@ -114,6 +114,7 @@
 
   .font-bungee {
     font-family: 'Bungee', 'Inter', sans-serif;
+    /* Removed progressive-reveal and scroll-reveal-item for instant loading */
   }
 
   .font-poppins {

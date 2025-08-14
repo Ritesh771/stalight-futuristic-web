@@ -301,6 +301,202 @@ const Products: React.FC = () => {
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>
+
+              {/* Chat2DB */}
+              <div className="glass-card p-6 rounded-xl hover:scale-105 transition-transform">
+                <div className="flex items-center gap-2 mb-4">
+                  
+                  <div>
+                    <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Chat2DB</h3>
+                    <p className="text-sm text-blue-400">Natural Language Database Chat</p>
+                  </div>
+                </div>
+                <div className="flex justify-center mb-4">
+                  <img 
+                    src="/svg/undraw_analytics_6mru.svg"
+                    alt="Chat2DB"
+                    className="w-32 h-24 opacity-70"
+                  />
+                </div>
+                <p className="text-white/80 mb-4">
+                  Access and query your databases by chatting in plain English. Our software securely converts your requests to SQL, fetches data with proper authentication, and supports memory chat and multiple database connections.
+                </p>
+                <div className="space-y-4 mb-6">
+                  <div className="glass-card p-4 rounded-lg bg-white/5">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2">
+                      <MessageSquare className="w-4 h-4 text-primary" />
+                      Natural Language to SQL
+                    </h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2 text-sm text-white/70">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                        Chat with your database in normal English
+                      </li>
+                      <li className="flex items-center gap-2 text-sm text-white/70">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                        Automatic conversion to secure SQL queries
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="glass-card p-4 rounded-lg bg-white/5">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2">
+                      <Shield className="w-4 h-4 text-primary" />
+                      Secure & Flexible
+                    </h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2 text-sm text-white/70">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                        Safe data access with authentication
+                      </li>
+                      <li className="flex items-center gap-2 text-sm text-white/70">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                        Supports memory chat and multiple database connections
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-primary">
+                  <span>Coming Soon</span>
+                  <ArrowRight className="w-4 h-4" />
+                </div>
+              </div>
+
+            {/* AR-Based Remote Technical Support */}
+            <div className="glass-card p-6 rounded-xl hover:scale-105 transition-transform">
+              <div className="flex items-center gap-2 mb-4">
+               
+                <div>
+                  <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-400">AR-Based Technical Support</h3>
+                  <p className="text-sm text-green-400">Industry: Manufacturing, IoT, AR/VR</p>
+                </div>
+              </div>
+              <div className="flex justify-center mb-4">
+                <img 
+                  src="/svg/undraw_virtual-reality_rkzg.svg"
+                  alt="AR Remote Support"
+                  className="w-32 h-24 opacity-70"
+                />
+              </div>
+              <p className="text-white/80 mb-4">
+                An augmented reality platform for field technicians to receive real-time, hands-free guidance from remote experts while repairing or maintaining industrial equipment. AR overlays, live video, and IoT integration create a fully immersive, data-driven support experience.
+              </p>
+              <div className="space-y-4 mb-6">
+                <div className="glass-card p-4 rounded-lg bg-white/5">
+                  <h4 className="font-semibold mb-2 flex items-center gap-2">
+                    <Camera className="w-4 h-4 text-primary" />
+                    AR Overlays
+                  </h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2 text-sm text-white/70">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                      Step-by-step visual instructions and 3D models of equipment
+                    </li>
+                  </ul>
+                </div>
+                <div className="glass-card p-4 rounded-lg bg-white/5">
+                  <h4 className="font-semibold mb-2 flex items-center gap-2">
+                    <MessageSquare className="w-4 h-4 text-primary" />
+                    Remote Collaboration
+                  </h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2 text-sm text-white/70">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                      Live video and audio support from experts
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-white/70">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                      Experts can draw annotations in technician’s field of view
+                    </li>
+                  </ul>
+                </div>
+                <div className="glass-card p-4 rounded-lg bg-white/5">
+                  <h4 className="font-semibold mb-2 flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-primary" />
+                    IoT Integration
+                  </h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2 text-sm text-white/70">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                      Connects to equipment sensors for real-time diagnostics
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-white/70">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                      Predictive maintenance alerts
+                    </li>
+                  </ul>
+                </div>
+                 
+              </div>
+               <div className="flex items-center gap-2 text-primary">
+                <span>Coming Soon</span>
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+
+            {/* AI Lawyer for Everyday Legal Issues */}
+            <div className="glass-card p-6 rounded-xl hover:scale-105 transition-transform flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <Shield className="w-6 h-6 text-purple-500" />
+                  <div>
+                    <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-400">AI Lawyer</h3>
+                    <p className="text-sm text-purple-500">Legal Help for Everyday Issues</p>
+                  </div>
+                </div>
+                <div className="flex justify-center mb-4">
+                  <img 
+                    src="/svg/undraw_contact-us_kcoa.svg"
+                    alt="AI Lawyer"
+                    className="w-32 h-24 opacity-70"
+                  />
+                </div>
+                <p className="text-white/80 mb-4">
+                  Get affordable, accessible legal advice for common issues like rent agreements and traffic fines. The AI Lawyer chatbot drafts and reviews contracts, predicts legal outcomes, and connects you to human lawyers for complex cases.
+                </p>
+                <div className="space-y-4 mb-6">
+                  <div className="glass-card p-4 rounded-lg bg-white/5">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2">
+                      <BookOpen className="w-4 h-4 text-primary" />
+                      Contract Drafting & Review
+                    </h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2 text-sm text-white/70">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                        Drafts and reviews rental agreements and other contracts in plain language
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="glass-card p-4 rounded-lg bg-white/5">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2">
+                      <Brain className="w-4 h-4 text-primary" />
+                      Legal Outcome Prediction
+                    </h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2 text-sm text-white/70">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                        Predicts likely outcomes (e.g., notice periods, fines)
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="glass-card p-4 rounded-lg bg-white/5">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2">
+                      <Users className="w-4 h-4 text-primary" />
+                      Human Lawyer Connection
+                    </h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2 text-sm text-white/70">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                        Connects to affordable lawyers for complex cases
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-primary mt-auto">
+                <span>Coming Soon</span>
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

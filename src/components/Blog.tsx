@@ -91,7 +91,7 @@ const Blog: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16 scroll-reveal-item">
+  <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 font-poppins text-gradient-primary">
             Latest Insights & Trends
           </h2>
@@ -104,7 +104,7 @@ const Blog: React.FC = () => {
           {blogPosts.map((post, index) => (
             <div 
               key={index}
-              className="scroll-reveal-item opacity-0 translate-y-10"
+              className="opacity-100 translate-y-0"
               style={{ 
                 transitionDelay: `${index * 0.1}s` 
               }}
