@@ -87,17 +87,17 @@ const Hero = () => {
           {/* Text Content - Balanced responsive text sizing */}
           <div ref={heroRef} className="order-2 lg:order-1 flex flex-col justify-center py-8 lg:py-12 xl:py-16 2xl:py-20">
             
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-4 sm:mb-6 lg:mb-8 xl:mb-10 font-bungee leading-tight hero-text">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-4 sm:mb-6 lg:mb-8 xl:mb-10 font-bungee leading-tight hero-text">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-green-400 animate-fade-in">
                 Igniting Intelligence
               </span>
               <br />
               <span className="text-white/90">through Innovation</span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-primary font-semibold mb-3 sm:mb-4 lg:mb-6 xl:mb-8 hero-text font-inter">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-primary font-semibold mb-3 sm:mb-4 lg:mb-6 xl:mb-8 hero-text font-inter">
               Empowering the Future with Trusted AI Solutions
             </p>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-white/80 mb-6 sm:mb-8 lg:mb-10 xl:mb-12 max-w-2xl lg:max-w-3xl xl:max-w-4xl hero-description leading-relaxed font-inter">
+            <p className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl 2xl:text-3xl text-white/80 mb-6 sm:mb-8 lg:mb-10 xl:mb-12 max-w-2xl lg:max-w-3xl xl:max-w-4xl hero-description leading-relaxed font-inter">
               We build intelligent systems for campuses, safety, and automation that transform how organizations operate.
             </p>
             
@@ -122,7 +122,7 @@ const Hero = () => {
 
           {/* Illustration - Improved responsive sizing and centering */}
           <div className="relative flex items-center justify-center order-1 lg:order-2 mb-8 lg:mb-0 py-8 lg:py-12 xl:py-16">
-            <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 3xl:max-w-3xl">
+            <div className="relative w-full max-w-[220px] sm:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl 3xl:max-w-3xl">
               <img 
                 src="/svg/undraw_visionary-technology_f6b3.svg"
                 alt="Visionary Technology"
