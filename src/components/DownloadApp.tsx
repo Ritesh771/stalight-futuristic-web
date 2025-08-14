@@ -20,9 +20,9 @@ const DownloadApp = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Mobile App Illustration */}
-          <div className="relative flex justify-center order-2 lg:order-1">
+  <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Mobile App Illustration - always first on mobile */}
+          <div className="relative flex justify-center order-1 lg:order-1 w-full mb-8 lg:mb-0">
             <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg">
               <img 
                 src="/svg/undraw_mobile-app_qxev.svg"
@@ -35,8 +35,8 @@ const DownloadApp = () => {
             </div>
           </div>
 
-          {/* Features and Download */}
-          <div className="space-y-6 lg:space-y-8 order-1 lg:order-2 px-4 lg:px-0">
+          {/* Features and Download - always second on mobile */}
+          <div className="space-y-6 lg:space-y-8 order-2 lg:order-2 px-4 lg:px-0 w-full">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-white/10">
                 <Smartphone className="w-8 h-8 text-purple-400 mb-4" />

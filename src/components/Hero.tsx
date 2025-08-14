@@ -11,18 +11,15 @@ const Hero = () => {
     const scrollManager = ScrollManager.getInstance();
     
     // Use the optimized scroll manager for reveal animations
-    const observer = scrollManager.observeRevealElements('.scroll-reveal-item');
+  // Removed scrollManager observer for instant loading
     
     // Progressive reveal with faster timing
     requestAnimationFrame(() => {
-      scrollManager.progressiveReveal('.progressive-reveal', 80);
+  // Removed progressiveReveal for instant loading
     });
     
     // Cleanup function
     return () => {
-      if (observer) {
-        observer.disconnect();
-      }
     };
   }, []);
 
@@ -31,15 +28,15 @@ const Hero = () => {
     scrollManager.smoothScrollTo(sectionId, 80);
   };
 
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden w-full animate-fade-in-up">
       <div className="absolute inset-0 bg-gradient-to-b from-background/60 to-background/90"></div>
 
       {/* Modern Gradient Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20"></div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-500/5 to-purple-500/10"></div>
-        
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-green-900/20 animate-fade-in" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-500/5 to-purple-500/10 animate-fade-in" />
         {/* Animated Gradient Overlay */}
         <div className="absolute inset-0 opacity-30">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-green-500/10 animate-pulse" style={{ animationDuration: '8s' }}></div>
@@ -48,7 +45,7 @@ const Hero = () => {
 
       {/* Animated Grid Pattern */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0" style={{
+        <div className="absolute inset-0 animate-fade-in" style={{
           backgroundImage: `
             linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
             linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
@@ -60,11 +57,11 @@ const Hero = () => {
 
       {/* Floating Orbs */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/6 w-32 h-32 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-xl animate-pulse" style={{ animationDelay: '0s', animationDuration: '4s' }}></div>
-        <div className="absolute top-3/4 right-1/6 w-24 h-24 rounded-full bg-gradient-to-r from-purple-400/20 to-green-400/20 blur-xl animate-pulse" style={{ animationDelay: '2s', animationDuration: '5s' }}></div>
-        <div className="absolute top-1/2 left-3/4 w-20 h-20 rounded-full bg-gradient-to-r from-green-400/20 to-blue-400/20 blur-xl animate-pulse" style={{ animationDelay: '1s', animationDuration: '3s' }}></div>
-        <div className="absolute top-1/3 right-1/3 w-16 h-16 rounded-full bg-gradient-to-r from-blue-400/30 to-purple-400/30 blur-lg animate-pulse" style={{ animationDelay: '3s', animationDuration: '4s' }}></div>
-        <div className="absolute bottom-1/3 left-1/4 w-28 h-28 rounded-full bg-gradient-to-r from-purple-400/15 to-blue-400/15 blur-2xl animate-pulse" style={{ animationDelay: '1.5s', animationDuration: '6s' }}></div>
+        <div className="absolute top-1/4 left-1/6 w-32 h-32 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-xl animate-float" />
+        <div className="absolute top-3/4 right-1/6 w-24 h-24 rounded-full bg-gradient-to-r from-purple-400/20 to-green-400/20 blur-xl animate-float" />
+        <div className="absolute top-1/2 left-3/4 w-20 h-20 rounded-full bg-gradient-to-r from-green-400/20 to-blue-400/20 blur-xl animate-float" />
+        <div className="absolute top-1/3 right-1/3 w-16 h-16 rounded-full bg-gradient-to-r from-blue-400/30 to-purple-400/30 blur-lg animate-float" />
+        <div className="absolute bottom-1/3 left-1/4 w-28 h-28 rounded-full bg-gradient-to-r from-purple-400/15 to-blue-400/15 blur-2xl animate-float" />
       </div>
 
       {/* Subtle Particles */}
@@ -72,7 +69,7 @@ const Hero = () => {
         {[...Array(12)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-white/40 rounded-full animate-pulse"
+            className="absolute w-1 h-1 bg-white/40 rounded-full animate-float"
             style={{
               left: `${15 + (i * 7)}%`,
               top: `${20 + (i * 5)}%`,
@@ -88,25 +85,23 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 2xl:gap-20 items-center min-h-[80vh] lg:min-h-[85vh] xl:min-h-[90vh]">
           
           {/* Text Content - Balanced responsive text sizing */}
-          <div ref={heroRef} className="scroll-reveal-item order-2 lg:order-1 flex flex-col justify-center py-8 lg:py-12 xl:py-16 2xl:py-20">
+          <div ref={heroRef} className="order-2 lg:order-1 flex flex-col justify-center py-8 lg:py-12 xl:py-16 2xl:py-20">
             
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-4 sm:mb-6 lg:mb-8 xl:mb-10 font-bungee leading-tight hero-text">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-4 sm:mb-6 lg:mb-8 xl:mb-10 font-bungee leading-tight hero-text">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-green-400 animate-fade-in">
                 Igniting Intelligence
               </span>
               <br />
               <span className="text-white/90">through Innovation</span>
             </h1>
-            
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-primary font-semibold mb-3 sm:mb-4 lg:mb-6 xl:mb-8 hero-text font-inter">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-primary font-semibold mb-3 sm:mb-4 lg:mb-6 xl:mb-8 hero-text font-inter">
               Empowering the Future with Trusted AI Solutions
             </p>
-            
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl text-white/80 mb-6 sm:mb-8 lg:mb-10 xl:mb-12 max-w-2xl lg:max-w-3xl xl:max-w-4xl hero-description leading-relaxed font-inter">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl text-white/80 mb-6 sm:mb-8 lg:mb-10 xl:mb-12 max-w-2xl lg:max-w-3xl xl:max-w-4xl hero-description leading-relaxed font-inter">
               We build intelligent systems for campuses, safety, and automation that transform how organizations operate.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8 xl:gap-10 progressive-reveal">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 lg:gap-8 xl:gap-10">
               <GlassmorphicButton
                 onClick={() => window.open('https://neurocampus.netlify.app', '_blank')}
                 className="bg-primary hover:bg-primary/90 text-white font-medium py-3 sm:py-4 lg:py-5 xl:py-6 px-6 sm:px-8 lg:px-10 xl:px-12 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] relative z-10 flex items-center justify-center group text-sm sm:text-base lg:text-lg xl:text-xl font-inter"

@@ -3,11 +3,9 @@ import React from 'react';
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
 
 const socialLinks = [
-  { icon: <Facebook className="h-5 w-5" />, href: 'https://facebook.com', label: 'Facebook' },
-  { icon: <Instagram className="h-5 w-5" />, href: 'https://instagram.com', label: 'Instagram' },
-  { icon: <Twitter className="h-5 w-5" />, href: 'https://twitter.com', label: 'Twitter' },
-  { icon: <Linkedin className="h-5 w-5" />, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: <Youtube className="h-5 w-5" />, href: 'https://youtube.com', label: 'YouTube' },
+  { icon: <Instagram className="h-5 w-5" />, href: 'https://www.instagram.com/amc.ecell/', label: 'Instagram' },
+  { icon: <Linkedin className="h-5 w-5" />, href: 'https://www.linkedin.com/in/stalight-technology-45391a378/', label: 'LinkedIn' },
+  { icon: <Youtube className="h-5 w-5" />, href: 'https://www.youtube.com/@RITESHN_771', label: 'YouTube' },
 ];
 
 const Footer: React.FC = () => {
@@ -49,7 +47,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-center items-center mb-12">
           {/* Company info */}
-          <div className="scroll-reveal-item opacity-0 translate-y-10" style={{ transitionDelay: '0.1s' }}>
+          <div className="opacity-100 translate-y-0" style={{ transitionDelay: '0.1s' }}>
             <div className="mb-8 flex justify-center">
               <a href="#home" className="flex items-center" onClick={(e) => handleLinkClick(e, '#home')}>
                             <span className="text-3xl lg:text-4xl font-bold font-inter text-gradient-primary">Stalight</span>

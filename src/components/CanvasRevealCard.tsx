@@ -66,7 +66,7 @@ const CanvasRevealCard: React.FC<CanvasRevealCardProps> = ({
     <div 
       ref={cardRef}
       className={cn(
-        "canvas-reveal relative rounded-xl overflow-hidden transition-all duration-700 scroll-reveal-item",
+  "canvas-reveal relative rounded-xl overflow-hidden transition-all duration-700",
         spotlight && "card-spotlight",
         isVisible && "animate-fade-in",
         className

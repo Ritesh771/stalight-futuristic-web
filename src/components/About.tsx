@@ -3,7 +3,7 @@ import { Brain, Shield, Zap, Users, Target, Lightbulb } from 'lucide-react';
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden section-reveal">
+  <section id="about" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
       {/* Section Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/90 to-background/80"></div>
       <div className="absolute inset-0 bg-gradient-to-r from-blue-950/10 via-transparent to-purple-950/10"></div>

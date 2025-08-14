@@ -3,9 +3,7 @@ import React, { useEffect } from 'react';
 import GlassmorphicCard from './GlassmorphicCard';
 
 const ScrollDemo: React.FC = () => {
-  useEffect(() => {
-    // Initialize any component-specific animations here if needed
-  }, []);
+  // Removed useEffect for instant loading
 
   return (
     <section id="scroll-demo" className="py-24 relative overflow-hidden bg-gradient-to-b from-black to-stalight-dark">
