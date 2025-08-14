@@ -5,7 +5,7 @@ const contactInfo = [
   {
     icon: <Mail className="h-5 w-5 text-primary" />,
     label: "Email",
-    value: "infostalight@gmail.com",
+    value: "info@stalight.tech",
     link: "mailto:infostalight@gmail.com"
   },
   {
