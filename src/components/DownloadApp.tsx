@@ -3,7 +3,7 @@ import { ArrowRight, Download, Smartphone, Sparkles, Star } from 'lucide-react';
 
 const DownloadApp = () => {
   return (
-    <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
+        <section id="neuro-campus" className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
       {/* Section Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/75 via-background/85 to-background/75"></div>
       <div className="absolute inset-0 bg-gradient-to-br from-purple-950/15 via-transparent to-blue-950/15" />
