@@ -15,7 +15,7 @@ const About: React.FC = () => {
               About <span className="text-gradient-stalight">Stalight Technology</span>
             </h2>
             <p className="text-lg sm:text-xl text-white/80 mb-4 lg:mb-6 max-w-3xl mx-auto px-4 font-inter">
-              <span className="text-gradient-stalight font-semibold">Stalight Technology</span> is an AI-first Indian startup focused on building scalable, intelligent, and secure systems across education, public safety, and developer automation.
+              <span className="text-gradient-stalight font-semibold">Stalight Technology</span> is an AI-first Indian startup focused on building scalable, intelligent, and secure systems across education, public safety , and developer automation.
             </p>
             <div className="bg-white/5 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-white/10 inline-block mx-4">
               <p className="text-sm sm:text-base text-white/70 mb-2 font-inter">Reg No: UDYAM-KR-03-0515698</p>
