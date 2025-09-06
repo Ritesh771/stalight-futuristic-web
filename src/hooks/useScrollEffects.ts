@@ -1,78 +1,58 @@
-import { useEffect, useRef, useState } from 'react';
-import ScrollManager from '@/utils/scrollManager';
+import { useEffect, useState } from 'react';
+// Disabled ScrollManager for better performance
 
-interface UseScrollRevealOptions {
-  threshold?: number;
-  rootMargin?: string;
-  triggerOnce?: boolean;
-}
-
-// Hook for scroll-based reveal animations
-export const useScrollReveal = (options: UseScrollRevealOptions = {}) => {
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-
-    const scrollManager = ScrollManager.getInstance();
-    
-    const observer = scrollManager.createIntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            if (options.triggerOnce !== false) {
-              observer.unobserve(entry.target);
-            }
-          }
-        });
-      },
-      {
-        threshold: options.threshold || 0.1,
-        rootMargin: options.rootMargin || '0px 0px -50px 0px',
-      }
-    );
-
-    observer.observe(element);
-
-    return () => {
-      observer.unobserve(element);
-    };
-  }, [options.threshold, options.rootMargin, options.triggerOnce]);
-
-  return ref;
-};
-
-// Hook for managing active section in navigation
+// Hook for managing active section in navigation - Simplified for performance
 export const useActiveSection = (sections: string[], offset = 150) => {
   const [activeSection, setActiveSection] = useState<string>('');
 
   useEffect(() => {
-    const scrollManager = ScrollManager.getInstance();
+    const handleScroll = () => {
+      const current = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= offset && rect.bottom >= offset;
+        }
+        return false;
+      }) || '';
 
-    const removeListener = scrollManager.addScrollListener(() => {
-      const current = scrollManager.getCurrentSection(sections, offset);
       if (current && current !== activeSection) {
         setActiveSection(current);
       }
-    });
+    };
 
-    return removeListener;
+    // Throttled scroll listener
+    let ticking = false;
+    const throttledScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    handleScroll(); // Initial check
+
+    return () => {
+      window.removeEventListener('scroll', throttledScroll);
+    };
   }, [sections, offset, activeSection]);
 
   const scrollToSection = (sectionId: string) => {
-    const scrollManager = ScrollManager.getInstance();
-    const success = scrollManager.smoothScrollTo(sectionId, offset);
-    
-    if (success) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
       setActiveSection(sectionId);
     }
-    
-    return success;
   };
 
   return { activeSection, scrollToSection };
 };
 
-export default { useScrollReveal, useActiveSection };
+export default { useActiveSection };

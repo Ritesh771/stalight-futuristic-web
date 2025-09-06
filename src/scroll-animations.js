@@ -1,20 +1,20 @@
 
-// Optimized scroll animations with performance improvements
-document.addEventListener('DOMContentLoaded', function() {
-  // Use requestIdleCallback for non-critical initialization
-  if (window.requestIdleCallback) {
-    requestIdleCallback(() => {
-      initOptimizedScrollReveal();
-      setupReadMoreButtons();
-    });
-  } else {
-    // Fallback for browsers without requestIdleCallback
-    setTimeout(() => {
-      initOptimizedScrollReveal();
-      setupReadMoreButtons();
-    }, 100);
-  }
-});
+// Disabled scroll animations for better performance
+// document.addEventListener('DOMContentLoaded', function() {
+//   // Use requestIdleCallback for non-critical initialization
+//   if (window.requestIdleCallback) {
+//     requestIdleCallback(() => {
+//       initOptimizedScrollReveal();
+//       setupReadMoreButtons();
+//     }, { timeout: 2000 }); // Add timeout for fallback
+//   } else {
+//     // Fallback for browsers without requestIdleCallback
+//     setTimeout(() => {
+//       initOptimizedScrollReveal();
+//       setupReadMoreButtons();
+//     }, 100);
+//   }
+// });
 
 // Optimized scroll reveal with performance improvements
 function initOptimizedScrollReveal() {
@@ -33,17 +33,18 @@ function initOptimizedScrollReveal() {
 
   const revealObserver = new IntersectionObserver(revealCallback, {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -30px 0px', // Reduced from -50px for earlier triggering
+    // Add passive option for better performance
   });
 
   revealItems.forEach(item => {
     revealObserver.observe(item);
   });
 
-  // Auto-cleanup after 30 seconds to prevent memory leaks
+  // Auto-cleanup after 15 seconds to prevent memory leaks - Reduced from 30s
   setTimeout(() => {
     revealObserver.disconnect();
-  }, 30000);
+  }, 15000);
 }
 
 // Only keep setupReadMoreButtons (not scroll-based)

@@ -6,6 +6,8 @@ class ScrollManager {
   private rafId: number | null = null;
   private lastScrollTime = 0;
   private throttleDelay = 16; // ~60fps
+  private isScrolling = false;
+  private scrollTimeout: number | null = null;
 
   private constructor() {
     this.initializeManager();
@@ -34,6 +36,17 @@ class ScrollManager {
     }
     
     this.lastScrollTime = now;
+    this.isScrolling = true;
+    
+    // Clear existing timeout
+    if (this.scrollTimeout) {
+      clearTimeout(this.scrollTimeout);
+    }
+    
+    // Set scrolling state to false after scroll stops
+    this.scrollTimeout = window.setTimeout(() => {
+      this.isScrolling = false;
+    }, 150);
     
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
@@ -146,16 +159,9 @@ class ScrollManager {
     return true;
   }
 
-  // Get current section based on viewport
-  getCurrentSection(sections: string[], offset = 150): string | null {
-    return sections.find(section => {
-      const element = document.getElementById(section);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        return rect.top <= offset && rect.bottom >= offset;
-      }
-      return false;
-    }) || null;
+  // Get current scroll state
+  isCurrentlyScrolling(): boolean {
+    return this.isScrolling;
   }
 }
 

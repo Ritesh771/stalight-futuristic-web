@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
-@import './wave-animations.css';
-@import './components/advanced-animations.css';
+/* @import './wave-animations.css'; */
+/* @import './components/advanced-animations.css'; */
 
-/* Import Bungee font */
+/* Import Bungee font - commented out as we're using system fonts */
+/*
 @font-face {
   font-family: 'Bungee';
   src: url('/fonts/Bungee/Bungee-Regular.ttf') format('truetype');
@@ -10,6 +10,7 @@
   font-style: normal;
   font-display: swap;
 }
+*/
 
 @tailwind base;
 @tailwind components;
@@ -64,6 +65,8 @@
   html {
     /* Optimized scroll behavior - let JS handle smooth scrolling */
     scroll-behavior: auto;
+    /* Improve scroll performance */
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -113,16 +116,16 @@
   }
 
   .font-bungee {
-    font-family: 'Bungee', 'Inter', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     /* Removed progressive-reveal and scroll-reveal-item for instant loading */
   }
 
   .font-poppins {
-    font-family: 'Poppins', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
 
   .font-inter {
-    font-family: 'Inter', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
   
   /* Enhanced animations */
@@ -271,16 +274,30 @@
     backface-visibility: hidden;
     perspective: 1000px;
   }
+
+  /* Optimize floating animations */
+  .animate-float {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  /* Reduce animation complexity for better performance */
+  .animate-pulse-soft {
+    animation: pulse-soft 3s ease-in-out infinite; /* Increased duration */
+  }
 }
 
+/* Disabled animations for better performance */
+/*
 @keyframes float {
   0%, 100% {
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-20px) translateZ(0);
   }
 }
+*/
 
 @keyframes float-reverse {
   0%, 100% {
@@ -291,6 +308,8 @@
   }
 }
 
+/* Disabled animations for better performance */
+/*
 @keyframes pulse-glow {
   0%, 100% {
     box-shadow: 0 0 20px rgba(155,135,245,0.3);
@@ -308,7 +327,10 @@
     opacity: 0.7;
   }
 }
+*/
 
+/* Disabled animations for better performance */
+/*
 @keyframes reveal {
   0% {
     opacity: 0;
@@ -348,6 +370,7 @@
     opacity: 0;
   }
 }
+*/
 
 @media (max-width: 640px) {
   .container {
@@ -466,6 +489,8 @@
 }
 
 /* Smooth gradient animation */
+/* Disabled animations for better performance */
+/*
 @keyframes gradientShift {
   0%, 100% {
     background-position: 0% 50%;
@@ -475,7 +500,6 @@
   }
 }
 
-/* Floating orb animation */
 @keyframes floatOrb {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
@@ -486,13 +510,17 @@
     opacity: 0.8;
   }
 }
+*/
 
-/* Section reveal animation */
+/* Section reveal animation - Disabled */
+/*
 .section-reveal {
   animation: sectionSlideIn 0.8s ease-out forwards;
 }
+*/
 
-/* Gradient background utility */
+/* Gradient background utility - Disabled */
+/*
 .gradient-bg-animated {
   background: linear-gradient(-45deg, 
     rgba(59, 130, 246, 0.1), 
@@ -503,3 +531,4 @@
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
+*/

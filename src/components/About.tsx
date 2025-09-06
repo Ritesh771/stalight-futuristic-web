@@ -56,6 +56,8 @@ const About: React.FC = () => {
                 src="/svg/undraw_team-collaboration_phnf.svg"
                 alt="Team Collaboration"
                 className="w-full max-w-xs sm:max-w-sm lg:max-w-md opacity-80 hover:opacity-100 transition-opacity duration-300"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

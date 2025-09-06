@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  LayoutDashboard, 
-  BookOpen, 
-  Users, 
+import {
+  LayoutDashboard,
+  BookOpen,
+  Users,
   MessageCircle,
-  Bell,
   Home,
   Info,
   Download
@@ -30,13 +29,12 @@ const DockItem: React.FC<DockItemProps> = ({
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <button 
+    <button
       className={cn(
         "dock-item relative group",
         active && "bg-stalight-primary/20 scale-110",
-        "animate-fade-in"
+        "transition-all duration-300"
       )}
-      style={{ animationDelay: `${index * 100}ms` }}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -49,12 +47,12 @@ const DockItem: React.FC<DockItemProps> = ({
       )}>
         {icon}
       </div>
-      
+
       {/* Active indicator */}
       {active && (
-        <div className="absolute inset-0 bg-stalight-primary/20 rounded-2xl animate-pulse"></div>
+        <div className="absolute inset-0 bg-stalight-primary/20 rounded-2xl"></div>
       )}
-      
+
       {/* Hover glow effect */}
       <div className={cn(
         "absolute inset-0 rounded-2xl transition-all duration-300",
@@ -88,12 +86,12 @@ const FloatingDock: React.FC = () => {
   return (
     <div className={cn(
       "floating-dock",
-      "animate-fade-in transition-all duration-500 ease-out"
+      "transition-all duration-500 ease-out"
     )}>
       {dockItems.map((item, index) => (
-        <DockItem 
+        <DockItem
           key={item.section}
-          icon={item.icon} 
+          icon={item.icon}
           label={item.label}
           onClick={() => scrollToSection(item.section)}
           active={activeSection === item.section}

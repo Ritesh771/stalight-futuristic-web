@@ -91,6 +91,8 @@ const CanvasRevealCard: React.FC<CanvasRevealCardProps> = ({
             src={imageSrc} 
             alt={title || "Dashboard preview"} 
             className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy" // Add lazy loading for better performance
+            decoding="async" // Async decoding for smoother loading
           />
           <div className={`canvas-dots absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700 ${isHovering ? 'active' : ''}`}></div>
           

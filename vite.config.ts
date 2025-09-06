@@ -6,6 +6,9 @@ import path from "path";
 export default defineConfig(({ mode }) => ({
   server: {
     host: "localhost",
+    headers: {
+      'Cache-Control': 'public, max-age=31536000, immutable',
+    },
   },
   plugins: [
     react(),
@@ -14,5 +17,18 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+        },
+      },
+    },
+    assetsInlineLimit: 4096, // Inline small assets
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
   },
 }));
